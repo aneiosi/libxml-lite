@@ -223,13 +223,6 @@
 #define LIBXML_SCHEMAS_ENABLED
 #endif
 
-#if @WITH_SCHEMATRON@
-/**
- * Whether the Schematron validation interfaces are compiled in
- */
-#define LIBXML_SCHEMATRON_ENABLED
-#endif
-
 #if @WITH_MODULES@
 /**
  * Whether the module interfaces are compiled in
@@ -238,7 +231,7 @@
 /**
  * the string suffix used by dynamic modules (usually shared libraries)
  */
-#define LIBXML_MODULE_EXTENSION "@MODULE_EXTENSION@" 
+#define LIBXML_MODULE_EXTENSION "@MODULE_EXTENSION@"
 #endif
 
 #if @WITH_ZLIB@
@@ -251,5 +244,3 @@
 #include <libxml/xmlexports.h>
 
 #endif
-
-

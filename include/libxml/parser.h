@@ -2129,7 +2129,7 @@ typedef enum {
     XML_WITH_EXPR = 24,
     /** XML Schemas */
     XML_WITH_SCHEMAS = 25,
-    /** Schematron */
+    /** @deprecated Schematron support was removed */
     XML_WITH_SCHEMATRON = 26,
     /** Loadable modules */
     XML_WITH_MODULES = 27,
