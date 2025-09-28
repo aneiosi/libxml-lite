@@ -46,9 +46,7 @@ struct _xmlSaveCtxt {
 };
 
 /************************************************************************
- *									*
  *			Output error handlers				*
- *									*
  ************************************************************************/
 /**
  * Handle an out of memory condition
@@ -108,9 +106,7 @@ xmlSaveErr(xmlOutputBufferPtr out, int code, xmlNodePtr node,
 }
 
 /************************************************************************
- *									*
  *			Allocation and deallocation			*
- *									*
  ************************************************************************/
 
 /**
@@ -217,9 +213,7 @@ xmlNewSaveCtxt(const char *encoding, int options)
 }
 
 /************************************************************************
- *									*
  *		Dumping XML tree content to a simple buffer		*
- *									*
  ************************************************************************/
 
 static void
@@ -637,9 +631,7 @@ xmlBufDumpEntityDecl(xmlOutputBufferPtr buf, xmlEntityPtr ent) {
 }
 
 /************************************************************************
- *									*
  *		Dumping XML tree content to an I/O output buffer	*
- *									*
  ************************************************************************/
 
 static int
@@ -1341,9 +1333,7 @@ xmlSaveDocInternal(xmlSaveCtxtPtr ctxt, xmlDocPtr cur,
 
 #ifdef LIBXML_HTML_ENABLED
 /************************************************************************
- *									*
  *		Functions specific to XHTML serialization		*
- *									*
  ************************************************************************/
 
 /**
@@ -1807,9 +1797,7 @@ xhtmlNodeDumpOutput(xmlSaveCtxtPtr ctxt, xmlNodePtr cur) {
 #endif
 
 /************************************************************************
- *									*
  *			Public entry points				*
- *									*
  ************************************************************************/
 
 /**
@@ -2124,9 +2112,7 @@ xmlSaveSetAttrEscape(xmlSaveCtxt *ctxt,
 }
 
 /************************************************************************
- *									*
  *		Public entry points based on buffers			*
- *									*
  ************************************************************************/
 
 /**
@@ -2306,9 +2292,7 @@ xmlElemDump(FILE * f, xmlDoc *doc, xmlNode *cur)
 }
 
 /************************************************************************
- *									*
  *		Saving functions front-ends				*
- *									*
  ************************************************************************/
 
 /**
@@ -2678,4 +2662,3 @@ xmlSaveFile(const char *filename, xmlDoc *cur) {
 }
 
 #endif /* LIBXML_OUTPUT_ENABLED */
-

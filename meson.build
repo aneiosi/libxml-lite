@@ -83,10 +83,8 @@ add_project_arguments(global_args, language: 'c')
 
 # disabled by default
 want_docs = get_option('docs').enabled()
-want_http = get_option('http').enabled()
 want_icu = get_option('icu').enabled()
 want_legacy = get_option('legacy').enabled()
-want_python = get_option('python').enabled()
 want_thread_alloc = get_option('thread-alloc').enabled()
 want_tls = get_option('tls').enabled()
 
@@ -135,7 +133,7 @@ feature = get_option('output')
 want_output = not want_minimum or get_option('c14n').enabled() or get_option('writer').enabled() ? feature.allowed() : feature.enabled()
 
 feature = get_option('pattern')
-want_pattern = not want_minimum or get_option('schemas').enabled() or get_option('schematron').enabled() ? feature.allowed() : feature.enabled()
+want_pattern = not want_minimum or get_option('schemas').enabled() ? feature.allowed() : feature.enabled()
 
 feature = get_option('regexps')
 want_regexps = not want_minimum or get_option('relaxng').enabled() or get_option('schemas').enabled() ? feature.allowed() : feature.enabled()
@@ -147,7 +145,7 @@ feature = get_option('readline')
 want_readline = get_option('history').enabled() ? feature.allowed() : feature.enabled()
 
 feature = get_option('xpath')
-want_xpath = not want_minimum or get_option('c14n').enabled() or get_option('schematron').enabled() or get_option('xptr').enabled() ? feature.allowed() : feature.enabled()
+want_xpath = not want_minimum or get_option('c14n').enabled() or get_option('xptr').enabled() ? feature.allowed() : feature.enabled()
 
 feature = get_option('c14n').require(want_output, error_message: 'c14n requires output').require(want_xpath, error_message: 'c14n requires xpath')
 want_c14n = want_minimum ? feature.enabled() : feature.allowed()
@@ -163,9 +161,6 @@ want_schemas = not want_minimum or get_option('relaxng').enabled() ? feature.all
 
 feature = get_option('relaxng').require(want_regexps, error_message: 'relaxng requires regexps').require(want_schemas, error_message: 'relaxng requires schemas')
 want_relaxng = want_minimum ? feature.enabled() : feature.allowed()
-
-feature = get_option('schematron').require(want_pattern, error_message: 'schematron requires pattern').require(want_xpath, error_message: 'schematron requires xpath')
-want_schematron = want_legacy ? feature.allowed() : feature.enabled()
 
 feature = get_option('writer').require(want_output, error_message: 'writer requires output').require(want_push, error_message: 'writer requires push')
 want_writer = want_minimum ? feature.enabled() : feature.allowed()
@@ -214,7 +209,6 @@ endforeach
 # [X] config.h.in
 # [X] include/libxml/xmlversion.h.in
 # [X] libxml-2.0.pc.in
-# [X] python/setup.py.in
 # [X] xml2-config.in
 
 ## config.h
@@ -385,7 +379,6 @@ xml_opt_src = [
 	[want_catalog, ['catalog.c']],
 	[want_debug, ['debugXML.c']],
 	[want_html, ['HTMLparser.c', 'HTMLtree.c']],
-	[want_http, ['nanohttp.c']],
 	[want_modules, ['xmlmodule.c']],
 	[want_output, ['xmlsave.c']],
 	[want_pattern, ['pattern.c']],
@@ -393,7 +386,6 @@ xml_opt_src = [
 	[want_regexps, ['xmlregexp.c']],
 	[want_relaxng, ['relaxng.c']],
 	[want_schemas, ['xmlschemas.c', 'xmlschemastypes.c']],
-	[want_schematron, ['schematron.c']],
 	[want_writer, ['xmlwriter.c']],
 	[want_xinclude, ['xinclude.c']],
 	[want_xpath, ['xpath.c']],
@@ -527,12 +519,8 @@ endif
 
 subdir('example')
 
-if want_docs or want_python
+if want_docs
 	subdir('doc')
-endif
-
-if want_python == true
-	subdir('python')
 endif
 
 ## pc files
@@ -568,7 +556,6 @@ summary(
 		'docs': want_docs,
 		'history': want_history,
 		'html': want_html,
-		'http': want_http,
 		'iconv': want_iconv,
 		'icu': want_icu,
 		'iso8859x': want_iso8859x,
@@ -577,14 +564,12 @@ summary(
 		'output': want_output,
 		'pattern': want_pattern,
 		'push': want_push,
-		'python': want_python,
 		'reader': want_reader,
 		'readline': want_readline,
 		'regexps': want_regexps,
 		'relaxng': want_relaxng,
 		'sax1': want_sax1,
 		'schemas': want_schemas,
-		'schematron': want_schematron,
 		'threads': want_threads,
 		'thread-alloc': want_thread_alloc,
 		'tls': want_tls,

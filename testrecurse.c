@@ -176,9 +176,7 @@ globfree(glob_t *pglob ATTRIBUTE_UNUSED) {
 #endif /* _WIN32, HAVE_DECL_GLOB */
 
 /************************************************************************
- *									*
  *		Huge document generator					*
- *									*
  ************************************************************************/
 
 #include <libxml/xmlIO.h>
@@ -343,9 +341,7 @@ hugeRead(void *context, char *buffer, int len)
 }
 
 /************************************************************************
- *									*
  *		Libxml2 specific routines				*
- *									*
  ************************************************************************/
 
 static int nb_tests = 0;
@@ -390,9 +386,7 @@ initSAX(xmlParserCtxtPtr ctxt) {
 }
 
 /************************************************************************
- *									*
  *		File name and path utilities				*
- *									*
  ************************************************************************/
 
 static const char *baseFilename(const char *filename) {
@@ -453,9 +447,7 @@ static int checkTestFile(const char *filename) {
 
 
 /************************************************************************
- *									*
  *		Test to detect or not recursive entities		*
- *									*
  ************************************************************************/
 /**
  * Parse a file loading DTD and replacing entities check it fails for
@@ -737,9 +729,7 @@ hugeDtdTest(const char *filename ATTRIBUTE_UNUSED,
 }
 
 /************************************************************************
- *									*
  *			Tests Descriptions				*
- *									*
  ************************************************************************/
 
 static
@@ -781,9 +771,7 @@ testDesc testDescriptions[] = {
 };
 
 /************************************************************************
- *									*
  *		The main code driving the tests				*
- *									*
  ************************************************************************/
 
 static int

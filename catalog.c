@@ -68,9 +68,7 @@ static xmlChar *xmlCatalogNormalizePublic(const xmlChar *pubID);
 static int xmlExpandCatalog(xmlCatalogPtr catal, const char *filename);
 
 /************************************************************************
- *									*
  *			Types, all private				*
- *									*
  ************************************************************************/
 
 typedef enum {
@@ -155,9 +153,7 @@ struct _xmlCatalog {
 };
 
 /************************************************************************
- *									*
  *			Global variables				*
- *									*
  ************************************************************************/
 
 /*
@@ -192,9 +188,7 @@ static xmlRMutex xmlCatalogMutex;
 static int xmlCatalogInitialized = 0;
 
 /************************************************************************
- *									*
  *			Catalog error handlers				*
- *									*
  ************************************************************************/
 
 /**
@@ -243,9 +237,7 @@ xmlCatalogPrintDebug(const char *fmt, ...) {
 }
 
 /************************************************************************
- *									*
  *			Allocation and Freeing				*
- *									*
  ************************************************************************/
 
 /**
@@ -440,9 +432,7 @@ xmlFreeCatalog(xmlCatalog *catal) {
 }
 
 /************************************************************************
- *									*
  *			Serializing Catalogs				*
- *									*
  ************************************************************************/
 
 #ifdef LIBXML_OUTPUT_ENABLED
@@ -697,9 +687,7 @@ BAD_CAST "http://www.oasis-open.org/committees/entity/release/1.0/catalog.dtd");
 #endif /* LIBXML_OUTPUT_ENABLED */
 
 /************************************************************************
- *									*
  *			Converting SGML Catalogs to XML			*
- *									*
  ************************************************************************/
 
 #ifdef LIBXML_SGML_CATALOG_ENABLED
@@ -795,9 +783,7 @@ xmlConvertSGMLCatalog(xmlCatalog *catal) {
 #endif /* LIBXML_SGML_CATALOG_ENABLED */
 
 /************************************************************************
- *									*
  *			Helper function					*
- *									*
  ************************************************************************/
 
 /**
@@ -1028,9 +1014,7 @@ xmlCatalogNormalizePublic(const xmlChar *pubID)
 }
 
 /************************************************************************
- *									*
  *			The XML Catalog parser				*
- *									*
  ************************************************************************/
 
 static xmlCatalogEntryPtr
@@ -1422,9 +1406,7 @@ xmlFetchXMLCatalogFile(xmlCatalogEntryPtr catal) {
 }
 
 /************************************************************************
- *									*
  *			XML Catalog handling				*
- *									*
  ************************************************************************/
 
 /**
@@ -2065,9 +2047,7 @@ xmlCatalogListXMLResolveURI(xmlCatalogEntryPtr catal, const xmlChar *URI) {
 #ifdef LIBXML_SGML_CATALOG_ENABLED
 
 /************************************************************************
- *									*
  *			The SGML Catalog parser				*
- *									*
  ************************************************************************/
 
 
@@ -2459,9 +2439,7 @@ xmlParseSGMLCatalog(xmlCatalogPtr catal, const xmlChar *value,
 }
 
 /************************************************************************
- *									*
  *			SGML Catalog handling				*
- *									*
  ************************************************************************/
 
 /**
@@ -2551,9 +2529,7 @@ xmlCatalogSGMLResolve(xmlCatalogPtr catal, const xmlChar *pubID,
 #endif /* LIBXML_SGML_CATALOG_ENABLED */
 
 /************************************************************************
- *									*
  *			Specific Public interfaces			*
- *									*
  ************************************************************************/
 
 #ifdef LIBXML_SGML_CATALOG_ENABLED
@@ -3033,9 +3009,7 @@ xmlCatalogIsEmpty(xmlCatalog *catal) {
 }
 
 /************************************************************************
- *									*
  *   Public interfaces manipulating the global shared default catalog	*
- *									*
  ************************************************************************/
 
 /**
@@ -3388,9 +3362,7 @@ xmlCatalogConvert(void) {
 #endif /* LIBXML_SGML_CATALOG_ENABLED */
 
 /************************************************************************
- *									*
  *	Public interface manipulating the common preferences		*
- *									*
  ************************************************************************/
 
 /**
@@ -3495,9 +3467,7 @@ xmlCatalogSetDebug(int level) {
 }
 
 /************************************************************************
- *									*
  *   Minimal interfaces used for per-document catalogs by the parser	*
- *									*
  ************************************************************************/
 
 /**
@@ -3622,9 +3592,7 @@ xmlCatalogLocalResolveURI(void *catalogs, const xmlChar *URI) {
 }
 
 /************************************************************************
- *									*
  *			Deprecated interfaces				*
- *									*
  ************************************************************************/
 /**
  * Try to lookup the catalog reference associated to a system ID

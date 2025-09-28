@@ -28,9 +28,7 @@
 #include "private/memory.h"
 
 /************************************************************************
- *									*
  *		Some declaration better left private ATM		*
- *									*
  ************************************************************************/
 
 typedef enum {
@@ -123,9 +121,7 @@ static xmlChar *xmlC11NNormalizeString(const xmlChar * input,
     ( (ctx)->mode == XML_C14N_EXCLUSIVE_1_0 )
 
 /************************************************************************
- *									*
  *		Some factorized error routines				*
- *									*
  ************************************************************************/
 
 /**
@@ -234,9 +230,7 @@ xmlC14NErr(xmlC14NCtxPtr ctxt, xmlNodePtr node, int error,
 }
 
 /************************************************************************
- *									*
  *		The implementation internals				*
- *									*
  ************************************************************************/
 #define XML_NAMESPACES_DEFAULT		16
 

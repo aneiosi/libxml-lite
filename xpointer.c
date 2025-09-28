@@ -48,9 +48,7 @@
 #include "private/xpath.h"
 
 /************************************************************************
- *									*
  *		Some factorized error routines				*
- *									*
  ************************************************************************/
 
 /**
@@ -110,9 +108,7 @@ xmlXPtrErr(xmlXPathParserContextPtr ctxt, int code,
 }
 
 /************************************************************************
- *									*
  *		A few helper functions for child sequences		*
- *									*
  ************************************************************************/
 
 /**
@@ -141,9 +137,7 @@ xmlXPtrGetNthChild(xmlNodePtr cur, int no) {
 }
 
 /************************************************************************
- *									*
  *			The parser					*
- *									*
  ************************************************************************/
 
 static void xmlXPtrEvalChildSeq(xmlXPathParserContextPtr ctxt, xmlChar *name);
@@ -557,9 +551,7 @@ xmlXPtrEvalXPointer(xmlXPathParserContextPtr ctxt) {
 
 
 /************************************************************************
- *									*
  *			General routines				*
- *									*
  ************************************************************************/
 
 /**
@@ -663,4 +655,3 @@ error:
 }
 
 #endif
-

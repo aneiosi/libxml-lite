@@ -36,9 +36,7 @@ static FILE *logfile = NULL;
 static int verbose = 0;
 
 /************************************************************************
- *									*
  *		File name and path utilities				*
- *									*
  ************************************************************************/
 
 static int checkTestFile(const char *filename) {
@@ -59,9 +57,7 @@ static int checkTestFile(const char *filename) {
 }
 
 /************************************************************************
- *									*
  *		Libxml2 specific routines				*
- *									*
  ************************************************************************/
 
 static int nb_tests = 0;
@@ -207,9 +203,7 @@ getString(xmlNodePtr cur, const char *xpath) {
 }
 
 /************************************************************************
- *									*
  *		Test test/xsdtest/xsdtestsuite.xml			*
- *									*
  ************************************************************************/
 
 #ifdef LIBXML_RELAXNG_ENABLED
@@ -928,9 +922,7 @@ Exit:
 #endif /* LIBXML_RELAXNG_ENABLED */
 
 /************************************************************************
- *									*
  *		Schemas test suites from W3C/NIST/MS/Sun		*
- *									*
  ************************************************************************/
 
 #ifdef LIBXML_SCHEMAS_ENABLED
@@ -1196,9 +1188,7 @@ done:
 #endif /* LIBXML_SCHEMAS_ENABLED */
 
 /************************************************************************
- *									*
  *		The driver for the tests				*
- *									*
  ************************************************************************/
 
 int

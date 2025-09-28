@@ -59,9 +59,7 @@ xmlIsCatastrophicError(int level, int code) {
 }
 
 /************************************************************************
- *									*
  *			Error struct					*
- *									*
  ************************************************************************/
 
 static int
@@ -216,9 +214,7 @@ xmlVUpdateError(xmlError *err,
 }
 
 /************************************************************************
- *									*
  *			Handling of out of context errors		*
- *									*
  ************************************************************************/
 
 /**
@@ -321,9 +317,7 @@ xmlSetStructuredErrorFunc(void *ctx, xmlStructuredErrorFunc handler) {
 }
 
 /************************************************************************
- *									*
  *			Handling of parsing errors			*
- *									*
  ************************************************************************/
 
 /**
@@ -535,9 +529,6 @@ xmlFormatError(const xmlError *err, xmlGenericErrorFunc channel, void *data)
             break;
         case XML_FROM_I18N:
             channel(data, "encoding ");
-            break;
-        case XML_FROM_SCHEMATRONV:
-            channel(data, "schematron ");
             break;
         case XML_FROM_BUFFER:
             channel(data, "internal buffer ");
@@ -921,9 +912,7 @@ xmlParserValidityWarning(void *ctx, const char *msg ATTRIBUTE_UNUSED, ...)
 
 
 /************************************************************************
- *									*
  *			Extended Error Handling				*
- *									*
  ************************************************************************/
 
 /**

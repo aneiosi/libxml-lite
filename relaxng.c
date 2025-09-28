@@ -382,9 +382,7 @@ struct _xmlRelaxNGDocument {
 
 
 /************************************************************************
- *									*
  *		Some factorized error routines				*
- *									*
  ************************************************************************/
 
 /**
@@ -518,9 +516,7 @@ xmlRngVErr(xmlRelaxNGValidCtxtPtr ctxt, xmlNodePtr node, int error,
 }
 
 /************************************************************************
- *									*
  *		Preliminary type checking interfaces			*
- *									*
  ************************************************************************/
 
 /**
@@ -598,9 +594,7 @@ struct _xmlRelaxNGTypeLibrary {
 };
 
 /************************************************************************
- *									*
  *			Allocation functions				*
- *									*
  ************************************************************************/
 static void xmlRelaxNGFreeGrammar(xmlRelaxNGGrammarPtr grammar);
 static void xmlRelaxNGFreeDefine(xmlRelaxNGDefinePtr define);
@@ -1313,9 +1307,7 @@ xmlRelaxNGFreeValidState(xmlRelaxNGValidCtxtPtr ctxt,
 }
 
 /************************************************************************
- *									*
  *			Semi internal functions				*
- *									*
  ************************************************************************/
 
 /**
@@ -1343,9 +1335,7 @@ xmlRelaxParserSetFlag(xmlRelaxNGParserCtxt *ctxt, int flags)
 }
 
 /************************************************************************
- *									*
  *			Document functions				*
- *									*
  ************************************************************************/
 static xmlDocPtr xmlRelaxNGCleanupDoc(xmlRelaxNGParserCtxtPtr ctxt,
                                       xmlDocPtr doc);
@@ -1925,9 +1915,7 @@ xmlRelaxNGLoadExternalRef(xmlRelaxNGParserCtxtPtr ctxt,
 }
 
 /************************************************************************
- *									*
  *			Error functions					*
- *									*
  ************************************************************************/
 
 #define VALID_ERR(a) xmlRelaxNGAddValidError(ctxt, a, NULL, NULL, 0);
@@ -2206,7 +2194,7 @@ xmlRelaxNGDumpValidError(xmlRelaxNGValidCtxtPtr ctxt)
 {
     int i, j, k;
     xmlRelaxNGValidErrorPtr err, dup;
-    
+
     for (i = 0, k = 0; i < ctxt->errNr; i++) {
         err = &ctxt->errTab[i];
         if (k < MAX_ERROR) {
@@ -2290,9 +2278,7 @@ xmlRelaxNGAddValidError(xmlRelaxNGValidCtxtPtr ctxt,
 
 
 /************************************************************************
- *									*
  *			Type library hooks				*
- *									*
  ************************************************************************/
 static xmlChar *xmlRelaxNGNormalize(xmlRelaxNGValidCtxtPtr ctxt,
                                     const xmlChar * str);
@@ -2754,12 +2740,9 @@ xmlRelaxNGCleanupTypes(void)
 }
 
 /************************************************************************
- *									*
  *		Compiling element content into regexp			*
- *									*
  * Sometime the element content can be compiled into a pure regexp,	*
  * This allows a faster execution and streamability at that level	*
- *									*
  ************************************************************************/
 
 static int xmlRelaxNGTryCompile(xmlRelaxNGParserCtxtPtr ctxt,
@@ -3169,9 +3152,7 @@ xmlRelaxNGTryCompile(xmlRelaxNGParserCtxtPtr ctxt, xmlRelaxNGDefinePtr def)
 }
 
 /************************************************************************
- *									*
  *			Parsing functions				*
- *									*
  ************************************************************************/
 
 static xmlRelaxNGDefinePtr xmlRelaxNGParseAttribute(xmlRelaxNGParserCtxtPtr
@@ -5843,7 +5824,7 @@ xmlRelaxNGSimplify(xmlRelaxNGParserCtxtPtr ctxt,
                 parent->type = XML_RELAXNG_NOT_ALLOWED;
                 break;
             }
-            if ((parent != NULL) && ((parent->type == XML_RELAXNG_CHOICE) || 
+            if ((parent != NULL) && ((parent->type == XML_RELAXNG_CHOICE) ||
                 ((parent->type == XML_RELAXNG_DEF) &&
                     (ctxt->def != NULL && ctxt->def->parent != NULL) && (ctxt->def->parent->type == XML_RELAXNG_CHOICE)))) {
                 if (parent->type == XML_RELAXNG_CHOICE)
@@ -5861,7 +5842,7 @@ xmlRelaxNGSimplify(xmlRelaxNGParserCtxtPtr ctxt,
                 parent->type = XML_RELAXNG_EMPTY;
                 break;
             }
-            if ((parent != NULL) && 
+            if ((parent != NULL) &&
                 ((parent->type == XML_RELAXNG_GROUP) ||
                  (parent->type == XML_RELAXNG_INTERLEAVE) ||
                     ((parent->type == XML_RELAXNG_DEF) &&
@@ -5870,7 +5851,7 @@ xmlRelaxNGSimplify(xmlRelaxNGParserCtxtPtr ctxt,
                           ctxt->def->parent->type == XML_RELAXNG_INTERLEAVE)))) {
                 if (parent->type == XML_RELAXNG_GROUP || parent->type == XML_RELAXNG_INTERLEAVE)
                     prev = xmlRelaxNGTryUnlink(ctxt, cur, parent, prev);
-                else if (ctxt->def->parent->type == XML_RELAXNG_GROUP || ctxt->def->parent->type == XML_RELAXNG_INTERLEAVE) 
+                else if (ctxt->def->parent->type == XML_RELAXNG_GROUP || ctxt->def->parent->type == XML_RELAXNG_INTERLEAVE)
                     prev = xmlRelaxNGTryUnlink(ctxt, ctxt->def, ctxt->def->parent, prev);
             } else
                 prev = cur;
@@ -5936,7 +5917,7 @@ xmlRelaxNGSimplify(xmlRelaxNGParserCtxtPtr ctxt,
                     if ((parent == NULL) && (prev == NULL)) {
                         cur->type = XML_RELAXNG_NOOP;
                     } else if (prev == NULL) {
-                        /* 
+                        /*
                          * this simplification may already have happened
                          * if this is done twice this leads to an infinite loop of attrs->next
                          */
@@ -6514,9 +6495,7 @@ xmlRelaxNGParseDocument(xmlRelaxNGParserCtxtPtr ctxt, xmlNodePtr node)
 }
 
 /************************************************************************
- *									*
  *			Reading RelaxNGs				*
- *									*
  ************************************************************************/
 
 /**
@@ -7469,9 +7448,7 @@ xmlRelaxNGSetResourceLoader(xmlRelaxNGParserCtxt *ctxt,
 #ifdef LIBXML_DEBUG_ENABLED
 
 /************************************************************************
- *									*
  *			Dump back a compiled form			*
- *									*
  ************************************************************************/
 static void xmlRelaxNGDumpDefine(FILE * output,
                                  xmlRelaxNGDefinePtr define);
@@ -7704,9 +7681,7 @@ xmlRelaxNGDumpTree(FILE * output, xmlRelaxNG *schema)
 #endif /* LIBXML_OUTPUT_ENABLED */
 
 /************************************************************************
- *									*
  *		Validation of compiled content				*
- *									*
  ************************************************************************/
 static int xmlRelaxNGValidateDefinition(xmlRelaxNGValidCtxtPtr ctxt,
                                         xmlRelaxNGDefinePtr define);
@@ -7840,9 +7815,7 @@ xmlRelaxNGValidateCompiledContent(xmlRelaxNGValidCtxtPtr ctxt,
 }
 
 /************************************************************************
- *									*
  *		Progressive validation of when possible			*
- *									*
  ************************************************************************/
 static int xmlRelaxNGValidateAttributeList(xmlRelaxNGValidCtxtPtr ctxt,
                                            xmlRelaxNGDefinePtr defines);
@@ -8250,9 +8223,7 @@ xmlRelaxNGValidCtxtClearErrors(xmlRelaxNGValidCtxt* ctxt)
 }
 
 /************************************************************************
- *									*
  *		Generic interpreted validation implementation		*
- *									*
  ************************************************************************/
 static int xmlRelaxNGValidateValue(xmlRelaxNGValidCtxtPtr ctxt,
                                    xmlRelaxNGDefinePtr define);
@@ -10526,9 +10497,7 @@ xmlRelaxNGCleanPSVI(xmlNodePtr node) {
     }
 }
 /************************************************************************
- *									*
  *			Validation interfaces				*
- *									*
  ************************************************************************/
 
 /**

@@ -36,9 +36,7 @@
 #define XINCLUDE_MAX_DEPTH 40
 
 /************************************************************************
- *									*
  *			XInclude context handling			*
- *									*
  ************************************************************************/
 
 /*
@@ -125,9 +123,7 @@ xmlXIncludeDoProcess(xmlXIncludeCtxtPtr ctxt, xmlNodePtr tree);
 
 
 /************************************************************************
- *									*
  *			XInclude error handler				*
- *									*
  ************************************************************************/
 
 /**
@@ -629,9 +625,7 @@ xmlXIncludeRecurseDoc(xmlXIncludeCtxtPtr ctxt, xmlDocPtr doc) {
 }
 
 /************************************************************************
- *									*
  *			Node copy with specific semantic		*
- *									*
  ************************************************************************/
 
 static void
@@ -897,9 +891,7 @@ xmlXIncludeCopyXPointer(xmlXIncludeCtxtPtr ctxt, xmlXPathObjectPtr obj,
 #endif
 
 /************************************************************************
- *									*
  *			XInclude I/O handling				*
- *									*
  ************************************************************************/
 
 typedef struct _xmlXIncludeMergeData xmlXIncludeMergeData;
@@ -1555,9 +1547,7 @@ xmlXIncludeLoadFallback(xmlXIncludeCtxtPtr ctxt, xmlNodePtr fallback,
 }
 
 /************************************************************************
- *									*
  *			XInclude Processing				*
- *									*
  ************************************************************************/
 
 /**

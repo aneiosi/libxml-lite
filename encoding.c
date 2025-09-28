@@ -372,9 +372,7 @@ xmlCharEncUconv(const char *name, xmlCharEncFlags flags,
 #endif
 
 /************************************************************************
- *									*
  *		Generic encoding handling routines			*
- *									*
  ************************************************************************/
 
 /**
@@ -681,9 +679,7 @@ xmlGetCharEncodingName(xmlCharEncoding enc) {
 }
 
 /************************************************************************
- *									*
  *			Char encoding handlers				*
- *									*
  ************************************************************************/
 
 /**
@@ -1206,9 +1202,7 @@ xmlFindCharEncodingHandler(const char *name) {
 }
 
 /************************************************************************
- *									*
  *		ICONV based generic conversion functions		*
- *									*
  ************************************************************************/
 
 #ifdef LIBXML_ICONV_ENABLED
@@ -1428,9 +1422,7 @@ error:
 #endif /* LIBXML_ICONV_ENABLED */
 
 /************************************************************************
- *									*
  *		ICU based generic conversion functions		*
- *									*
  ************************************************************************/
 
 #ifdef LIBXML_ICU_ENABLED
@@ -1634,9 +1626,7 @@ error:
 #endif /* LIBXML_ICU_ENABLED */
 
 /************************************************************************
- *									*
  *		The real API used by libxml for on-the-fly conversion	*
- *									*
  ************************************************************************/
 
 /**
@@ -2265,9 +2255,7 @@ xmlByteConsumed(xmlParserCtxt *ctxt) {
 }
 
 /************************************************************************
- *									*
  *		Conversions To/From UTF8 encoding			*
- *									*
  ************************************************************************/
 
 static xmlCharEncError
@@ -2999,4 +2987,3 @@ done:
     *inlen = in - instart;
     return(ret);
 }
-

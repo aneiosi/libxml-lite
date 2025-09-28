@@ -62,9 +62,7 @@ static char *filename = NULL;
 #endif
 
 /************************************************************************
- *									*
  *			Shell Interface					*
- *									*
  ************************************************************************/
 /**
  * Read a string
@@ -306,9 +304,7 @@ static void usershell(void) {
 }
 
 /************************************************************************
- *									*
  *			Main						*
- *									*
  ************************************************************************/
 static void usage(const char *name) {
     /* split into 2 printf's to avoid overly long string (gcc warning) */

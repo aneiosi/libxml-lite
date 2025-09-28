@@ -59,9 +59,7 @@
 int xmlRegisterCallbacks = 0;
 
 /************************************************************************
- *									*
  *		Forward declarations					*
- *									*
  ************************************************************************/
 
 static xmlNodePtr
@@ -83,9 +81,7 @@ static void
 xmlUnlinkNodeInternal(xmlNodePtr cur);
 
 /************************************************************************
- *									*
  *		A few static variables and macros			*
- *									*
  ************************************************************************/
 /* #undef xmlStringText */
 const xmlChar xmlStringText[] = { 't', 'e', 'x', 't', 0 };
@@ -101,10 +97,8 @@ static int xmlCompressMode = 0;
   (str[1] == 'm') && (str[2] == 'l') && (str[3] == 0))
 
 /************************************************************************
- *									*
  *		Functions to move to entities.c once the		*
  *		API freeze is smoothen and they can be made public.	*
- *									*
  ************************************************************************/
 #include <libxml/hash.h>
 
@@ -146,9 +140,7 @@ xmlGetParameterEntityFromDtd(const xmlDtd *dtd, const xmlChar *name) {
 }
 
 /************************************************************************
- *									*
  *			QName handling helper				*
- *									*
  ************************************************************************/
 
 /**
@@ -338,9 +330,7 @@ xmlSplitQName4(const xmlChar *name, xmlChar **prefixPtr) {
 }
 
 /************************************************************************
- *									*
  *		Check Name, NCName and QName strings			*
- *									*
  ************************************************************************/
 
 /**
@@ -492,9 +482,7 @@ xmlValidateNMToken(const xmlChar *value, int space) {
 }
 
 /************************************************************************
- *									*
  *		Allocation and deallocation of basic structures		*
- *									*
  ************************************************************************/
 
 /**
@@ -3599,9 +3587,7 @@ xmlReplaceNode(xmlNode *old, xmlNode *cur) {
 }
 
 /************************************************************************
- *									*
  *		Copy operations						*
- *									*
  ************************************************************************/
 
 /**
@@ -4377,9 +4363,7 @@ error:
 }
 
 /************************************************************************
- *									*
  *		Content access functions				*
- *									*
  ************************************************************************/
 
 /**
@@ -8815,9 +8799,7 @@ xmlDOMWrapAdoptNode(xmlDOMWrapCtxt *ctxt,
 }
 
 /************************************************************************
- *									*
  *			XHTML detection					*
- *									*
  ************************************************************************/
 
 #define XHTML_STRICT_PUBLIC_ID BAD_CAST \
@@ -8858,9 +8840,7 @@ xmlIsXHTML(const xmlChar *systemID, const xmlChar *publicID) {
 }
 
 /************************************************************************
- *									*
  *			Node callbacks					*
- *									*
  ************************************************************************/
 
 /**
@@ -8898,4 +8878,3 @@ xmlDeregisterNodeDefault(xmlDeregisterNodeFunc func)
     xmlDeregisterNodeDefaultValue = func;
     return(old);
 }
-
