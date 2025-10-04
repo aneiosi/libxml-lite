@@ -61,6 +61,10 @@
 #include <libxml/xmlschemastypes.h>
 #endif
 
+#ifdef LIBXML_SCHEMATRON_ENABLED
+#include <libxml/schematron.h>
+#endif
+
 #ifdef LIBXML_PATTERN_ENABLED
 #include <libxml/pattern.h>
 #endif
@@ -240,7 +244,9 @@ globfree(glob_t *pglob ATTRIBUTE_UNUSED) {
 #endif /* _WIN32, HAVE_DECL_GLOB */
 
 /************************************************************************
+ *									*
  *		Libxml2 specific routines				*
+ *									*
  ************************************************************************/
 
 static int nb_tests = 0;
@@ -321,7 +327,9 @@ initializeLibxml2(void) {
 
 
 /************************************************************************
+ *									*
  *		File name and path utilities				*
+ *									*
  ************************************************************************/
 
 static const char *baseFilename(const char *filename) {
@@ -538,11 +546,15 @@ static int unloadMem(const char *mem) {
 }
 
 /************************************************************************
+ *									*
  *		Tests implementations					*
+ *									*
  ************************************************************************/
 
 /************************************************************************
+ *									*
  *		Parse to SAX based tests				*
+ *									*
  ************************************************************************/
 
 static FILE *SAXdebug = NULL;
@@ -1780,7 +1792,9 @@ htmlTokenizerTest(const char *filename, const char *result,
 #endif /* HTML */
 
 /************************************************************************
+ *									*
  *		Parse to tree based tests				*
+ *									*
  ************************************************************************/
 /**
  * Parse a file using the old #xmlParseFile API, then serialize back
@@ -2620,7 +2634,9 @@ fdParseTest(const char *filename, const char *result, const char *err,
 
 #ifdef LIBXML_READER_ENABLED
 /************************************************************************
+ *									*
  *		Reader based tests					*
+ *									*
  ************************************************************************/
 
 static void processNode(FILE *out, xmlTextReaderPtr reader) {
@@ -2814,7 +2830,9 @@ streamMemParseTest(const char *filename, const char *result, const char *err,
 #ifdef LIBXML_XPATH_ENABLED
 #ifdef LIBXML_DEBUG_ENABLED
 /************************************************************************
+ *									*
  *		XPath and XPointer based tests				*
+ *									*
  ************************************************************************/
 
 static FILE *xpathOutput;
@@ -3112,7 +3130,9 @@ xmlidDocTest(const char *filename,
 #endif /* LIBXML_DEBUG_ENABLED */
 #endif /* XPATH */
 /************************************************************************
+ *									*
  *			URI based tests					*
+ *									*
  ************************************************************************/
 
 static void
@@ -3434,7 +3454,9 @@ uriPathTest(const char *filename ATTRIBUTE_UNUSED,
 }
 
 /************************************************************************
+ *									*
  *			Schemas tests					*
+ *									*
  ************************************************************************/
 
 #ifdef LIBXML_SCHEMAS_ENABLED
@@ -3593,7 +3615,9 @@ schemasTest(const char *filename,
 #endif /* LIBXML_SCHEMAS_ENABLED */
 
 /************************************************************************
+ *									*
  *			RELAX NG tests					*
+ *									*
  ************************************************************************/
 
 #ifdef LIBXML_RELAXNG_ENABLED
@@ -3818,10 +3842,140 @@ rngStreamTest(const char *filename,
 #endif /* LIBXML_RELAX_ENABLED */
 
 /************************************************************************
- *			Patterns tests					*
+ *									*
+ *			Schematron tests				*
+ *									*
  ************************************************************************/
+
+#ifdef LIBXML_SCHEMATRON_ENABLED
+static int
+schematronOneTest(const char *sch, const char *filename, int options,
+                  xmlSchematronPtr schematron) {
+    xmlDocPtr doc;
+    xmlSchematronValidCtxtPtr ctxt;
+    int ret;
+
+    doc = xmlReadFile(filename, NULL, options);
+    if (doc == NULL) {
+        fprintf(stderr, "failed to parse instance %s for %s\n", filename, sch);
+	return(-1);
+    }
+
+    ctxt = xmlSchematronNewValidCtxt(schematron, XML_SCHEMATRON_OUT_ERROR);
+    xmlSchematronSetValidStructuredErrors(ctxt, testStructuredErrorHandler,
+                                          NULL);
+    ret = xmlSchematronValidateDoc(ctxt, doc);
+    if (ret == 0) {
+	testErrorHandler(NULL, "%s validates\n", filename);
+    } else if (ret > 0) {
+	testErrorHandler(NULL, "%s fails to validate\n", filename);
+    } else {
+	testErrorHandler(NULL, "%s validation generated an internal error\n",
+	       filename);
+    }
+
+    xmlSchematronFreeValidCtxt(ctxt);
+    xmlFreeDoc(doc);
+    return(0);
+}
+
+/**
+ * @param filename  the schemas file
+ * @param result  the file with expected result
+ * @param err  the file with error messages
+ * @returns 0 in case of success, an error code otherwise
+ */
+static int
+schematronTest(const char *filename,
+               const char *resul ATTRIBUTE_UNUSED,
+               const char *errr ATTRIBUTE_UNUSED,
+               int options) {
+    const char *base = baseFilename(filename);
+    const char *base2;
+    const char *instance;
+    xmlSchematronParserCtxtPtr pctxt;
+    xmlSchematronPtr schematron;
+    int res = 0, len, ret = 0;
+    int parseErrorsSize;
+    char pattern[500];
+    char prefix[500];
+    char err[500];
+    glob_t globbuf;
+    size_t i;
+    char count = 0;
+
+    /* Redirect XPath errors */
+    xmlSetStructuredErrorFunc(NULL, testStructuredErrorHandler);
+
+    pctxt = xmlSchematronNewParserCtxt(filename);
+    schematron = xmlSchematronParse(pctxt);
+    xmlSchematronFreeParserCtxt(pctxt);
+    if (schematron == NULL)
+        testErrorHandler(NULL, "Schematron schema %s failed to compile\n",
+                         filename);
+    parseErrorsSize = testErrorsSize;
+
+    /*
+     * most of the mess is about the output filenames generated by the Makefile
+     */
+    len = strlen(base);
+    if ((len > 499) || (len < 5)) {
+        ret = -1;
+        goto done;
+    }
+    len -= 4; /* remove trailing .sct */
+    memcpy(prefix, base, len);
+    prefix[len] = 0;
+
+    if (snprintf(pattern, 499, "./test/schematron/%s_?.xml", prefix) >= 499)
+        pattern[499] = 0;
+
+    globbuf.gl_offs = 0;
+    glob(pattern, GLOB_DOOFFS, NULL, &globbuf);
+    for (i = 0;i < globbuf.gl_pathc;i++) {
+        testErrorsSize = parseErrorsSize;
+        testErrors[parseErrorsSize] = 0;
+        instance = globbuf.gl_pathv[i];
+	base2 = baseFilename(instance);
+	len = strlen(base2);
+	if ((len > 6) && (base2[len - 6] == '_')) {
+	    count = base2[len - 5];
+	    res = snprintf(err, 499, "result/schematron/%s_%c.err",
+		     prefix, count);
+            if (res >= 499)
+	        err[499] = 0;
+	} else {
+	    fprintf(stderr, "don't know how to process %s\n", instance);
+	    continue;
+	}
+	if (schematron != NULL) {
+	    nb_tests++;
+	    res = schematronOneTest(filename, instance, options, schematron);
+	    if (res != 0)
+		ret = res;
+	}
+        if (compareFileMem(err, testErrors, testErrorsSize)) {
+            fprintf(stderr, "Error for %s on %s failed\n", instance,
+                    filename);
+            ret = 1;
+        }
+    }
+    globfree(&globbuf);
+
+done:
+    xmlSchematronFree(schematron);
+    xmlSetStructuredErrorFunc(NULL, NULL);
+    return(ret);
+}
+#endif /* LIBXML_SCHEMATRON_ENABLED */
+
 #ifdef LIBXML_PATTERN_ENABLED
 #ifdef LIBXML_READER_ENABLED
+/************************************************************************
+ *									*
+ *			Patterns tests					*
+ *									*
+ ************************************************************************/
 static void patternNode(FILE *out, xmlTextReaderPtr reader,
                         const char *pattern, xmlPatternPtr patternc,
 			xmlStreamCtxtPtr patstream) {
@@ -4023,11 +4177,12 @@ patternTest(const char *filename,
 }
 #endif /* READER */
 #endif /* PATTERN */
-
-/************************************************************************
- *			Canonicalization tests				*
- ************************************************************************/
 #ifdef LIBXML_C14N_ENABLED
+/************************************************************************
+ *									*
+ *			Canonicalization tests				*
+ *									*
+ ************************************************************************/
 static xmlXPathObjectPtr
 load_xpath_expr (xmlDocPtr parent_doc, const char* filename) {
     xmlXPathObjectPtr xpath;
@@ -4333,7 +4488,9 @@ c14n11WithoutCommentTest(const char *filename,
 #endif
 #if defined(LIBXML_THREAD_ENABLED) && defined(LIBXML_CATALOG_ENABLED)
 /************************************************************************
+ *									*
  *			Catalog and threads test			*
+ *									*
  ************************************************************************/
 
 #define	MAX_ARGC	20
@@ -4519,7 +4676,9 @@ threadsTest(const char *filename ATTRIBUTE_UNUSED,
 
 #if defined(LIBXML_REGEXP_ENABLED)
 /************************************************************************
+ *									*
  *			Regexp tests					*
+ *									*
  ************************************************************************/
 
 static void testRegexp(FILE *output, xmlRegexpPtr comp, const char *value) {
@@ -4632,7 +4791,9 @@ done:
 }
 
 /************************************************************************
+ *									*
  *			Automata tests					*
+ *									*
  ************************************************************************/
 
 static int scanNumber(char **ptr) {
@@ -4868,7 +5029,9 @@ automataTest(const char *filename, const char *result,
 #endif /* LIBXML_REGEXP_ENABLED */
 
 /************************************************************************
+ *									*
  *			Tests Descriptions				*
+ *									*
  ************************************************************************/
 
 static
@@ -5045,7 +5208,11 @@ testDesc testDescriptions[] = {
       XML_PARSE_DTDATTR | XML_PARSE_NOENT },
 #endif
 #endif
-
+#if defined(LIBXML_SCHEMATRON_ENABLED)
+    { "Schematron regression tests" ,
+      schematronTest, "./test/schematron/*.sct", NULL, NULL, NULL,
+      0 },
+#endif
 #ifdef LIBXML_PATTERN_ENABLED
 #ifdef LIBXML_READER_ENABLED
     { "Pattern regression tests" ,
@@ -5087,7 +5254,9 @@ testDesc testDescriptions[] = {
 };
 
 /************************************************************************
+ *									*
  *		The main code driving the tests				*
+ *									*
  ************************************************************************/
 
 static int

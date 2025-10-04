@@ -32,7 +32,9 @@
 #include "private/tree.h"
 
 /************************************************************************
+ *									*
  *		Getting/Setting encoding meta tags			*
+ *									*
  ************************************************************************/
 
 typedef struct {
@@ -438,7 +440,9 @@ htmlIsBooleanAttr(const xmlChar *name)
 
 #ifdef LIBXML_OUTPUT_ENABLED
 /************************************************************************
+ *									*
  *		Dumping HTML tree content to a simple buffer		*
+ *									*
  ************************************************************************/
 
 static xmlParserErrors
@@ -650,7 +654,9 @@ htmlDocDumpMemory(xmlDoc *cur, xmlChar**mem, int *size) {
 
 
 /************************************************************************
+ *									*
  *		Dumping HTML tree content to an I/O output buffer	*
+ *									*
  ************************************************************************/
 
 /**
@@ -1172,7 +1178,9 @@ htmlDocContentDumpOutput(xmlOutputBuffer *buf, xmlDoc *cur,
 }
 
 /************************************************************************
+ *									*
  *		Saving functions front-ends				*
+ *									*
  ************************************************************************/
 
 /**

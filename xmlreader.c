@@ -68,8 +68,10 @@
 
 #define CHUNK_SIZE 512
 /************************************************************************
+ *									*
  *	The parser: maps the Text Reader API on top of the existing	*
  *		parsing routines building a tree			*
+ *									*
  ************************************************************************/
 
 #define XML_TEXTREADER_INPUT	1
@@ -260,7 +262,9 @@ constQString(xmlTextReaderPtr reader, const xmlChar *prefix,
 }
 
 /************************************************************************
+ *									*
  *	Our own version of the freeing routines as we recycle nodes	*
+ *									*
  ************************************************************************/
 
 /**
@@ -544,7 +548,9 @@ xmlTextReaderFreeDoc(xmlTextReaderPtr reader, xmlDocPtr cur) {
 }
 
 /************************************************************************
+ *									*
  *			The reader core parser				*
+ *									*
  ************************************************************************/
 
 static void
@@ -1796,7 +1802,9 @@ done:
 }
 
 /************************************************************************
+ *									*
  *			Operating on a preparsed tree			*
+ *									*
  ************************************************************************/
 static int
 xmlTextReaderNextTree(xmlTextReaderPtr reader)
@@ -1964,7 +1972,9 @@ xmlTextReaderNextSibling(xmlTextReader *reader) {
 }
 
 /************************************************************************
+ *									*
  *			Constructor and destructors			*
+ *									*
  ************************************************************************/
 /**
  * Create an xmlTextReader structure fed with `input`
@@ -2176,7 +2186,9 @@ xmlFreeTextReader(xmlTextReader *reader) {
 }
 
 /************************************************************************
+ *									*
  *			Methods for XmlTextReader			*
+ *									*
  ************************************************************************/
 
 /**
@@ -2858,7 +2870,9 @@ xmlTextReaderConstEncoding(xmlTextReader *reader) {
 
 
 /************************************************************************
+ *									*
  *			Access API to the current node			*
+ *									*
  ************************************************************************/
 /**
  * Provides the number of attributes of the current node
@@ -3635,7 +3649,9 @@ xmlTextReaderNormalization(xmlTextReader *reader) {
 }
 
 /************************************************************************
+ *									*
  *			Extensions to the base APIs			*
+ *									*
  ************************************************************************/
 
 /**
@@ -4422,7 +4438,9 @@ xmlTextReaderStandalone(xmlTextReader *reader) {
 }
 
 /************************************************************************
+ *									*
  *			Error Handling Extensions                       *
+ *									*
  ************************************************************************/
 
 /**
@@ -4671,7 +4689,9 @@ xmlTextReaderIsValid(xmlTextReader *reader)
 }
 
 /************************************************************************
+ *									*
  *	New set (2.6.0) of simpler and more flexible APIs		*
+ *									*
  ************************************************************************/
 
 /**

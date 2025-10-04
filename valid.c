@@ -39,7 +39,9 @@ xmlValidateAttributeValueInternal(xmlDocPtr doc, xmlAttributeType type,
                                   const xmlChar *value);
 #endif
 /************************************************************************
+ *									*
  *			Error handling routines				*
+ *									*
  ************************************************************************/
 
 /**
@@ -420,7 +422,9 @@ nodeVPop(xmlValidCtxtPtr ctxt)
 #ifdef LIBXML_REGEXP_ENABLED
 
 /************************************************************************
+ *									*
  *		Content model validation based on the regexps		*
+ *									*
  ************************************************************************/
 
 /**
@@ -1885,7 +1889,9 @@ xmlDumpAttributeTable(xmlBuffer *buf, xmlAttributeTable *table) {
 #endif /* LIBXML_OUTPUT_ENABLED */
 
 /************************************************************************
+ *									*
  *				NOTATIONs				*
+ *									*
  ************************************************************************/
 /**
  * Deallocate the memory used by an notation definition.
@@ -2108,7 +2114,9 @@ xmlDumpNotationTable(xmlBuffer *buf, xmlNotationTable *table) {
 #endif /* LIBXML_OUTPUT_ENABLED */
 
 /************************************************************************
+ *									*
  *				IDs					*
+ *									*
  ************************************************************************/
 
 /**
@@ -2438,7 +2446,9 @@ xmlGetID(xmlDoc *doc, const xmlChar *ID) {
 }
 
 /************************************************************************
+ *									*
  *				Refs					*
+ *									*
  ************************************************************************/
 typedef struct xmlRemoveMemo_t
 {
@@ -2765,7 +2775,9 @@ xmlGetRefs(xmlDoc *doc, const xmlChar *ID) {
 }
 
 /************************************************************************
+ *									*
  *		Routines for validity checking				*
+ *									*
  ************************************************************************/
 
 /**
@@ -6363,7 +6375,9 @@ xmlCtxtValidateDocument(xmlParserCtxt *ctxt, xmlDoc *doc) {
 }
 
 /************************************************************************
+ *									*
  *		Routines for dynamic validation editing			*
+ *									*
  ************************************************************************/
 
 /**

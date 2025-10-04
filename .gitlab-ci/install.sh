@@ -8,7 +8,7 @@ mkdir -p install
 installdir="$srcdir/install"
 export PKG_CONFIG_PATH="$installdir/lib/pkgconfig"
 
-sh autogen.sh "--prefix=$installdir" --with-docs --with-zlib
+sh autogen.sh "--prefix=$installdir" --with-docs --with-schematron --with-zlib
 make -j$(nproc)
 make install
 
@@ -18,7 +18,7 @@ ln -s /etc install/etc
 git clone --depth 1 https://gitlab.gnome.org/GNOME/libxslt.git
 cd libxslt
 sh autogen.sh \
-	"--prefix=$installdir" \
-	--without-python
+    "--prefix=$installdir" \
+    --without-python
 make -j$(nproc)
 make install

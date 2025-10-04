@@ -104,7 +104,9 @@ static int xmlOutputCallbackNr;
 #endif /* LIBXML_OUTPUT_ENABLED */
 
 /************************************************************************
+ *									*
  *			Special escaping routines			*
+ *									*
  ************************************************************************/
 
 /*
@@ -389,7 +391,9 @@ xmlSerializeText(xmlOutputBuffer *buf, const xmlChar *string, size_t maxSize,
 #endif /* LIBXML_OUTPUT_ENABLED */
 
 /************************************************************************
+ *									*
  *			Error handling					*
+ *									*
  ************************************************************************/
 
 /**
@@ -558,7 +562,9 @@ xmlIOErr(int err)
 }
 
 /************************************************************************
+ *									*
  *		Standard I/O for file accesses				*
+ *									*
  ************************************************************************/
 
 #if defined(_WIN32)
@@ -1071,7 +1077,9 @@ xmlBufferWrite (void * context, const char * buffer, int len) {
 
 #ifdef LIBXML_ZLIB_ENABLED
 /************************************************************************
+ *									*
  *		I/O for compressed file accesses			*
+ *									*
  ************************************************************************/
 
 /**
@@ -1126,7 +1134,9 @@ xmlGzfileClose (void * context) {
 #endif /* LIBXML_ZLIB_ENABLED */
 
 /************************************************************************
+ *									*
  *			Input/output buffers				*
+ *									*
  ************************************************************************/
 
 static int
@@ -2737,7 +2747,9 @@ xmlNoNetExists(const char *filename) {
 }
 
 /************************************************************************
+ *									*
  *			Input/output callbacks				*
+ *									*
  ************************************************************************/
 
 /**
@@ -2886,3 +2898,4 @@ xmlCleanupOutputCallbacks(void)
     xmlOutputCallbackNr = 0;
 }
 #endif /* LIBXML_OUTPUT_ENABLED */
+

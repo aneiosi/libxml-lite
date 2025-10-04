@@ -1,8 +1,8 @@
 /**
  * @file
- *
+ * 
  * @brief Internals routines and limits exported by the parser.
- *
+ * 
  * Except for some I/O-related functions, most of these macros and
  * functions are deprecated.
  *
@@ -87,7 +87,9 @@ extern "C" {
 #define XML_MAX_NAMELEN 100
 
 /************************************************************************
+ *									*
  * UNICODE version of the macros.					*
+ *									*
  ************************************************************************/
 /**
  * Macro to check the following production in the XML spec:

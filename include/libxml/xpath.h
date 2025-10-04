@@ -1,8 +1,8 @@
 /**
  * @file
- *
+ * 
  * @brief XML Path Language implementation
- *
+ * 
  * API for the XML Path Language implementation
  *
  * XML Path Language implementation
@@ -398,7 +398,9 @@ struct _xmlXPathParserContext {
 };
 
 /************************************************************************
+ *									*
  *			Public API					*
+ *									*
  ************************************************************************/
 
 /**

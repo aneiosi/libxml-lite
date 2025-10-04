@@ -87,7 +87,9 @@ xmlCheckVersion(int version) {
 
 
 /************************************************************************
+ *									*
  *		Some factorized error routines				*
+ *									*
  ************************************************************************/
 
 
@@ -584,7 +586,9 @@ xmlIsLetter(int c) {
 }
 
 /************************************************************************
+ *									*
  *		Input handling functions for progressive parsing	*
+ *									*
  ************************************************************************/
 
 /* we need to keep enough input to show errors in context */
@@ -796,7 +800,9 @@ xmlParserInputShrink(xmlParserInput *in) {
 }
 
 /************************************************************************
+ *									*
  *		UTF8 character input and related functions		*
+ *									*
  ************************************************************************/
 
 /**
@@ -1131,7 +1137,9 @@ xmlCopyChar(int len ATTRIBUTE_UNUSED, xmlChar *out, int val) {
 }
 
 /************************************************************************
+ *									*
  *		Commodity functions to switch encodings			*
+ *									*
  ************************************************************************/
 
 /**
@@ -1746,7 +1754,9 @@ xmlGetActualEncoding(xmlParserCtxt *ctxt) {
 }
 
 /************************************************************************
+ *									*
  *	Commodity functions to handle entities processing		*
+ *									*
  ************************************************************************/
 
 /**
@@ -2736,7 +2746,9 @@ xmlLoadExternalEntity(const char *URL, const char *publicId,
 }
 
 /************************************************************************
+ *									*
  *		Commodity functions to handle parser contexts		*
+ *									*
  ************************************************************************/
 
 /**
@@ -3478,7 +3490,9 @@ xmlCtxtGetInputWindow(xmlParserCtxt *ctxt, int inputIndex,
 }
 
 /************************************************************************
+ *									*
  *		Handling of node information				*
+ *									*
  ************************************************************************/
 
 /**
@@ -3659,7 +3673,9 @@ xmlParserAddNodeInfo(xmlParserCtxt *ctxt,
 }
 
 /************************************************************************
+ *									*
  *		Defaults settings					*
+ *									*
  ************************************************************************/
 /**
  * Set and return the previous value for enabling pedantic warnings.
@@ -3729,3 +3745,4 @@ xmlKeepBlanksDefault(int val) {
 #endif
     return(old);
 }
+

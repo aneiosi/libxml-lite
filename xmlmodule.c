@@ -36,7 +36,9 @@ static int xmlModulePlatformClose(void *handle);
 static int xmlModulePlatformSymbol(void *handle, const char *name, void **result);
 
 /************************************************************************
+ *									*
  *		module memory error handler				*
+ *									*
  ************************************************************************/
 
 /**

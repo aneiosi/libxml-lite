@@ -26,7 +26,9 @@ static unsigned long  debugMemBlocks = 0;
 static xmlMutex xmlMemMutex;
 
 /************************************************************************
+ *									*
  *		Macros, variables and associated types			*
+ *									*
  ************************************************************************/
 
 /*
@@ -511,3 +513,4 @@ xmlGcMemGet(xmlFreeFunc *freeFunc, xmlMallocFunc *mallocFunc,
     if (strdupFunc != NULL) *strdupFunc = xmlMemStrdup;
     return(0);
 }
+

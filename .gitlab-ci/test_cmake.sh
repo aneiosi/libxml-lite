@@ -3,13 +3,16 @@
 set -e
 
 CFLAGS="-Werror $CFLAGS" \
-	cmake "$@" \
-	-DBUILD_SHARED_LIBS=$BUILD_SHARED_LIBS \
-	-DCMAKE_INSTALL_PREFIX=libxml2-install \
-	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
-	-DLIBXML2_WITH_ZLIB=ON \
-	$CONFIG \
-	-S . -B libxml2-build
+cmake "$@" \
+    -DBUILD_SHARED_LIBS=$BUILD_SHARED_LIBS \
+    -DCMAKE_INSTALL_PREFIX=libxml2-install \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+    -DLIBXML2_WITH_HTTP=ON \
+    -DLIBXML2_WITH_SCHEMATRON=ON \
+    -DLIBXML2_WITH_ZLIB=ON \
+    -DLIBXML2_WITH_PYTHON=ON \
+    $CONFIG \
+    -S . -B libxml2-build
 cmake --build libxml2-build --target install
 
 (cd libxml2-build && ctest -VV)
@@ -17,4 +20,4 @@ cmake --build libxml2-build --target install
 mkdir -p libxml2-install/share/libxml2
 cp Copyright libxml2-install/share/libxml2
 (cd libxml2-install &&
-	tar -czf ../libxml2-$CI_COMMIT_SHORT_SHA-$SUFFIX.tar.gz *)
+    tar -czf ../libxml2-$CI_COMMIT_SHORT_SHA-$SUFFIX.tar.gz *)

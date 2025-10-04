@@ -34,6 +34,7 @@
  *
  * --relaxng:
  * --schema:
+ * --schematron: Requires schemas
  *
  * --shell: We could pipe fuzz data to stdin but this is probably
  *          not worth it.
@@ -252,3 +253,4 @@ LLVMFuzzerCustomMutator(char *data, size_t size, size_t maxSize,
     return xmlFuzzMutateChunks(chunks, data, size, maxSize, seed,
                                LLVMFuzzerMutate);
 }
+

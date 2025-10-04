@@ -121,6 +121,7 @@
             <arg choice="plain"><option>--pattern <replaceable class="option">PATTERNVALUE</replaceable></option></arg>
             <arg choice="plain"><option>--relaxng <replaceable class="option">SCHEMA</replaceable></option></arg>
             <arg choice="plain"><option>--schema <replaceable class="option">SCHEMA</replaceable></option></arg>
+            <arg choice="plain"><option>--schematron <replaceable class="option">SCHEMA</replaceable></option></arg>
             <arg choice="plain"><option>--c14n</option></arg>
             <arg choice="plain"><option>--c14n11</option></arg>
             <arg choice="plain"><option>--exc-c14n</option></arg>
@@ -194,6 +195,16 @@
             <listitem>
                 <para>
                     Use a W3C <acronym>XML</acronym> Schema file
+                    named <replaceable>SCHEMA</replaceable> for validation.
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term><option>--schematron <replaceable>SCHEMA</replaceable></option></term>
+            <listitem>
+                <para>
+                    Use a Schematron file
                     named <replaceable>SCHEMA</replaceable> for validation.
                 </para>
             </listitem>

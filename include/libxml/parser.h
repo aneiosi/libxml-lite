@@ -1,8 +1,8 @@
 /**
  * @file
- *
+ * 
  * @brief Validating XML 1.0 parser
- *
+ * 
  * Interfaces, constants and types related to the XML parser.
  *
  * @copyright See Copyright for the status of this software.
@@ -943,7 +943,9 @@ typedef int (*hasInternalSubsetSAXFunc) (void *ctx);
 typedef int (*hasExternalSubsetSAXFunc) (void *ctx);
 
 /************************************************************************
+ *									*
  *			The SAX version 2 API extensions		*
+ *									*
  ************************************************************************/
 /**
  * Special constant required for SAX2 handlers.
@@ -2129,7 +2131,7 @@ typedef enum {
     XML_WITH_EXPR = 24,
     /** XML Schemas */
     XML_WITH_SCHEMAS = 25,
-    /** @deprecated Schematron support was removed */
+    /** Schematron */
     XML_WITH_SCHEMATRON = 26,
     /** Loadable modules */
     XML_WITH_MODULES = 27,

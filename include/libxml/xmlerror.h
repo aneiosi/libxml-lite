@@ -1,8 +1,8 @@
 /**
  * @file
- *
+ * 
  * @brief Error handling
- *
+ * 
  * API for error reporting and callbacks.
  *
  * @copyright See Copyright for the status of this software.
@@ -92,6 +92,10 @@ typedef enum {
     XML_FROM_OUTPUT,
     /** The Input/Output stack */
     XML_FROM_IO,
+    /** The FTP module (unused) */
+    XML_FROM_FTP,
+    /** The HTTP module (unused) */
+    XML_FROM_HTTP,
     /** The XInclude processing */
     XML_FROM_XINCLUDE,
     /** The XPath module */
@@ -126,6 +130,8 @@ typedef enum {
     XML_FROM_MODULE,
     /** The module handling character conversion (unused) */
     XML_FROM_I18N,
+    /** The Schematron validator module */
+    XML_FROM_SCHEMATRONV,
     /** The buffers module (unused) */
     XML_FROM_BUFFER,
     /** The URI module (unused) */
@@ -877,6 +883,8 @@ typedef enum {
     XML_SCHEMAP_AU_PROPS_CORRECT, /* 3088 */
     XML_SCHEMAP_A_PROPS_CORRECT_3, /* 3089 */
     XML_SCHEMAP_COS_ALL_LIMITED, /* 3090 */
+    XML_SCHEMATRONV_ASSERT = 4000, /* 4000 */
+    XML_SCHEMATRONV_REPORT,
     XML_MODULE_OPEN = 4900, /* 4900 */
     XML_MODULE_CLOSE, /* 4901 */
     XML_CHECK_FOUND_ELEMENT = 5000,

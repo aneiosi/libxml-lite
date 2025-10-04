@@ -1,8 +1,8 @@
 /**
  * @file
- *
+ * 
  * @brief internal interfaces for XML Path Language implementation
- *
+ * 
  * internal interfaces for XML Path Language implementation
  *              used to build new modules on top of XPath like XPointer and
  *              XSLT
@@ -39,7 +39,9 @@ extern "C" {
 #define valuePop xmlXPathValuePop
 
 /************************************************************************
+ *									*
  *			Helpers						*
+ *									*
  ************************************************************************/
 
 /*

@@ -18,6 +18,7 @@
 #include <libxml/parserInternals.h>
 #include <libxml/pattern.h>
 #include <libxml/relaxng.h>
+#include <libxml/schematron.h>
 #include <libxml/uri.h>
 #include <libxml/xinclude.h>
 #include <libxml/xlink.h>
@@ -1078,6 +1079,19 @@ main(int argc ATTRIBUTE_UNUSED, char **argv ATTRIBUTE_UNUSED) {
     xmlSchemaDump(NULL, NULL);
 #endif /* LIBXML_DEBUG_ENABLED */
 #endif /* LIBXML_SCHEMAS_ENABLED */
+
+#ifdef LIBXML_SCHEMATRON_ENABLED
+    xmlSchematronFree(NULL);
+    xmlSchematronFreeParserCtxt(NULL);
+    xmlSchematronFreeValidCtxt(NULL);
+    xmlSchematronNewDocParserCtxt(NULL);
+    xmlSchematronNewMemParserCtxt(NULL, 0);
+    xmlSchematronNewParserCtxt(NULL);
+    xmlSchematronNewValidCtxt(NULL, 0);
+    xmlSchematronParse(NULL);
+    xmlSchematronSetValidStructuredErrors(NULL, 0, NULL);
+    xmlSchematronValidateDoc(NULL, NULL);
+#endif /* LIBXML_SCHEMATRON_ENABLED */
 
 #ifdef LIBXML_SGML_CATALOG_ENABLED
     xmlCatalogConvert();
