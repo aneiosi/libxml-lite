@@ -13,20 +13,20 @@ fi
 exitcode=0
 
 for i in test/data/catalogs/*.script; do
-	name=$(basename $i .script)
+	name=$(basename "$i" .script)
 	xml="./test/data/catalogs/$name.xml"
 
-	if [ -f $xml ]; then
-		if [ ! -f result/catalogs/$name ]; then
-			echo New test file $name
-			$xmlcatalog --shell $xml < $i 2>&1 > result/catalogs/$name
+	if [ -f "$xml" ]; then
+		if [ ! -f "test/result/catalogs/$name" ]; then
+			echo "New test file $name"
+			$xmlcatalog --shell "$xml" < "$i" 2>&1 > "test/result/catalogs/$name"
 		else
-			$xmlcatalog --shell $xml < $i 2>&1 > catalog.out
-			log=$(diff result/catalogs/$name catalog.out)
+			$xmlcatalog --shell "$xml" < "$i" 2>&1 > 'catalog.out'
+			log=$(diff "test/result/catalogs/$name" 'catalog.out')
 			if [ -n "$log" ]; then
-				echo $name result
+				echo "$name" result
 				echo "$log"
-				exitcode=1
+				exitcode='1'
 			fi
 			rm catalog.out
 		fi
@@ -39,11 +39,11 @@ $xmlcatalog --create --noout mycatalog
 $xmlcatalog --noout --add public Pubid sysid mycatalog
 $xmlcatalog --noout --add public Pubid2 sysid2 mycatalog
 $xmlcatalog --noout --add public Pubid3 sysid3 mycatalog
-diff result/catalogs/mycatalog.full mycatalog
+diff test/result/catalogs/mycatalog.full mycatalog
 $xmlcatalog --noout --del sysid mycatalog
 $xmlcatalog --noout --del sysid3 mycatalog
 $xmlcatalog --noout --del sysid2 mycatalog
-diff result/catalogs/mycatalog.empty mycatalog
+diff test/result/catalogs/mycatalog.empty mycatalog
 rm -f mycatalog
 
 exit $exitcode

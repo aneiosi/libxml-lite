@@ -1,2 +1,2 @@
-/result/** -text
-/test/** -text
+/test/result/** -text
+/test/data/** -text

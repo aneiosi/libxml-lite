@@ -3,14 +3,14 @@
 ## Working with the test suite
 
 Most of the tests are contained in the `runtest` executable which
-generally reads test cases from the `test` directory and compares output
-to files in the `result` directory.
+generally reads test cases from the `test/data/` directory and compares output
+to files in the `test/result/` directory.
 
 You can simply add new test cases and run `runtest -u` to update the
 results. If you debug test failures, it's also useful to execute
 `runtest -u` and then `git diff result` to get a diff between actual and
 expected results. You can restore the original results by running
-`git restore result` and `git clean -xd result`.
+`git restore test/result` and `git clean -xd test/result`.
 
 ## Generated files
 
@@ -27,7 +27,7 @@ directory.
 - `tools/genHtml5LibTests.py` creates test cases and expected results
   from the html5lib test suite:
   - `test/data/html-tokenizer`
-  - `result/html-tokenizer`
+  - `test/result/html-tokenizer`
 
 - `tools/genHtmlEnt.py` prints lookup tables for HTML5 named character
   references (predefined entities):

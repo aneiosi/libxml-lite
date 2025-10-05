@@ -2991,7 +2991,7 @@ xpathDocTest(const char *filename,
     globbuf.gl_offs = 0;
     glob(pattern, GLOB_DOOFFS, NULL, &globbuf);
     for (i = 0;i < globbuf.gl_pathc;i++) {
-        res = snprintf(result, 499, "result/XPath/tests/%s",
+        res = snprintf(result, 499, "test/result/XPath/tests/%s",
 	         baseFilename(globbuf.gl_pathv[i]));
         if (res >= 499)
             result[499] = 0;
@@ -3041,7 +3041,7 @@ xptrDocTest(const char *filename,
     globbuf.gl_offs = 0;
     glob(pattern, GLOB_DOOFFS, NULL, &globbuf);
     for (i = 0;i < globbuf.gl_pathc;i++) {
-        res = snprintf(result, 499, "result/XPath/xptr/%s",
+        res = snprintf(result, 499, "test/result/XPath/xptr/%s",
 	               baseFilename(globbuf.gl_pathv[i]));
         if (res >= 499)
             result[499] = 0;
@@ -3593,7 +3593,7 @@ schemasTest(const char *filename,
 	len = strlen(base2);
 	if ((len > 6) && (base2[len - 6] == '_')) {
 	    count = base2[len - 5];
-	    ret = snprintf(err, 499, "result/schemas/%s_%c.err",
+	    ret = snprintf(err, 499, "test/result/schemas/%s_%c.err",
 		     prefix, count);
             if (ret >= 499)
 	        err[499] = 0;
@@ -3715,7 +3715,7 @@ rngTest(const char *filename,
 	len = strlen(base2);
 	if ((len > 6) && (base2[len - 6] == '_')) {
 	    count = base2[len - 5];
-	    res = snprintf(err, 499, "result/relaxng/%s_%c.err",
+	    res = snprintf(err, 499, "test/result/relaxng/%s_%c.err",
 		     prefix, count);
             if (res >= 499)
 	        err[499] = 0;
@@ -3803,11 +3803,11 @@ rngStreamTest(const char *filename,
 	len = strlen(base2);
 	if ((len > 6) && (base2[len - 6] == '_')) {
 	    count = base2[len - 5];
-	    ret = snprintf(result, 499, "result/relaxng/%s_%c",
+	    ret = snprintf(result, 499, "test/result/relaxng/%s_%c",
 		     prefix, count);
             if (ret >= 499)
 	        result[499] = 0;
-	    ret = snprintf(err, 499, "result/relaxng/%s_%c.err",
+	    ret = snprintf(err, 499, "test/result/relaxng/%s_%c.err",
 		     prefix, count);
             if (ret >= 499)
 	        err[499] = 0;
@@ -3940,7 +3940,7 @@ schematronTest(const char *filename,
 	len = strlen(base2);
 	if ((len > 6) && (base2[len - 6] == '_')) {
 	    count = base2[len - 5];
-	    res = snprintf(err, 499, "result/schematron/%s_%c.err",
+	    res = snprintf(err, 499, "test/result/schematron/%s_%c.err",
 		     prefix, count);
             if (res >= 499)
 	        err[499] = 0;
@@ -4063,7 +4063,7 @@ patternTest(const char *filename,
     len -= 4;
     memcpy(xml, filename, len);
     xml[len] = 0;
-    if (snprintf(result, 499, "result/pattern/%s", baseFilename(xml)) >= 499)
+    if (snprintf(result, 499, "test/result/pattern/%s", baseFilename(xml)) >= 499)
         result[499] = 0;
     memcpy(xml + len, ".xml", 5);
 
@@ -4432,7 +4432,7 @@ c14nCommonTest(const char *filename, int with_comments, int mode,
     memcpy(prefix, base, len);
     prefix[len] = 0;
 
-    if (snprintf(buf, 499, "result/c14n/%s/%s", subdir, prefix) >= 499)
+    if (snprintf(buf, 499, "test/result/c14n/%s/%s", subdir, prefix) >= 499)
         buf[499] = 0;
     result = xmlMemStrdup(buf);
     if (snprintf(buf, 499, "test/data/c14n/%s/%s.xpath", subdir, prefix) >= 499)
@@ -5037,91 +5037,91 @@ automataTest(const char *filename, const char *result,
 static
 testDesc testDescriptions[] = {
     { "XML regression tests" ,
-      oldParseTest, "./test/data/*", "result/", "", NULL,
+      oldParseTest, "./test/data/*", "test/result/", "", NULL,
       0 },
     { "XML regression tests on memory" ,
-      memParseTest, "./test/data/*", "result/", "", NULL,
+      memParseTest, "./test/data/*", "test/result/", "", NULL,
       0 },
     { "XML entity subst regression tests" ,
-      noentParseTest, "./test/data/*", "result/noent/", "", NULL,
+      noentParseTest, "./test/data/*", "test/result/noent/", "", NULL,
       XML_PARSE_NOENT },
     { "XML Namespaces regression tests",
-      errParseTest, "./test/data/namespaces/*", "result/namespaces/", "", ".err",
+      errParseTest, "./test/data/namespaces/*", "test/result/namespaces/", "", ".err",
       0 },
 #ifdef LIBXML_VALID_ENABLED
     { "Error cases regression tests",
-      errParseTest, "./test/data/errors/*.xml", "result/errors/", "", ".err",
+      errParseTest, "./test/data/errors/*.xml", "test/result/errors/", "", ".err",
       0 },
     { "Error cases regression tests from file descriptor",
-      fdParseTest, "./test/data/errors/*.xml", "result/errors/", "", ".err",
+      fdParseTest, "./test/data/errors/*.xml", "test/result/errors/", "", ".err",
       0 },
     { "Error cases regression tests with entity substitution",
-      errParseTest, "./test/data/errors/*.xml", "result/errors/", NULL, ".ent",
+      errParseTest, "./test/data/errors/*.xml", "test/result/errors/", NULL, ".ent",
       XML_PARSE_NOENT },
     { "Error cases regression tests (old 1.0)",
-      errParseTest, "./test/data/errors10/*.xml", "result/errors10/", "", ".err",
+      errParseTest, "./test/data/errors10/*.xml", "test/result/errors10/", "", ".err",
       XML_PARSE_OLD10 },
 #endif
 #ifdef LIBXML_READER_ENABLED
 #ifdef LIBXML_VALID_ENABLED
     { "Error cases stream regression tests",
-      streamParseTest, "./test/data/errors/*.xml", "result/errors/", NULL, ".str",
+      streamParseTest, "./test/data/errors/*.xml", "test/result/errors/", NULL, ".str",
       0 },
 #endif
     { "Reader regression tests",
-      streamParseTest, "./test/data/*", "result/", ".rdr", NULL,
+      streamParseTest, "./test/data/*", "test/result/", ".rdr", NULL,
       0 },
     { "Reader entities substitution regression tests",
-      streamParseTest, "./test/data/*", "result/", ".rde", NULL,
+      streamParseTest, "./test/data/*", "test/result/", ".rde", NULL,
       XML_PARSE_NOENT },
     { "Reader on memory regression tests",
-      streamMemParseTest, "./test/data/*", "result/", ".rdr", NULL,
+      streamMemParseTest, "./test/data/*", "test/result/", ".rdr", NULL,
       0 },
     { "Walker regression tests",
-      walkerParseTest, "./test/data/*", "result/", ".rdr", NULL,
+      walkerParseTest, "./test/data/*", "test/result/", ".rdr", NULL,
       0 },
 #endif
 #ifdef LIBXML_SAX1_ENABLED
     { "SAX1 callbacks regression tests" ,
-      saxParseTest, "./test/data/*", "result/", ".sax", NULL,
+      saxParseTest, "./test/data/*", "test/result/", ".sax", NULL,
       XML_PARSE_SAX1 },
 #endif
     { "SAX2 callbacks regression tests" ,
-      saxParseTest, "./test/data/*", "result/", ".sax2", NULL,
+      saxParseTest, "./test/data/*", "test/result/", ".sax2", NULL,
       0 },
     { "SAX2 callbacks regression tests with entity substitution" ,
-      saxParseTest, "./test/data/*", "result/noent/", ".sax2", NULL,
+      saxParseTest, "./test/data/*", "test/result/noent/", ".sax2", NULL,
       XML_PARSE_NOENT },
 #ifdef LIBXML_PUSH_ENABLED
     { "XML push regression tests" ,
-      pushParseTest, "./test/data/*", "result/", "", NULL,
+      pushParseTest, "./test/data/*", "test/result/", "", NULL,
       0 },
     { "XML push boundary tests" ,
-      pushBoundaryTest, "./test/data/*", "result/", "", NULL,
+      pushBoundaryTest, "./test/data/*", "test/result/", "", NULL,
       0 },
 #endif
 #ifdef LIBXML_HTML_ENABLED
     { "HTML regression tests" ,
-      errParseTest, "./test/data/HTML/*", "result/HTML/", "", ".err",
+      errParseTest, "./test/data/HTML/*", "test/result/HTML/", "", ".err",
       XML_PARSE_HTML },
     { "HTML regression tests from file descriptor",
-      fdParseTest, "./test/data/HTML/*", "result/HTML/", "", ".err",
+      fdParseTest, "./test/data/HTML/*", "test/result/HTML/", "", ".err",
       XML_PARSE_HTML },
 #ifdef LIBXML_PUSH_ENABLED
     { "Push HTML regression tests" ,
-      pushParseTest, "./test/data/HTML/*", "result/HTML/", "", ".err",
+      pushParseTest, "./test/data/HTML/*", "test/result/HTML/", "", ".err",
       XML_PARSE_HTML },
     { "Push HTML boundary tests" ,
-      pushBoundaryTest, "./test/data/HTML/*", "result/HTML/", "", NULL,
+      pushBoundaryTest, "./test/data/HTML/*", "test/result/HTML/", "", NULL,
       XML_PARSE_HTML },
 #endif
     { "HTML SAX regression tests" ,
-      saxParseTest, "./test/data/HTML/*", "result/HTML/", ".sax", NULL,
+      saxParseTest, "./test/data/HTML/*", "test/result/HTML/", ".sax", NULL,
       XML_PARSE_HTML },
 #ifdef LIBXML_PUSH_ENABLED
     { "HTML tokenization tests",
       htmlTokenizerTest,
-      "./test/data/html-tokenizer/*.test", "result/html-tokenizer/", "", NULL, 0 },
+      "./test/data/html-tokenizer/*.test", "test/result/html-tokenizer/", "", NULL, 0 },
 #endif
 #endif
 #ifdef LIBXML_VALID_ENABLED
@@ -5129,45 +5129,45 @@ testDesc testDescriptions[] = {
       errParseTest, "./test/data/VCM/*", NULL, NULL, NULL,
       XML_PARSE_DTDVALID },
     { "Validity checking regression tests" ,
-      errParseTest, "./test/data/VC/*", "result/VC/", NULL, "",
+      errParseTest, "./test/data/VC/*", "test/result/VC/", NULL, "",
       XML_PARSE_DTDVALID },
 #ifdef LIBXML_READER_ENABLED
     { "Streaming validity checking regression tests" ,
-      streamParseTest, "./test/data/valid/*.xml", "result/valid/", NULL, ".err.rdr",
+      streamParseTest, "./test/data/valid/*.xml", "test/result/valid/", NULL, ".err.rdr",
       XML_PARSE_DTDVALID },
     { "Streaming validity error checking regression tests" ,
-      streamParseTest, "./test/data/VC/*", "result/VC/", NULL, ".rdr",
+      streamParseTest, "./test/data/VC/*", "test/result/VC/", NULL, ".rdr",
       XML_PARSE_DTDVALID },
 #endif
     { "General documents valid regression tests" ,
-      errParseTest, "./test/data/valid/*", "result/valid/", "", ".err",
+      errParseTest, "./test/data/valid/*", "test/result/valid/", "", ".err",
       XML_PARSE_DTDVALID },
 #endif
 #ifdef LIBXML_XINCLUDE_ENABLED
     { "XInclude regression tests" ,
-      errParseTest, "./test/data/XInclude/docs/*", "result/XInclude/", "", ".err",
+      errParseTest, "./test/data/XInclude/docs/*", "test/result/XInclude/", "", ".err",
       XML_PARSE_XINCLUDE },
 #ifdef LIBXML_READER_ENABLED
     { "XInclude xmlReader regression tests",
-      streamParseTest, "./test/data/XInclude/docs/*", "result/XInclude/", ".rdr",
+      streamParseTest, "./test/data/XInclude/docs/*", "test/result/XInclude/", ".rdr",
       ".err", XML_PARSE_XINCLUDE },
 #endif
     { "XInclude regression tests stripping include nodes" ,
-      errParseTest, "./test/data/XInclude/docs/*", "result/XInclude/", "", ".err",
+      errParseTest, "./test/data/XInclude/docs/*", "test/result/XInclude/", "", ".err",
       XML_PARSE_XINCLUDE | XML_PARSE_NOXINCNODE },
 #ifdef LIBXML_READER_ENABLED
     { "XInclude xmlReader regression tests stripping include nodes",
-      streamParseTest, "./test/data/XInclude/docs/*", "result/XInclude/", ".rdr",
+      streamParseTest, "./test/data/XInclude/docs/*", "test/result/XInclude/", ".rdr",
       ".err", XML_PARSE_XINCLUDE | XML_PARSE_NOXINCNODE },
 #endif
     { "XInclude regression tests without reader",
-      errParseTest, "./test/data/XInclude/without-reader/*", "result/XInclude/", "",
+      errParseTest, "./test/data/XInclude/without-reader/*", "test/result/XInclude/", "",
       ".err", XML_PARSE_XINCLUDE },
 #endif
 #ifdef LIBXML_XPATH_ENABLED
 #ifdef LIBXML_DEBUG_ENABLED
     { "XPath expressions regression tests" ,
-      xpathExprTest, "./test/data/XPath/expr/*", "result/XPath/expr/", "", NULL,
+      xpathExprTest, "./test/data/XPath/expr/*", "test/result/XPath/expr/", "", NULL,
       0 },
     { "XPath document queries regression tests" ,
       xpathDocTest, "./test/data/XPath/docs/*", NULL, NULL, NULL,
@@ -5179,16 +5179,16 @@ testDesc testDescriptions[] = {
 #endif
 #ifdef LIBXML_VALID_ENABLED
     { "xml:id regression tests" ,
-      xmlidDocTest, "./test/data/xmlid/*", "result/xmlid/", "", ".err",
+      xmlidDocTest, "./test/data/xmlid/*", "test/result/xmlid/", "", ".err",
       0 },
 #endif
 #endif
 #endif
     { "URI parsing tests" ,
-      uriParseTest, "./test/data/URI/*.uri", "result/URI/", "", NULL,
+      uriParseTest, "./test/data/URI/*.uri", "test/result/URI/", "", NULL,
       0 },
     { "URI base composition tests" ,
-      uriBaseTest, "./test/data/URI/*.data", "result/URI/", "", NULL,
+      uriBaseTest, "./test/data/URI/*.data", "test/result/URI/", "", NULL,
       0 },
     { "Path URI conversion tests" ,
       uriPathTest, NULL, NULL, NULL, NULL,
@@ -5216,7 +5216,7 @@ testDesc testDescriptions[] = {
 #ifdef LIBXML_PATTERN_ENABLED
 #ifdef LIBXML_READER_ENABLED
     { "Pattern regression tests" ,
-      patternTest, "./test/data/pattern/*.pat", "result/pattern/", NULL, NULL,
+      patternTest, "./test/data/pattern/*.pat", "test/result/pattern/", NULL, NULL,
       0 },
 #endif
 #endif
@@ -5240,14 +5240,14 @@ testDesc testDescriptions[] = {
       0 },
 #endif
     { "SVG parsing regression tests" ,
-      oldParseTest, "./test/data/SVG/*.xml", "result/SVG/", "", NULL,
+      oldParseTest, "./test/data/SVG/*.xml", "test/result/SVG/", "", NULL,
       0 },
 #if defined(LIBXML_REGEXP_ENABLED)
     { "Regexp regression tests" ,
-      regexpTest, "./test/data/regexp/*", "result/regexp/", "", ".err",
+      regexpTest, "./test/data/regexp/*", "test/result/regexp/", "", ".err",
       0 },
     { "Automata regression tests" ,
-      automataTest, "./test/data/automata/*", "result/automata/", "", NULL,
+      automataTest, "./test/data/automata/*", "test/result/automata/", "", NULL,
       0 },
 #endif
     {NULL, NULL, NULL, NULL, NULL, NULL, 0}

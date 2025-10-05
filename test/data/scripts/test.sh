@@ -13,37 +13,37 @@ fi
 exitcode=0
 
 for i in test/data/scripts/*.script; do
-	name=$(basename $i .script)
+	name=$(basename "$i" .script)
 	xml="./test/data/scripts/$name.xml"
 
-	if [ -f $xml ]; then
-		if [ ! -f result/scripts/$name ]; then
+	if [ -f "$xml" ]; then
+		if [ ! -f "test/result/scripts/$name" ]; then
 			echo "New test file $name"
 
-			$xmllint --shell $xml < $i \
-				> result/scripts/$name \
-				2> result/scripts/$name.err
+			$xmllint --shell "$xml" < "$i" \
+				> "test/result/scripts/$name" \
+				2> "test/result/scripts/$name.err"
 		else
-			$xmllint --shell $xml < $i > shell.out 2> shell.err || true
+			$xmllint --shell "$xml" < "$i" > shell.out 2> shell.err || true
 
-			if [ -f result/scripts/$name.err ]; then
-				resulterr="result/scripts/$name.err"
+			if [ -f "test/result/scripts/$name.err" ]; then
+				resulterr="test/result/scripts/$name.err"
 			else
-				resulterr=/dev/null
+				resulterr='/dev/null'
 			fi
 
 			log=$(
-				diff -u result/scripts/$name shell.out || true
-				diff -u $resulterr shell.err || true
+				diff -u "test/result/scripts/$name" 'shell.out' || true
+				diff -u "$resulterr" 'shell.err' || true
 			)
 
 			if [ -n "$log" ]; then
-				echo $name result
+				echo "$name" result
 				echo "$log"
 				exitcode=1
 			fi
 
-			rm shell.out shell.err
+			rm 'shell.out' 'shell.err'
 		fi
 	fi
 done

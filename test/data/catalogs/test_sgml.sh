@@ -17,12 +17,12 @@ for i in test/data/catalogs/*.script; do
 	sgml="./test/data/catalogs/$name.sgml"
 
 	if [ -f $sgml ]; then
-		if [ ! -f result/catalogs/$name ]; then
+		if [ ! -f test/result/catalogs/$name ]; then
 			echo New test file $name
-			$xmlcatalog --shell $sgml < $i > result/catalogs/$name
+			$xmlcatalog --shell $sgml < $i > test/result/catalogs/$name
 		else
 			$xmlcatalog --shell $sgml < $i > catalog_sgml.out
-			log=$(diff result/catalogs/$name catalog_sgml.out)
+			log=$(diff test/result/catalogs/$name catalog_sgml.out)
 			if [ -n "$log" ]; then
 				echo $name result
 				echo "$log"

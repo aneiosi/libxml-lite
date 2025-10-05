@@ -25,7 +25,7 @@ for filename in sorted(glob.glob("../html5lib-tests/tokenizer/*.test")):
 		root = json.load(json_data)
 
 	test_out = open(f"test/data/html-tokenizer/{testname}.test", "w")
-	result_out = open(f"result/html-tokenizer/{testname}.test", "w")
+	result_out = open(f"test/result/html-tokenizer/{testname}.test", "w")
 
 	counter = 0
 
