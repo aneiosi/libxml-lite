@@ -135,9 +135,7 @@ static xmlEntityPtr xmlLookupGeneralEntity(xmlParserCtxtPtr ctxt, const xmlChar*
 static const xmlChar* xmlParseEntityRefInternal(xmlParserCtxtPtr ctxt);
 
 /************************************************************************
- *									*
  *	Arbitrary limits set in the parser. See XML_PARSE_HUGE		*
- *									*
  ************************************************************************/
 
 #define XML_PARSER_BIG_ENTITY        1000
@@ -197,9 +195,7 @@ static int               xmlLoadEntityContent(xmlParserCtxtPtr ctxt, xmlEntityPt
 static void              xmlParsePERefInternal(xmlParserCtxt* ctxt, int markupDecl);
 
 /************************************************************************
- *									*
  *		Some factorized error routines				*
- *									*
  ************************************************************************/
 
 static void              xmlErrMemory(xmlParserCtxtPtr ctxt) {
@@ -513,9 +509,7 @@ static int xmlParserEntityCheck(xmlParserCtxtPtr ctxt, unsigned long extra) {
 }
 
 /************************************************************************
- *									*
  *		Library wide options					*
- *									*
  ************************************************************************/
 
 /**
@@ -694,9 +688,7 @@ int xmlHasFeature(xmlFeature feature) {
 }
 
 /************************************************************************
- *									*
  *			Simple string buffer				*
- *									*
  ************************************************************************/
 
 typedef struct {
@@ -917,9 +909,7 @@ encoding_error:
 }
 
 /************************************************************************
- *									*
  *		SAX2 defaulted attributes handling			*
- *									*
  ************************************************************************/
 
 /**
@@ -1470,9 +1460,7 @@ region_m49:
 }
 
 /************************************************************************
- *									*
  *		Parser stacks related functions and macros		*
- *									*
  ************************************************************************/
 
 static xmlChar*  xmlParseStringEntityRef(xmlParserCtxtPtr ctxt, const xmlChar** str);
@@ -2571,9 +2559,7 @@ static int xmlSkipBlankCharsPE(xmlParserCtxtPtr ctxt) {
 }
 
 /************************************************************************
- *									*
  *		Commodity functions to handle entities			*
- *									*
  ************************************************************************/
 
 /**
@@ -2922,9 +2908,7 @@ xmlChar* xmlStringDecodeEntities(
 }
 
 /************************************************************************
- *									*
  *		Commodity functions, cleanup needed ?			*
- *									*
  ************************************************************************/
 
 /**
@@ -3018,10 +3002,8 @@ static int areBlanks(xmlParserCtxtPtr ctxt, const xmlChar* str, int len, int bla
 }
 
 /************************************************************************
- *									*
  *		Extra stuff for namespace support			*
  *	Relates to http://www.w3.org/TR/WD-xml-names			*
- *									*
  ************************************************************************/
 
 /**
@@ -3056,16 +3038,12 @@ xmlChar* xmlSplitQName(xmlParserCtxt* ctxt, const xmlChar* name, xmlChar** prefi
 }
 
 /************************************************************************
- *									*
  *			The parser itself				*
  *	Relates to http://www.w3.org/TR/REC-xml				*
- *									*
  ************************************************************************/
 
 /************************************************************************
- *									*
  *	Routines to parse Name, NCName and NmToken			*
- *									*
  ************************************************************************/
 
 /*
@@ -8628,9 +8606,7 @@ void xmlParseEndTag(xmlParserCtxt* ctxt) {
 #endif /* LIBXML_SAX1_ENABLED */
 
 /************************************************************************
- *									*
  *		      SAX 2 specific operations				*
- *									*
  ************************************************************************/
 
 /**
@@ -10922,9 +10898,7 @@ int xmlParseExtParsedEnt(xmlParserCtxt* ctxt) {
 
 #ifdef LIBXML_PUSH_ENABLED
 /************************************************************************
- *									*
  *		Progressive parsing interfaces				*
- *									*
  ************************************************************************/
 
 /**
@@ -11694,9 +11668,7 @@ int xmlParseChunk(xmlParserCtxt* ctxt, const char* chunk, int size, int terminat
 }
 
 /************************************************************************
- *									*
  *		I/O front end functions to the parser			*
- *									*
  ************************************************************************/
 
 /**
@@ -11821,9 +11793,7 @@ xmlParserCtxt* xmlCreateIOParserCtxt(
 
 #ifdef LIBXML_VALID_ENABLED
 /************************************************************************
- *									*
  *		Front ends when parsing a DTD				*
- *									*
  ************************************************************************/
 
 /**
@@ -12030,9 +12000,7 @@ xmlDtd* xmlParseDTD(const xmlChar* publicId, const xmlChar* systemId) {
 #endif /* LIBXML_VALID_ENABLED */
 
 /************************************************************************
- *									*
  *		Front ends when parsing an Entity			*
- *									*
  ************************************************************************/
 
 static xmlNodePtr xmlCtxtParseContentInternal(
@@ -12812,9 +12780,7 @@ error:
 }
 
 /************************************************************************
- *									*
  *		Front ends when parsing from a file			*
- *									*
  ************************************************************************/
 
 /**
@@ -13084,9 +13050,7 @@ int xmlSAXUserParseFile(xmlSAXHandler* sax, void* user_data, const char* filenam
 #endif /* LIBXML_SAX1_ENABLED */
 
 /************************************************************************
- *									*
  *		Front ends when parsing from memory			*
- *									*
  ************************************************************************/
 
 /**
@@ -13392,9 +13356,7 @@ xmlDoc* xmlParseDoc(const xmlChar* cur) {
 #endif /* LIBXML_SAX1_ENABLED */
 
 /************************************************************************
- *									*
  *	New set (2.6.0) of simpler and more flexible APIs		*
- *									*
  ************************************************************************/
 
 /**

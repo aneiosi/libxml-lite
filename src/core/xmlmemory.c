@@ -9,7 +9,6 @@
 
 #include <string.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include <time.h>
 
 #include <libxml/xmlmemory.h>
@@ -26,9 +25,7 @@ static unsigned long  debugMemBlocks = 0;
 static xmlMutex xmlMemMutex;
 
 /************************************************************************
- *									*
- *		Macros, variables and associated types			*
- *									*
+ *                Macros, variables and associated types                *
  ************************************************************************/
 
 /*
@@ -389,8 +386,6 @@ xmlCleanupMemoryInternal(void) {
      * Don't clean up mutex on Windows. Global state destructors can call
      * malloc functions after xmlCleanupParser was called. If memory
      * debugging is enabled, xmlMemMutex can be used after cleanup.
-     *
-     * See python/tests/thread2.py
      */
 #if !defined(LIBXML_THREAD_ENABLED) || !defined(_WIN32)
     xmlCleanupMutex(&xmlMemMutex);
@@ -513,4 +508,3 @@ xmlGcMemGet(xmlFreeFunc *freeFunc, xmlMallocFunc *mallocFunc,
     if (strdupFunc != NULL) *strdupFunc = xmlMemStrdup;
     return(0);
 }
-

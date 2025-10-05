@@ -30,9 +30,7 @@ static int verbose = 0;
 static int tests_quiet = 0;
 
 /************************************************************************
- *									*
  *		time handling                                           *
- *									*
  ************************************************************************/
 
 /* maximum time for one parsing before declaring a timeout */
@@ -56,9 +54,7 @@ static int check_time(void) {
 }
 
 /************************************************************************
- *									*
  *		Huge document generator					*
- *									*
  ************************************************************************/
 
 #include <libxml/xmlIO.h>
@@ -216,9 +212,7 @@ hugeRead(void *context, char *buffer, int len)
 }
 
 /************************************************************************
- *									*
  *		Crazy document generator				*
- *									*
  ************************************************************************/
 
 static unsigned int crazy_indx = 0;
@@ -348,9 +342,7 @@ crazyRead(void *context, char *buffer, int len)
     return (len);
 }
 /************************************************************************
- *									*
  *		Libxml2 specific routines				*
- *									*
  ************************************************************************/
 
 static int nb_tests = 0;
@@ -381,9 +373,7 @@ initializeLibxml2(void) {
 }
 
 /************************************************************************
- *									*
  *		SAX empty callbacks                                     *
- *									*
  ************************************************************************/
 
 static unsigned long callbacks = 0;
@@ -878,9 +868,7 @@ static xmlSAXHandler callbackSAX2HandlerStruct = {
 static xmlSAXHandlerPtr callbackSAX2Handler = &callbackSAX2HandlerStruct;
 
 /************************************************************************
- *									*
  *		The tests front-ends                                     *
- *									*
  ************************************************************************/
 
 /**
@@ -993,9 +981,7 @@ readerTest(const char *filename, size_t limit, int options, int fail) {
 #endif
 
 /************************************************************************
- *									*
  *			Tests descriptions				*
- *									*
  ************************************************************************/
 
 typedef int (*functest) (const char *filename, size_t limit, int options,

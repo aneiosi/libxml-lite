@@ -185,9 +185,7 @@ static xmlGlobalState globalState;
 #endif /* LIBXML_THREAD_ENABLED */
 
 /************************************************************************
- *									*
  *	All the user accessible global variables of the library		*
- *									*
  ************************************************************************/
 
 /**
@@ -339,9 +337,7 @@ static void
 xmlInitGlobalState(xmlGlobalStatePtr gs);
 
 /************************************************************************
- *									*
  *			Per thread global state handling		*
- *									*
  ************************************************************************/
 
 /**
@@ -1134,4 +1130,3 @@ xmlThrDefOutputBufferCreateFilenameDefault(xmlOutputBufferCreateFilenameFunc fun
 
     return(old);
 }
-

@@ -612,9 +612,7 @@ xmlBufUpdateInput(xmlBuf *buf, xmlParserInput *input, size_t pos) {
 }
 
 /************************************************************************
- *									*
  *			Old buffer implementation			*
- *									*
  ************************************************************************/
 
 /**
@@ -979,7 +977,7 @@ xmlBufferResize(xmlBuffer *buf, unsigned int size)
  * If `len` is -1, `str` is assumed to be zero-terminated.
  *
  * @param buf  the buffer
- * @param str  bytes to add 
+ * @param str  bytes to add
  * @param len  number of bytes
  * @returns  an xmlParserErrors code.
  */
@@ -1153,4 +1151,3 @@ xmlBufferWriteQuotedString(xmlBuffer *buf, const xmlChar *string) {
         xmlBufferCCat(buf, "\"");
     }
 }
-

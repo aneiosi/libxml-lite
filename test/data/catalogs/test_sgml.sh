@@ -13,18 +13,18 @@ fi
 exitcode=0
 
 for i in test/data/catalogs/*.script; do
-	name=$(basename $i .script)
+	name=$(basename "$i" .script)
 	sgml="./test/data/catalogs/$name.sgml"
 
-	if [ -f $sgml ]; then
-		if [ ! -f test/result/catalogs/$name ]; then
-			echo New test file $name
-			$xmlcatalog --shell $sgml < $i > test/result/catalogs/$name
+	if [ -f "$sgml" ]; then
+		if [ ! -f "test/result/catalogs/$name" ]; then
+			echo New test file "$name"
+			$xmlcatalog --shell "$sgml" < "$i" > "test/result/catalogs/$name"
 		else
-			$xmlcatalog --shell $sgml < $i > catalog_sgml.out
-			log=$(diff test/result/catalogs/$name catalog_sgml.out)
+			$xmlcatalog --shell "$sgml" < "$i" > catalog_sgml.out
+			log=$(diff "test/result/catalogs/$name" catalog_sgml.out)
 			if [ -n "$log" ]; then
-				echo $name result
+				echo "$name" result
 				echo "$log"
 				exitcode=1
 			fi

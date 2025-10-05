@@ -32,8 +32,6 @@ option('pattern', type: 'feature', description: 'xmlPattern selection interface'
 
 option('push', type: 'feature', description: 'push parser interfaces')
 
-option('python', type: 'feature', description: 'Python bindings')
-
 option('reader', type: 'feature', description: 'xmlReader parsing interface')
 
 option('readline', type: 'feature', description: 'use readline for shell history')

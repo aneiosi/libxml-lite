@@ -85,7 +85,6 @@ add_project_arguments(global_args, language: 'c')
 want_docs = get_option('docs').enabled()
 want_icu = get_option('icu').enabled()
 want_legacy = get_option('legacy').enabled()
-want_python = get_option('python').enabled()
 want_thread_alloc = get_option('thread-alloc').enabled()
 want_tls = get_option('tls').enabled()
 
@@ -213,7 +212,6 @@ endforeach
 # [X] config.h.in
 # [X] include/libxml/xmlversion.h.in
 # [X] libxml-2.0.pc.in
-# [X] python/setup.py.in
 # [X] xml2-config.in
 
 ## config.h
@@ -532,12 +530,8 @@ endif
 
 subdir('example')
 
-if want_docs or want_python
+if want_docs
 	subdir('doc')
-endif
-
-if want_python == true
-	subdir('python')
 endif
 
 ## pc files
@@ -581,7 +575,6 @@ summary(
 		'output': want_output,
 		'pattern': want_pattern,
 		'push': want_push,
-		'python': want_python,
 		'reader': want_reader,
 		'readline': want_readline,
 		'regexps': want_regexps,

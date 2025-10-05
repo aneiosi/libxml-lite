@@ -64,7 +64,6 @@ The following options disable or enable code modules and relevant symbols:
     --with-output           serialization support (on)
     --with-pattern          xmlPattern selection interface (on)
     --with-push             push parser interfaces (on)
-    --with-python           Python bindings (off)
     --with-reader           xmlReader parsing interface (on)
     --with-regexps          regular expressions support (on)
     --with-relaxng          RELAX NG support (on)

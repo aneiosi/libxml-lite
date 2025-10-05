@@ -930,9 +930,7 @@ extern "C" {
 	typedef int  (*hasExternalSubsetSAXFunc)(void* ctx);
 
 /************************************************************************
- *									*
  *			The SAX version 2 API extensions		*
- *									*
  ************************************************************************/
 /**
  * Special constant required for SAX2 handlers.

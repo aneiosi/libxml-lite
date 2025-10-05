@@ -185,9 +185,7 @@ static xmlSchemaTypePtr xmlSchemaTypeNmtokenDef = NULL;
 static xmlSchemaTypePtr xmlSchemaTypeNmtokensDef = NULL;
 
 /************************************************************************
- *									*
  *			Datatype error handlers				*
- *									*
  ************************************************************************/
 /**
  * Handle an out of memory condition
@@ -199,9 +197,7 @@ xmlSchemaTypeErrMemory(void)
 }
 
 /************************************************************************
- *									*
  *			Base types support				*
- *									*
  ************************************************************************/
 
 /**
@@ -363,9 +359,9 @@ xmlSchemaValDecimalGetSignificantDigitCount(const xmlSchemaValDecimal *decimal)
 
 /**
  * `brief` Compares two decimals
- * 
- * `param` lhs 
- * `param` rhs 
+ *
+ * `param` lhs
+ * `param` rhs
  * `return` positive value if lhs > rhs, negative if lhs < rhs, or 0 if lhs == rhs
  */
 static int xmlSchemaValDecimalCompare(const xmlSchemaValDecimal *lhs, const xmlSchemaValDecimal *rhs)

@@ -29,7 +29,6 @@ export V=1
 ./autogen.sh \
 	--disable-shared \
 	--without-debug \
-	--without-python \
 	$CONFIG
 make -j$(nproc)
 

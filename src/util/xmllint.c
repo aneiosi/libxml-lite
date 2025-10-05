@@ -234,9 +234,7 @@ static int xmllintMaxmemReached;
 static int xmllintOom;
 
 /************************************************************************
- *									*
  *		 Entity loading control and customization.		*
- *									*
  ************************************************************************/
 
 static void
@@ -324,9 +322,7 @@ xmllintResourceLoader(void *ctxt, const char *URL,
 }
 
 /************************************************************************
- *									*
  *		 	Core parsing functions				*
- *									*
  ************************************************************************/
 
 static xmlDocPtr
@@ -453,9 +449,7 @@ parseHtml(xmllintState *lint, const char *filename) {
 #endif /* LIBXML_HTML_ENABLED */
 
 /************************************************************************
- *									*
  * Memory allocation consumption debugging				*
- *									*
  ************************************************************************/
 
 #define XMLLINT_ABORT_ON_FAILURE 0
@@ -536,10 +530,8 @@ myStrdupFunc(const char *str) {
 }
 
 /************************************************************************
- *									*
  * Internal timing routines to remove the necessity to have		*
  * unix-specific function calls.					*
- *									*
  ************************************************************************/
 
 static void
@@ -592,9 +584,7 @@ endTimer(xmllintState *lint, const char *fmt, ...)
 }
 
 /************************************************************************
- *									*
  *			SAX based tests					*
- *									*
  ************************************************************************/
 
 /*
@@ -1244,9 +1234,7 @@ testSAX(xmllintState *lint, const char *filename) {
 }
 
 /************************************************************************
- *									*
  *			Stream Test processing				*
- *									*
  ************************************************************************/
 #ifdef LIBXML_READER_ENABLED
 static void processNode(xmllintState *lint, xmlTextReaderPtr reader) {
@@ -1605,9 +1593,7 @@ error:
 
 #ifdef LIBXML_XPATH_ENABLED
 /************************************************************************
- *									*
  *			XPath Query                                     *
- *									*
  ************************************************************************/
 
 static void
@@ -1720,9 +1706,7 @@ error:
 #endif /* LIBXML_XPATH_ENABLED */
 
 /************************************************************************
- *									*
  *			Tree Test processing				*
- *									*
  ************************************************************************/
 
 static xmlDocPtr
@@ -2266,9 +2250,7 @@ done:
 }
 
 /************************************************************************
- *									*
  *			Usage and Main					*
- *									*
  ************************************************************************/
 
 static void showVersion(FILE *errStream, const char *name) {

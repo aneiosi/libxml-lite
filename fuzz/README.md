@@ -24,11 +24,6 @@ Other options that can improve stack traces:
     -fno-inline
     -fno-optimize-sibling-calls (disables tail call optimization)
 
-Build libxml2 with instrumentation:
-
-    ./configure --without-python
-    make
-
 Run fuzzers:
 
     make -C fuzz fuzz-xml

@@ -1,7 +1,6 @@
 /*
- * runtest.c: C program to run libxml2 regression tests without
- *            requiring make or Python, and reducing platform dependencies
- *            to a strict minimum.
+ * runtest.c: C program to run libxml2 regression tests without requiring make or Python,
+ * and reducing platform dependencies to a strict minimum.
  *
  * To compile on Unixes:
  * cc -o runtest `xml2-config --cflags` runtest.c `xml2-config --libs` -lpthread
@@ -244,9 +243,7 @@ globfree(glob_t *pglob ATTRIBUTE_UNUSED) {
 #endif /* _WIN32, HAVE_DECL_GLOB */
 
 /************************************************************************
- *									*
  *		Libxml2 specific routines				*
- *									*
  ************************************************************************/
 
 static int nb_tests = 0;
@@ -327,9 +324,7 @@ initializeLibxml2(void) {
 
 
 /************************************************************************
- *									*
  *		File name and path utilities				*
- *									*
  ************************************************************************/
 
 static const char *baseFilename(const char *filename) {
@@ -546,15 +541,11 @@ static int unloadMem(const char *mem) {
 }
 
 /************************************************************************
- *									*
  *		Tests implementations					*
- *									*
  ************************************************************************/
 
 /************************************************************************
- *									*
  *		Parse to SAX based tests				*
- *									*
  ************************************************************************/
 
 static FILE *SAXdebug = NULL;
@@ -1792,9 +1783,7 @@ htmlTokenizerTest(const char *filename, const char *result,
 #endif /* HTML */
 
 /************************************************************************
- *									*
  *		Parse to tree based tests				*
- *									*
  ************************************************************************/
 /**
  * Parse a file using the old #xmlParseFile API, then serialize back
@@ -2634,9 +2623,7 @@ fdParseTest(const char *filename, const char *result, const char *err,
 
 #ifdef LIBXML_READER_ENABLED
 /************************************************************************
- *									*
  *		Reader based tests					*
- *									*
  ************************************************************************/
 
 static void processNode(FILE *out, xmlTextReaderPtr reader) {
@@ -2830,9 +2817,7 @@ streamMemParseTest(const char *filename, const char *result, const char *err,
 #ifdef LIBXML_XPATH_ENABLED
 #ifdef LIBXML_DEBUG_ENABLED
 /************************************************************************
- *									*
  *		XPath and XPointer based tests				*
- *									*
  ************************************************************************/
 
 static FILE *xpathOutput;
@@ -3130,9 +3115,7 @@ xmlidDocTest(const char *filename,
 #endif /* LIBXML_DEBUG_ENABLED */
 #endif /* XPATH */
 /************************************************************************
- *									*
  *			URI based tests					*
- *									*
  ************************************************************************/
 
 static void
@@ -3454,9 +3437,7 @@ uriPathTest(const char *filename ATTRIBUTE_UNUSED,
 }
 
 /************************************************************************
- *									*
  *			Schemas tests					*
- *									*
  ************************************************************************/
 
 #ifdef LIBXML_SCHEMAS_ENABLED
@@ -3615,9 +3596,7 @@ schemasTest(const char *filename,
 #endif /* LIBXML_SCHEMAS_ENABLED */
 
 /************************************************************************
- *									*
  *			RELAX NG tests					*
- *									*
  ************************************************************************/
 
 #ifdef LIBXML_RELAXNG_ENABLED
@@ -3842,9 +3821,7 @@ rngStreamTest(const char *filename,
 #endif /* LIBXML_RELAX_ENABLED */
 
 /************************************************************************
- *									*
  *			Schematron tests				*
- *									*
  ************************************************************************/
 
 #ifdef LIBXML_SCHEMATRON_ENABLED
@@ -3972,9 +3949,7 @@ done:
 #ifdef LIBXML_PATTERN_ENABLED
 #ifdef LIBXML_READER_ENABLED
 /************************************************************************
- *									*
  *			Patterns tests					*
- *									*
  ************************************************************************/
 static void patternNode(FILE *out, xmlTextReaderPtr reader,
                         const char *pattern, xmlPatternPtr patternc,
@@ -4179,9 +4154,7 @@ patternTest(const char *filename,
 #endif /* PATTERN */
 #ifdef LIBXML_C14N_ENABLED
 /************************************************************************
- *									*
  *			Canonicalization tests				*
- *									*
  ************************************************************************/
 static xmlXPathObjectPtr
 load_xpath_expr (xmlDocPtr parent_doc, const char* filename) {
@@ -4488,9 +4461,7 @@ c14n11WithoutCommentTest(const char *filename,
 #endif
 #if defined(LIBXML_THREAD_ENABLED) && defined(LIBXML_CATALOG_ENABLED)
 /************************************************************************
- *									*
  *			Catalog and threads test			*
- *									*
  ************************************************************************/
 
 #define	MAX_ARGC	20
@@ -4676,9 +4647,7 @@ threadsTest(const char *filename ATTRIBUTE_UNUSED,
 
 #if defined(LIBXML_REGEXP_ENABLED)
 /************************************************************************
- *									*
  *			Regexp tests					*
- *									*
  ************************************************************************/
 
 static void testRegexp(FILE *output, xmlRegexpPtr comp, const char *value) {
@@ -4791,9 +4760,7 @@ done:
 }
 
 /************************************************************************
- *									*
  *			Automata tests					*
- *									*
  ************************************************************************/
 
 static int scanNumber(char **ptr) {
@@ -5029,9 +4996,7 @@ automataTest(const char *filename, const char *result,
 #endif /* LIBXML_REGEXP_ENABLED */
 
 /************************************************************************
- *									*
  *			Tests Descriptions				*
- *									*
  ************************************************************************/
 
 static
@@ -5254,9 +5219,7 @@ testDesc testDescriptions[] = {
 };
 
 /************************************************************************
- *									*
  *		The main code driving the tests				*
- *									*
  ************************************************************************/
 
 static int
