@@ -107,8 +107,6 @@ extern "C" {
 	XML_DEPRECATED
 	XMLPUBFUN void htmlDefaultSAXHandlerInit(void);
 #endif
-	XML_DEPRECATED
-	XMLPUBFUN void xmlDefaultSAXHandlerInit(void);
 #ifdef __cplusplus
 }
 #endif

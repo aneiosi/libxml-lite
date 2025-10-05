@@ -188,7 +188,6 @@ main(int argc ATTRIBUTE_UNUSED, char **argv ATTRIBUTE_UNUSED) {
     xmlDOMWrapFreeCtxt(xmlDOMWrapNewCtxt());
     xmlDOMWrapReconcileNamespaces(NULL, NULL, 0);
     xmlDOMWrapRemoveNode(NULL, NULL, NULL, 0);
-    xmlDefaultSAXHandlerInit();
     xmlDelEncodingAlias(NULL);
     xmlDeregisterNodeDefault(0);
     xmlDetectCharEncoding(NULL, 0);

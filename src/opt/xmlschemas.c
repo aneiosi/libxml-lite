@@ -28060,18 +28060,14 @@ xmlSchemaSAXPlug(xmlSchemaValidCtxt *ctxt,
     xmlSAXHandlerPtr old_sax;
 
     if ((ctxt == NULL) || (sax == NULL) || (user_data == NULL))
-        return(NULL);
+        {return(NULL);}
 
     /*
      * We only allow to plug into SAX2 event streams
      */
     old_sax = *sax;
     if ((old_sax != NULL) && (old_sax->initialized != XML_SAX2_MAGIC))
-        return(NULL);
-    if ((old_sax != NULL) &&
-        (old_sax->startElementNs == NULL) && (old_sax->endElementNs == NULL) &&
-        ((old_sax->startElement != NULL) || (old_sax->endElement != NULL)))
-        return(NULL);
+        {return(NULL);}
 
     /*
      * everything seems right allocate the local data needed for that layer

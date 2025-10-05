@@ -1870,12 +1870,15 @@ pushParseTest(const char *filename, const char *result,
         chunkSize = size;
 
 #ifdef LIBXML_HTML_ENABLED
-    if (options & XML_PARSE_HTML)
+    if (options & XML_PARSE_HTML){
 	ctxt = htmlCreatePushParserCtxt(NULL, NULL, base + cur, chunkSize, filename,
 	                                XML_CHAR_ENCODING_NONE);
-    else
+}    else {
 #endif
     ctxt = xmlCreatePushParserCtxt(NULL, NULL, base + cur, chunkSize, filename);
+#ifdef LIBXML_HTML_ENABLED
+}
+#endif
     xmlCtxtSetErrorHandler(ctxt, testStructuredErrorHandler, NULL);
     xmlCtxtUseOptions(ctxt, options);
     cur += chunkSize;
@@ -1883,29 +1886,38 @@ pushParseTest(const char *filename, const char *result,
     do {
         if (cur + chunkSize >= size) {
 #ifdef LIBXML_HTML_ENABLED
-	    if (options & XML_PARSE_HTML)
+	    if (options & XML_PARSE_HTML){
 		htmlParseChunk(ctxt, base + cur, size - cur, 1);
-	    else
+}	    else {
 #endif
 	    xmlParseChunk(ctxt, base + cur, size - cur, 1);
+#ifdef LIBXML_HTML_ENABLED
+}
+#endif
 	    break;
 	} else {
 #ifdef LIBXML_HTML_ENABLED
-	    if (options & XML_PARSE_HTML)
+	    if (options & XML_PARSE_HTML){
 		htmlParseChunk(ctxt, base + cur, chunkSize, 0);
-	    else
+}	    else {
 #endif
 	    xmlParseChunk(ctxt, base + cur, chunkSize, 0);
+#ifdef LIBXML_HTML_ENABLED
+}
+#endif
 	    cur += chunkSize;
 	}
     } while (cur < size);
     doc = ctxt->myDoc;
 #ifdef LIBXML_HTML_ENABLED
-    if (options & XML_PARSE_HTML)
+    if (options & XML_PARSE_HTML){
         res = 1;
-    else
+}    else {
 #endif
     res = ctxt->wellFormed;
+#ifdef LIBXML_HTML_ENABLED
+}
+#endif
     xmlFreeParserCtxt(ctxt);
     xmlFree((char *)base);
     if (!res) {
@@ -1914,11 +1926,14 @@ pushParseTest(const char *filename, const char *result,
 	return(-1);
     }
 #ifdef LIBXML_HTML_ENABLED
-    if (options & XML_PARSE_HTML)
+    if (options & XML_PARSE_HTML){
 	htmlDocDumpMemory(doc, (xmlChar **) &base, &size);
-    else
+}    else {
 #endif
     xmlDocDumpMemory(doc, (xmlChar **) &base, &size);
+#ifdef LIBXML_HTML_ENABLED
+}
+#endif
     xmlFreeDoc(doc);
     res = compareFileMem(result, base, size);
     if ((base == NULL) || (res != 0)) {
@@ -2088,12 +2103,15 @@ pushBoundaryTest(const char *filename, const char *result,
     }
 
 #ifdef LIBXML_HTML_ENABLED
-    if (options & XML_PARSE_HTML)
+    if (options & XML_PARSE_HTML){
 	ctxt = htmlCreatePushParserCtxt(&bndSAX, NULL, base, 1, filename,
 	                                XML_CHAR_ENCODING_NONE);
-    else
+}    else {
 #endif
     ctxt = xmlCreatePushParserCtxt(&bndSAX, NULL, base, 1, filename);
+#ifdef LIBXML_HTML_ENABLED
+}
+#endif
     xmlCtxtSetErrorHandler(ctxt, testStructuredErrorHandler, NULL);
     xmlCtxtUseOptions(ctxt, options);
     cur = 1;
@@ -2205,11 +2223,14 @@ pushBoundaryTest(const char *filename, const char *result,
     }
     doc = ctxt->myDoc;
 #ifdef LIBXML_HTML_ENABLED
-    if (options & XML_PARSE_HTML)
+    if (options & XML_PARSE_HTML){
         res = 1;
-    else
+   } else {
 #endif
     res = ctxt->wellFormed;
+#ifdef LIBXML_HTML_ENABLED
+}
+#endif
     xmlFreeParserCtxt(ctxt);
     xmlFree((char *)base);
     if (numCallbacks > 1) {
@@ -2230,11 +2251,14 @@ pushBoundaryTest(const char *filename, const char *result,
 	return(-1);
     }
 #ifdef LIBXML_HTML_ENABLED
-    if (options & XML_PARSE_HTML)
+    if (options & XML_PARSE_HTML){
 	htmlDocDumpMemory(doc, (xmlChar **) &base, &size);
-    else
+}    else {
 #endif
     xmlDocDumpMemory(doc, (xmlChar **) &base, &size);
+#ifdef LIBXML_HTML_ENABLED
+}
+#endif
     xmlFreeDoc(doc);
     res = compareFileMem(result, base, size);
     if ((base == NULL) || (res != 0)) {
@@ -5359,14 +5383,14 @@ main(int argc ATTRIBUTE_UNUSED, char **argv ATTRIBUTE_UNUSED) {
 
     for (a = 1; a < argc;a++) {
         if (!strcmp(argv[a], "-v"))
-	    verbose = 1;
+	    {verbose = 1;}
         else if (!strcmp(argv[a], "-u"))
-	    update_results = 1;
+	    {update_results = 1;}
         else if (!strcmp(argv[a], "-quiet"))
-	    tests_quiet = 1;
+	    {tests_quiet = 1;}
         else if (!strcmp(argv[a], "--out"))
-	    temp_directory = argv[++a];
-	else {
+	    {temp_directory = argv[++a];}
+        else {
 	    for (i = 0; testDescriptions[i].func != NULL; i++) {
 	        if (strstr(testDescriptions[i].desc, argv[a])) {
 		    ret += runtest(i);

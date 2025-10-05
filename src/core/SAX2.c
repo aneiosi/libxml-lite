@@ -2147,15 +2147,6 @@ void xmlSAX2InitDefaultSAXHandler(xmlSAXHandler* hdlr, int warning) {
 	}
 }
 
-/**
- * Initialize the default SAX2 handler
- *
- * @deprecated This function is a no-op. Call #xmlInitParser to
- * initialize the library.
- *
- */
-void xmlDefaultSAXHandlerInit(void) {}
-
 #ifdef LIBXML_HTML_ENABLED
 
 /**
