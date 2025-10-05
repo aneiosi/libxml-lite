@@ -1,4 +1,4 @@
-/ > ./test/scripts/base2.xml
-/ > e > test/scripts/html/
-e > img > test/scripts/images/
-img > 
+/ > ./test/data/scripts/base2.xml
+/ > e > test/data/scripts/html/
+e > img > test/data/scripts/images/
+img >

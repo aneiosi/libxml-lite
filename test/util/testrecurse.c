@@ -192,7 +192,7 @@ typedef struct {
 
 static const xmlHugeDocParts hugeDocTable[] = {
     {
-        "test/recurse/huge.xml",
+        "test/data/recurse/huge.xml",
 
         "<!DOCTYPE foo ["
         "<!ELEMENT foo (bar*)> "
@@ -216,7 +216,7 @@ static const xmlHugeDocParts hugeDocTable[] = {
         "</foo>"
     },
     {
-        "test/recurse/huge_dtd.dtd",
+        "test/data/recurse/huge_dtd.dtd",
 
         "<!ELEMENT foo (#PCDATA)>\n"
         "<!ENTITY ent 'success'>\n"
@@ -570,7 +570,7 @@ notRecursiveHugeTest(const char *filename ATTRIBUTE_UNUSED,
         initSAX(ctxt);
     if ((options & OPT_NO_SUBST) == 0)
         parserOptions |= XML_PARSE_NOENT;
-    doc = xmlCtxtReadFile(ctxt, "test/recurse/huge.xml", NULL, parserOptions);
+    doc = xmlCtxtReadFile(ctxt, "test/data/recurse/huge.xml", NULL, parserOptions);
     if (doc == NULL) {
         fprintf(stderr, "Failed to parse huge.xml\n");
 	res = 1;
@@ -670,7 +670,7 @@ hugeDtdTest(const char *filename ATTRIBUTE_UNUSED,
         initSAX(ctxt);
     if ((options & OPT_NO_SUBST) == 0)
         parserOptions |= XML_PARSE_NOENT;
-    doc = xmlCtxtReadFile(ctxt, "test/recurse/huge_dtd.xml", NULL,
+    doc = xmlCtxtReadFile(ctxt, "test/data/recurse/huge_dtd.xml", NULL,
                           parserOptions);
     if (doc == NULL) {
         fprintf(stderr, "Failed to parse huge_dtd.xml\n");
@@ -745,22 +745,22 @@ hugeDtdTest(const char *filename ATTRIBUTE_UNUSED,
 static
 testDesc testDescriptions[] = {
     { "Parsing recursive test cases" ,
-      recursiveDetectTest, "./test/recurse/lol*.xml", NULL, NULL, NULL,
+      recursiveDetectTest, "./test/data/recurse/lol*.xml", NULL, NULL, NULL,
       0 },
     { "Parsing recursive test cases (no substitution)" ,
-      recursiveDetectTest, "./test/recurse/lol*.xml", NULL, NULL, NULL,
+      recursiveDetectTest, "./test/data/recurse/lol*.xml", NULL, NULL, NULL,
       OPT_NO_SUBST },
     { "Parsing recursive test cases (SAX)" ,
-      recursiveDetectTest, "./test/recurse/lol*.xml", NULL, NULL, NULL,
+      recursiveDetectTest, "./test/data/recurse/lol*.xml", NULL, NULL, NULL,
       OPT_SAX },
     { "Parsing recursive test cases (SAX, no substitution)" ,
-      recursiveDetectTest, "./test/recurse/lol*.xml", NULL, NULL, NULL,
+      recursiveDetectTest, "./test/data/recurse/lol*.xml", NULL, NULL, NULL,
       OPT_SAX | OPT_NO_SUBST },
     { "Parsing non-recursive test cases" ,
-      notRecursiveDetectTest, "./test/recurse/good*.xml", NULL, NULL, NULL,
+      notRecursiveDetectTest, "./test/data/recurse/good*.xml", NULL, NULL, NULL,
       0 },
     { "Parsing non-recursive test cases (SAX)" ,
-      notRecursiveDetectTest, "./test/recurse/good*.xml", NULL, NULL, NULL,
+      notRecursiveDetectTest, "./test/data/recurse/good*.xml", NULL, NULL, NULL,
       OPT_SAX },
     { "Parsing non-recursive huge case" ,
       notRecursiveHugeTest, NULL, NULL, NULL, NULL,

@@ -1,7 +1,7 @@
 project(
 	'libxml2',
 	'c',
-	version: '2.16.0',
+	version: '2.15.0',
 	license: 'MIT',
 	default_options: [
 		'c_std=c11,c99,c89',
@@ -83,7 +83,6 @@ add_project_arguments(global_args, language: 'c')
 
 # disabled by default
 want_docs = get_option('docs').enabled()
-want_http = get_option('http').enabled()
 want_icu = get_option('icu').enabled()
 want_legacy = get_option('legacy').enabled()
 want_python = get_option('python').enabled()
@@ -390,7 +389,6 @@ opt_src = [
 	[want_catalog, ['catalog.c']],
 	[want_debug, ['debugXML.c']],
 	[want_html, ['HTMLparser.c', 'HTMLtree.c']],
-	[want_http, ['nanohttp.c']],
 	[want_modules, ['xmlmodule.c']],
 	[want_output, ['xmlsave.c']],
 	[want_pattern, ['pattern.c']],
@@ -511,7 +509,7 @@ if want_output
 			test(
 				'xmllint shell',
 				sh,
-				args: ['test/scripts/test.sh', xmllint.full_path()],
+				args: ['test/data/scripts/test.sh', xmllint.full_path()],
 				workdir: meson.current_source_dir(),
 			)
 		endif
@@ -519,13 +517,13 @@ if want_output
 			test(
 				'xmlcatalog shell',
 				sh,
-				args: ['test/catalogs/test.sh', xmlcatalog.full_path()],
+				args: ['test/data/catalogs/test.sh', xmlcatalog.full_path()],
 				workdir: meson.current_source_dir(),
 			)
 			test(
 				'xmlcatalog shell SGML',
 				sh,
-				args: ['test/catalogs/test_sgml.sh', xmlcatalog.full_path()],
+				args: ['test/data/catalogs/test_sgml.sh', xmlcatalog.full_path()],
 				workdir: meson.current_source_dir(),
 			)
 		endif
@@ -575,7 +573,6 @@ summary(
 		'docs': want_docs,
 		'history': want_history,
 		'html': want_html,
-		'http': want_http,
 		'iconv': want_iconv,
 		'icu': want_icu,
 		'iso8859x': want_iso8859x,

@@ -98,7 +98,6 @@ main(int argc ATTRIBUTE_UNUSED, char **argv ATTRIBUTE_UNUSED) {
     xmlFree(xmlCharStrdup(NULL));
     xmlFree(xmlCharStrndup(NULL, 0));
     xmlCheckFilename(NULL);
-    xmlFreeInputStream(xmlCheckHTTPInput(NULL, NULL));
     xmlCheckLanguageID(NULL);
     xmlCheckThreadLocalStorage();
     xmlCheckUTF8(NULL);
@@ -418,7 +417,6 @@ main(int argc ATTRIBUTE_UNUSED, char **argv ATTRIBUTE_UNUSED) {
     xmlFreeNode(xmlNewTextLen(NULL, 0));
     xmlNextChar(NULL);
     xmlFreeNode(xmlNextElementSibling(NULL));
-    xmlFreeInputStream(xmlNoNetExternalEntityLoader(NULL, NULL, NULL));
     xmlNodeAddContent(NULL, NULL);
     xmlNodeAddContentLen(NULL, NULL, 0);
     xmlNodeBufGetContent(NULL, NULL);

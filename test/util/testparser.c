@@ -116,7 +116,7 @@ testCFileIO(void) {
     /* Deprecated FILE-based API */
     xmlRegisterInputCallbacks(xmlFileMatch, xmlFileOpen, xmlFileRead,
                               xmlFileClose);
-    doc = xmlReadFile("test/ent1", NULL, 0);
+    doc = xmlReadFile("test/data/ent1", NULL, 0);
 
     if (doc == NULL) {
         err = 1;
@@ -1550,4 +1550,3 @@ main(void) {
 
     return err;
 }
-

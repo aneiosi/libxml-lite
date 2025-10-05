@@ -66,7 +66,6 @@ static const char *const switches[] = {
     "--noenc",
     "--noent",
     "--nofixup-base-uris",
-    "--nonet",
     "--noout",
     "--nowarning",
     NULL,
@@ -253,4 +252,3 @@ LLVMFuzzerCustomMutator(char *data, size_t size, size_t maxSize,
     return xmlFuzzMutateChunks(chunks, data, size, maxSize, seed,
                                LLVMFuzzerMutate);
 }
-

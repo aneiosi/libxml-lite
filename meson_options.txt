@@ -10,12 +10,6 @@ option('history', type: 'feature', description: 'History support for shell')
 
 option('html', type: 'feature', description: 'HTML parser')
 
-option(
-	'http',
-	type: 'feature',
-	description: 'ABI compatibility for removed HTTP support',
-)
-
 # TODO meson custom dependency
 option('iconv', type: 'feature', description: 'iconv support')
 

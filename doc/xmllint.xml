@@ -82,7 +82,6 @@
             <arg choice="plain"><option>--noent</option></arg>
             <arg choice="plain"><option>--nofixup-base-uris</option></arg>
             <arg choice="plain"><option>--noout</option></arg>
-            <arg choice="plain"><option>--nonet</option></arg>
             <arg choice="plain"><option>--path "<replaceable class="option">PATH(S)</replaceable>"</option></arg>
             <arg choice="plain"><option>--load-trace</option></arg>
             <arg choice="plain"><option>--valid</option></arg>
@@ -345,15 +344,6 @@
                 <para>
                     Don't fix xml:base URIs when processing XIncludes
                     (parser option XML_PARSE_NOBASEFIX).
-                </para>
-            </listitem>
-        </varlistentry>
-
-        <varlistentry>
-            <term><option>--nonet</option></term>
-            <listitem>
-                <para>
-                    Do not use the Internet to fetch <acronym>DTD</acronym>s or entities. Has no effect with libxml2 2.15 or later.
                 </para>
             </listitem>
         </varlistentry>

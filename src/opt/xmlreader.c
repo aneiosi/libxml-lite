@@ -5191,9 +5191,9 @@ xmlReaderNewWalker(xmlTextReader *reader, xmlDoc *doc)
     reader->state = XML_TEXTREADER_START;
     if (reader->dict == NULL) {
         if ((reader->ctxt != NULL) && (reader->ctxt->dict != NULL))
-	    reader->dict = reader->ctxt->dict;
+	    {reader->dict = reader->ctxt->dict;}
 	else
-	    reader->dict = xmlDictCreate();
+	    {reader->dict = xmlDictCreate();}
     }
     return(0);
 }
@@ -5262,9 +5262,6 @@ xmlReaderNewFile(xmlTextReader *reader, const char *filename,
          */
         xmlParserInputFlags flags = XML_INPUT_UNZIP;
         xmlParserErrors code;
-
-        if ((options & XML_PARSE_NONET) == 0)
-            flags |= XML_INPUT_NETWORK;
 
         code = xmlParserInputBufferCreateUrl(filename, XML_CHAR_ENCODING_NONE,
                                              flags, &input);

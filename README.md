@@ -57,7 +57,6 @@ The following options disable or enable code modules and relevant symbols:
     --with-history          history support for xmllint shell (off)
     --with-readline[=DIR]   use readline in DIR for shell (off)
     --with-html             HTML parser (on)
-    --with-http             ABI compatibility for removed HTTP support (off)
     --with-iconv[=DIR]      iconv support (on)
     --with-icu              ICU support (off)
     --with-iso8859x         ISO-8859-X support if no iconv (on)
@@ -179,4 +178,3 @@ tests if possible.
 - Igor Zlatkovic for the Windows port
 - Aleksey Sanin
 - Nick Wellnhofer
-

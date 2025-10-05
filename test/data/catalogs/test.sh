@@ -5,32 +5,32 @@ set -e
 echo "## Catalog regression tests"
 
 if [ -n "$1" ]; then
-    xmlcatalog=$1
+	xmlcatalog=$1
 else
-    xmlcatalog=./xmlcatalog
+	xmlcatalog=./xmlcatalog
 fi
 
 exitcode=0
 
-for i in test/catalogs/*.script ; do
-    name=$(basename $i .script)
-    xml="./test/catalogs/$name.xml"
+for i in test/data/catalogs/*.script; do
+	name=$(basename $i .script)
+	xml="./test/data/catalogs/$name.xml"
 
-    if [ -f $xml ] ; then
-        if [ ! -f result/catalogs/$name ] ; then
-            echo New test file $name
-            $xmlcatalog --shell $xml < $i 2>&1 > result/catalogs/$name
-        else
-            $xmlcatalog --shell $xml < $i 2>&1 > catalog.out
-            log=$(diff result/catalogs/$name catalog.out)
-            if [ -n "$log" ] ; then
-                echo $name result
-                echo "$log"
-                exitcode=1
-            fi
-            rm catalog.out
-        fi
-    fi
+	if [ -f $xml ]; then
+		if [ ! -f result/catalogs/$name ]; then
+			echo New test file $name
+			$xmlcatalog --shell $xml < $i 2>&1 > result/catalogs/$name
+		else
+			$xmlcatalog --shell $xml < $i 2>&1 > catalog.out
+			log=$(diff result/catalogs/$name catalog.out)
+			if [ -n "$log" ]; then
+				echo $name result
+				echo "$log"
+				exitcode=1
+			fi
+			rm catalog.out
+		fi
+	fi
 done
 
 # Add and del operations on XML Catalogs

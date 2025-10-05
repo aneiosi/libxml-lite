@@ -26,7 +26,7 @@ directory.
 
 - `tools/genHtml5LibTests.py` creates test cases and expected results
   from the html5lib test suite:
-  - `test/html-tokenizer`
+  - `test/data/html-tokenizer`
   - `result/html-tokenizer`
 
 - `tools/genHtmlEnt.py` prints lookup tables for HTML5 named character
@@ -109,4 +109,3 @@ Dockerfile in the .gitlab-ci directory:
     docker build -t registry.gitlab.gnome.org/gnome/libxml2 - \
         < .gitlab-ci/Dockerfile
     docker push registry.gitlab.gnome.org/gnome/libxml2
-

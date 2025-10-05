@@ -1,4 +1,4 @@
-./test/errors/invalid-start-tag-2.xml:1: parser error : StartTag: invalid element name
+./test/data/errors/invalid-start-tag-2.xml:1: parser error : StartTag: invalid element name
 <
  ^
-./test/errors/invalid-start-tag-2.xml : failed to parse
+./test/data/errors/invalid-start-tag-2.xml : failed to parse

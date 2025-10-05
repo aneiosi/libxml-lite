@@ -1,9 +1,9 @@
-./test/errors/attr1.xml:2: parser error : AttValue: ' expected
+./test/data/errors/attr1.xml:2: parser error : AttValue: ' expected
 
 ^
-./test/errors/attr1.xml:2: parser error : attributes construct error
+./test/data/errors/attr1.xml:2: parser error : attributes construct error
 
 ^
-./test/errors/attr1.xml:2: parser error : Couldn't find end of Start Tag foo line 1
+./test/data/errors/attr1.xml:2: parser error : Couldn't find end of Start Tag foo line 1
 
 ^

@@ -1653,14 +1653,6 @@ extern "C" {
 		 */
 		XML_PARSE_XINCLUDE       = 1 << 10,
 		/**
-		 * Disable network access with the built-in HTTP or FTP clients.
-		 *
-		 * After the last built-in network client was removed in 2.15,
-		 * this option has no effect expect for being passed on to custom
-		 * resource loaders.
-		 */
-		XML_PARSE_NONET          = 1 << 11,
-		/**
 		 * Create a document without interned strings, making all
 		 * strings separate memory allocations.
 		 */
@@ -1908,10 +1900,6 @@ extern "C" {
 		XML_WITH_WRITER     = 7,
 		/** Legacy SAX1 API */
 		XML_WITH_SAX1       = 8,
-		/** @deprecated FTP support was removed */
-		XML_WITH_FTP        = 9,
-		/** @deprecated HTTP support was removed */
-		XML_WITH_HTTP       = 10,
 		/** DTD validation */
 		XML_WITH_VALID      = 11,
 		/** HTML parser */

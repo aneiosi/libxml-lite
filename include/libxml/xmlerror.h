@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief Error handling
- * 
+ *
  * API for error reporting and callbacks.
  *
  * @copyright See Copyright for the status of this software.
@@ -92,10 +92,6 @@ typedef enum {
     XML_FROM_OUTPUT,
     /** The Input/Output stack */
     XML_FROM_IO,
-    /** The FTP module (unused) */
-    XML_FROM_FTP,
-    /** The HTTP module (unused) */
-    XML_FROM_HTTP,
     /** The XInclude processing */
     XML_FROM_XINCLUDE,
     /** The XPath module */
@@ -784,13 +780,6 @@ typedef enum {
     XML_C14N_INVALID_NODE, /* 1953 */
     XML_C14N_UNKNOW_NODE, /* 1954 */
     XML_C14N_RELATIVE_NAMESPACE, /* 1955 */
-    XML_FTP_PASV_ANSWER = 2000,
-    XML_FTP_EPSV_ANSWER, /* 2001 */
-    XML_FTP_ACCNT, /* 2002 */
-    XML_FTP_URL_SYNTAX, /* 2003 */
-    XML_HTTP_URL_SYNTAX = 2020,
-    XML_HTTP_USE_IP, /* 2021 */
-    XML_HTTP_UNKNOWN_HOST, /* 2022 */
     XML_SCHEMAP_SRC_SIMPLE_TYPE_1 = 3000,
     XML_SCHEMAP_SRC_SIMPLE_TYPE_2, /* 3001 */
     XML_SCHEMAP_SRC_SIMPLE_TYPE_3, /* 3002 */

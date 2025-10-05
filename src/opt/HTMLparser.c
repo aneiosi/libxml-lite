@@ -5508,7 +5508,6 @@ htmlCtxtSetOptionsInternal(xmlParserCtxtPtr ctxt, int options, int keepMask)
               HTML_PARSE_NOWARNING |
               HTML_PARSE_PEDANTIC |
               HTML_PARSE_NOBLANKS |
-              HTML_PARSE_NONET |
               HTML_PARSE_NOIMPLIED |
               HTML_PARSE_COMPACT |
               HTML_PARSE_HUGE |

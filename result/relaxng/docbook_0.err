@@ -1,1 +1,1 @@
-./test/relaxng/docbook_0.xml validates
+./test/data/relaxng/docbook_0.xml validates

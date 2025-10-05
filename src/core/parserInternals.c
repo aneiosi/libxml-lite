@@ -17,7 +17,6 @@
 #endif
 
 #include <string.h>
-#include <ctype.h>
 #include <stdlib.h>
 
 #include <libxml/xmlmemory.h>
@@ -2305,7 +2304,7 @@ xmlResolveFromCatalog(const char *url, const char *publicId,
      *
      * TODO: This is somewhat non-deterministic.
      */
-    if (xmlNoNetExists(url))
+    if (xml_local_exists(url))
         return(XML_ERR_OK);
 
     /* Backup and reset last error */
@@ -2405,19 +2404,6 @@ xmlCtxtResolveFromCatalog(xmlParserCtxtPtr ctxt, const char *url,
 #endif
 
 /**
- * @deprecated Internal function, don't use.
- *
- * @param ctxt  an XML parser context
- * @param ret  an XML parser input
- * @returns NULL.
- */
-xmlParserInput *
-xmlCheckHTTPInput(xmlParserCtxt *ctxt ATTRIBUTE_UNUSED,
-                  xmlParserInput *ret ATTRIBUTE_UNUSED) {
-    return(NULL);
-}
-
-/**
  * Create a new input stream based on a file or a URL.
  *
  * The flag XML_INPUT_UNZIP allows decompression.
@@ -2470,7 +2456,7 @@ xmlNewInputFromUrl(const char *url, xmlParserInputFlags flags,
         buf = xmlParserInputBufferCreateFilenameValue(url,
                 XML_CHAR_ENCODING_NONE);
         if (buf == NULL)
-            code = XML_IO_ENOENT;
+            {code = XML_IO_ENOENT;}
     } else {
         code = xmlParserInputBufferCreateUrl(url, XML_CHAR_ENCODING_NONE,
                                              flags, &buf);
@@ -2485,7 +2471,7 @@ xmlNewInputFromUrl(const char *url, xmlParserInputFlags flags,
     }
 
     if (resource != NULL)
-        xmlFree(resource);
+        {xmlFree(resource);}
     return(code);
 }
 
@@ -2508,12 +2494,10 @@ xmlNewInputFromFile(xmlParserCtxt *ctxt, const char *filename) {
     xmlParserErrors code;
 
     if ((ctxt == NULL) || (filename == NULL))
-        return(NULL);
+        {return(NULL);}
 
     if (ctxt->options & XML_PARSE_UNZIP)
-        flags |= XML_INPUT_UNZIP;
-    if ((ctxt->options & XML_PARSE_NONET) == 0)
-        flags |= XML_INPUT_NETWORK;
+        {flags |= XML_INPUT_UNZIP;}
 
     code = xmlNewInputFromUrl(filename, flags, &input);
     if (code != XML_ERR_OK) {
@@ -2542,7 +2526,7 @@ xmlDefaultExternalEntityLoader(const char *url, const char *publicId,
     (void) publicId;
 
     if (url == NULL)
-        return(NULL);
+        {return(NULL);}
 
 #ifdef LIBXML_CATALOG_ENABLED
     resource = xmlCtxtResolveFromCatalog(ctxt, url, publicId);
@@ -2550,50 +2534,10 @@ xmlDefaultExternalEntityLoader(const char *url, const char *publicId,
 	url = resource;
 #endif
 
-    /*
-     * Several downstream test suites expect this error whenever
-     * an http URI is passed and NONET is set.
-     */
-    if ((ctxt != NULL) &&
-        (ctxt->options & XML_PARSE_NONET) &&
-        (xmlStrncasecmp(BAD_CAST url, BAD_CAST "http://", 7) == 0)) {
-        xmlCtxtErrIO(ctxt, XML_IO_NETWORK_ATTEMPT, url);
-    } else {
         input = xmlNewInputFromFile(ctxt, url);
-    }
 
     if (resource != NULL)
-	xmlFree(resource);
-    return(input);
-}
-
-/**
- * A specific entity loader disabling network accesses, though still
- * allowing local catalog accesses for resolution.
- *
- * @deprecated Use XML_PARSE_NONET.
- *
- * @param URL  the URL or system ID for the entity to load
- * @param publicId  the public ID for the entity to load
- * @param ctxt  the context in which the entity is called or NULL
- * @returns a new allocated xmlParserInput, or NULL.
- */
-xmlParserInput *
-xmlNoNetExternalEntityLoader(const char *URL, const char *publicId,
-                             xmlParserCtxt *ctxt) {
-    int oldOptions = 0;
-    xmlParserInputPtr input;
-
-    if (ctxt != NULL) {
-        oldOptions = ctxt->options;
-        ctxt->options |= XML_PARSE_NONET;
-    }
-
-    input = xmlDefaultExternalEntityLoader(URL, publicId, ctxt);
-
-    if (ctxt != NULL)
-        ctxt->options = oldOptions;
-
+	{xmlFree(resource);}
     return(input);
 }
 
@@ -2664,7 +2608,7 @@ xmlLoadResource(xmlParserCtxt *ctxt, const char *url, const char *publicId,
     xmlParserInputPtr ret;
 
     if (url == NULL)
-        return(NULL);
+        {return(NULL);}
 
     if ((ctxt != NULL) && (ctxt->resourceLoader != NULL)) {
         char *resource = NULL;
@@ -2675,17 +2619,15 @@ xmlLoadResource(xmlParserCtxt *ctxt, const char *url, const char *publicId,
 #ifdef LIBXML_CATALOG_ENABLED
         resource = xmlCtxtResolveFromCatalog(ctxt, url, publicId);
         if (resource != NULL)
-            url = resource;
+            {url = resource;}
 #endif
 
         if (ctxt->options & XML_PARSE_UNZIP)
-            flags |= XML_INPUT_UNZIP;
-        if ((ctxt->options & XML_PARSE_NONET) == 0)
-            flags |= XML_INPUT_NETWORK;
+            {flags |= XML_INPUT_UNZIP;}
 
         userData = ctxt->resourceCtxt;
         if (userData == NULL)
-            userData = ctxt;
+            {userData = ctxt;}
 
         code = ctxt->resourceLoader(userData, url, publicId, type,
                                     flags, &ret);
@@ -2694,7 +2636,7 @@ xmlLoadResource(xmlParserCtxt *ctxt, const char *url, const char *publicId,
             ret = NULL;
         }
         if (resource != NULL)
-            xmlFree(resource);
+            {xmlFree(resource);}
         return(ret);
     }
 
@@ -3745,4 +3687,3 @@ xmlKeepBlanksDefault(int val) {
 #endif
     return(old);
 }
-

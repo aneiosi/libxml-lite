@@ -100,13 +100,6 @@
 #define LIBXML_SAX1_ENABLED
 #endif
 
-#if @WITH_HTTP@
-/**
- * HTTP support was removed in 2.15
- */
-#define LIBXML_HTTP_STUBS_ENABLED
-#endif
-
 #if @WITH_VALID@
 /**
  * Whether the DTD validation support is configured in
@@ -238,7 +231,7 @@
 /**
  * the string suffix used by dynamic modules (usually shared libraries)
  */
-#define LIBXML_MODULE_EXTENSION "@MODULE_EXTENSION@" 
+#define LIBXML_MODULE_EXTENSION "@MODULE_EXTENSION@"
 #endif
 
 #if @WITH_ZLIB@
@@ -251,5 +244,3 @@
 #include <libxml/xmlexports.h>
 
 #endif
-
-

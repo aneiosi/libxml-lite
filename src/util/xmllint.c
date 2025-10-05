@@ -2321,7 +2321,6 @@ static void usage(FILE *f, const char *name) {
     fprintf(f, "\t--noout : don't output the result tree\n");
     fprintf(f, "\t--path 'paths': provide a set of paths for resources\n");
     fprintf(f, "\t--load-trace : print trace of all external entities loaded\n");
-    fprintf(f, "\t--nonet : refuse to fetch DTDs or entities over network\n");
     fprintf(f, "\t--nocompact : do not generate compact text nodes\n");
 #ifdef LIBXML_VALID_ENABLED
     fprintf(f, "\t--valid : validate the document in addition to std well-formed check\n");
@@ -2785,9 +2784,6 @@ xmllintParseOptions(xmllintState *lint, int argc, const char **argv) {
             lint->schematron = argv[i];
             lint->parseOptions |= XML_PARSE_NOENT;
 #endif
-        } else if ((!strcmp(argv[i], "-nonet")) ||
-                   (!strcmp(argv[i], "--nonet"))) {
-            lint->parseOptions |= XML_PARSE_NONET;
         } else if ((!strcmp(argv[i], "-nocompact")) ||
                    (!strcmp(argv[i], "--nocompact"))) {
             lint->parseOptions &= ~XML_PARSE_COMPACT;
@@ -2940,8 +2936,6 @@ xmllintParseOptions(xmllintState *lint, int argc, const char **argv) {
             xmllintOptWarnNoSupport(errStream, "--html", "--nodict");
         if (lint->parseOptions & XML_PARSE_NOENT)
             xmllintOptWarnNoSupport(errStream, "--html", "--noent");
-        if (lint->parseOptions & XML_PARSE_NONET)
-            xmllintOptWarnNoSupport(errStream, "--html", "--nonet");
         if (lint->parseOptions & XML_PARSE_NSCLEAN)
             xmllintOptWarnNoSupport(errStream, "--html", "--nsclean");
         if (lint->parseOptions & XML_PARSE_OLD10)
@@ -3328,4 +3322,3 @@ error:
 
     return(lint->progresult);
 }
-

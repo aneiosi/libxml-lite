@@ -36,7 +36,7 @@ XML_HIDDEN void
 xmlInitIOCallbacks(void);
 
 XML_HIDDEN int
-xmlNoNetExists(const char *filename);
+xml_local_exists(const char *filename);
 
 XML_HIDDEN xmlParserErrors
 xmlParserInputBufferCreateUrl(const char *URI, xmlCharEncoding enc,

@@ -10,7 +10,6 @@ moduleMap = {
 	"c14n": "C14N",
 	"catalog": "CATALOG",
 	"debugXML": "DEBUG",
-	"nanohttp": "HTTP",
 	"pattern": "PATTERN",
 	"relaxng": "RELAXNG",
 	"schemasInternals": "SCHEMAS",
@@ -38,7 +37,6 @@ symbolMap1 = {
 	"xmlValidateQName": "",
 	"htmlDefaultSAXHandlerInit": "HTML",
 	"xmlSAX2InitHtmlDefaultSAXHandler": "HTML",
-	"xmlRegisterHTTPPostCallbacks": "HTTP",
 	"__xmlOutputBufferCreateFilename": "OUTPUT",
 	"xmlAttrSerializeTxtContent": "OUTPUT",
 	"xmlUTF8ToIsolat1": "OUTPUT",
@@ -71,9 +69,6 @@ symbolMap2 = {
 	"xmlRelaxNGDump": "DEBUG",
 	"xmlACatalogDump": "OUTPUT",
 	"xmlCatalogDump": "OUTPUT",
-	"xmlIOHTTPOpenW": "OUTPUT",
-	"xmlNanoHTTPSave": "OUTPUT",
-	"xmlRegisterHTTPPostCallbacks": "OUTPUT",
 	"xmlRelaxNGDumpTree": "OUTPUT",
 	"xmlTextReaderPreservePattern": "PATTERN",
 	"htmlCreatePushParserCtxt": "PUSH",
@@ -114,8 +109,6 @@ def findModules(filename, symbol):
 			module1 = "VALID"
 		elif re.search("^xml(Recover|SAX(User)?Parse)", symbol):
 			module1 = "SAX1"
-		elif re.search("^xmlIOHTTP", symbol):
-			module1 = "HTTP"
 
 	module2 = symbolMap2.get(symbol)
 

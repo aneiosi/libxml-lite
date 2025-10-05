@@ -208,7 +208,7 @@ getString(xmlNodePtr cur, const char *xpath) {
 
 /************************************************************************
  *									*
- *		Test test/xsdtest/xsdtestsuite.xml			*
+ *		Test test/data/xsdtest/xsdtestsuite.xml			*
  *									*
  ************************************************************************/
 
@@ -606,7 +606,7 @@ static int
 xsdTest(void) {
     xmlDocPtr doc;
     xmlNodePtr cur;
-    const char *filename = "test/xsdtest/xsdtestsuite.xml";
+    const char *filename = "test/data/xsdtest/xsdtestsuite.xml";
     int ret = 0;
 
     doc = xmlReadFile(filename, NULL, XML_PARSE_NOENT);
@@ -669,7 +669,7 @@ static int
 rngTest1(void) {
     xmlDocPtr doc;
     xmlNodePtr cur;
-    const char *filename = "test/relaxng/OASIS/spectest.xml";
+    const char *filename = "test/data/relaxng/OASIS/spectest.xml";
     int ret = 0;
 
     doc = xmlReadFile(filename, NULL, XML_PARSE_NOENT);
@@ -707,7 +707,7 @@ static int
 rngTest2(void) {
     xmlDocPtr doc;
     xmlNodePtr cur;
-    const char *filename = "test/relaxng/testsuite.xml";
+    const char *filename = "test/data/relaxng/testsuite.xml";
     int ret = 0;
 
     doc = xmlReadFile(filename, NULL, XML_PARSE_NOENT);
@@ -797,8 +797,8 @@ rngTestStreaming(void) {
     xmlNodePtr description;
     xmlNodePtr child;
     const xmlChar* error_arr[EXPECTED_XMP_ERROR_COUNT] = { NULL };
-    const char* schema_filepath = "test/relaxng/ISO19005-1-XMP_Packet.rng";
-    const char* xmp_packet_filepath = "test/relaxng/TestXMPInvalid1.xmp";
+    const char* schema_filepath = "test/data/relaxng/ISO19005-1-XMP_Packet.rng";
+    const char* xmp_packet_filepath = "test/data/relaxng/TestXMPInvalid1.xmp";
 
     mem = xmlMemUsed();
 

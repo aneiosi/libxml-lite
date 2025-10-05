@@ -455,7 +455,7 @@ static void LIBXML_ATTR_FORMAT(3, 0) xmlNsWarn(
  * Summing the unexpanded lengths also adds the length of the reference.
  * This is by design. Taking the length of the entity name into account
  * discourages attacks that try to waste CPU time with abusively long
- * entity names. See test/recurse/lol6.xml for example. Each call also
+ * entity names. See test/data/recurse/lol6.xml for example. Each call also
  * adds some fixed cost XML_ENT_FIXED_COST to discourage attacks with
  * short entities.
  *
@@ -571,8 +571,6 @@ int xmlHasFeature(xmlFeature feature) {
 #else
 			return (0);
 #endif
-		case XML_WITH_HTTP:
-			return (0);
 		case XML_WITH_VALID:
 #ifdef LIBXML_VALID_ENABLED
 			return (1);
@@ -13560,7 +13558,7 @@ static int xmlCtxtSetOptionsInternal(xmlParserCtxtPtr ctxt, int options, int kee
 #ifdef LIBXML_SAX1_ENABLED
 	          XML_PARSE_SAX1 |
 #endif
-	          XML_PARSE_NONET | XML_PARSE_NODICT | XML_PARSE_NSCLEAN | XML_PARSE_NOCDATA
+	          XML_PARSE_NODICT | XML_PARSE_NSCLEAN | XML_PARSE_NOCDATA
 	        | XML_PARSE_COMPACT | XML_PARSE_OLD10 | XML_PARSE_HUGE | XML_PARSE_OLDSAX
 	        | XML_PARSE_IGNORE_ENC | XML_PARSE_BIG_LINES | XML_PARSE_NO_XXE | XML_PARSE_UNZIP
 	        | XML_PARSE_NO_SYS_CATALOG | XML_PARSE_CATALOG_PI;
@@ -13639,7 +13637,6 @@ int xmlCtxtGetOptions(xmlParserCtxt* ctxt) {
  *
  * - XML_PARSE_NOERROR
  * - XML_PARSE_NOWARNING
- * - XML_PARSE_NONET
  * - XML_PARSE_NSCLEAN
  * - XML_PARSE_NOCDATA
  * - XML_PARSE_COMPACT
@@ -13668,7 +13665,7 @@ int xmlCtxtUseOptions(xmlParserCtxt* ctxt, int options) {
 	/*
 	 * For historic reasons, some options can only be enabled.
 	 */
-	keepMask = XML_PARSE_NOERROR | XML_PARSE_NOWARNING | XML_PARSE_NONET | XML_PARSE_NSCLEAN
+	keepMask = XML_PARSE_NOERROR | XML_PARSE_NOWARNING | XML_PARSE_NSCLEAN
 	         | XML_PARSE_NOCDATA | XML_PARSE_COMPACT | XML_PARSE_OLD10 | XML_PARSE_HUGE
 	         | XML_PARSE_OLDSAX | XML_PARSE_IGNORE_ENC | XML_PARSE_BIG_LINES;
 

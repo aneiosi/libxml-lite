@@ -2727,18 +2727,18 @@ xmlParserGetDirectory(const char *filename) {
  * @returns 0, 1, or 2.
  */
 int
-xmlNoNetExists(const char *filename) {
+xml_local_exists(const char *filename) {
     char *fromUri;
     int ret;
 
     if (filename == NULL)
-	return(0);
+	{return(0);}
 
     if (xmlConvertUriToPath(filename, &fromUri) < 0)
-        return(0);
+        {return(0);}
 
     if (fromUri != NULL)
-        filename = fromUri;
+        {filename = fromUri;}
 
     ret =  xmlCheckFilename(filename);
 
@@ -2898,4 +2898,3 @@ xmlCleanupOutputCallbacks(void)
     xmlOutputCallbackNr = 0;
 }
 #endif /* LIBXML_OUTPUT_ENABLED */
-

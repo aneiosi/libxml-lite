@@ -1,5 +1,5 @@
-> test/catalogs/calstblx.dtd
-> test/catalogs/docbook.dtd
-> test/catalogs/soextblx.dtd
-> test/catalogs/dbgenent.mod
-> 
+> test/data/catalogs/calstblx.dtd
+> test/data/catalogs/docbook.dtd
+> test/data/catalogs/soextblx.dtd
+> test/data/catalogs/dbgenent.mod
+>
