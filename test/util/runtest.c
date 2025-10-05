@@ -1524,12 +1524,7 @@ saxParseTest(const char *filename, const char *result,
         debugContext userData;
         xmlParserCtxtPtr ctxt = xmlCreateFileParserCtxt(filename);
 
-        if (options & XML_PARSE_SAX1) {
-            memcpy(ctxt->sax, debugSAXHandler, sizeof(xmlSAXHandler));
-            options -= XML_PARSE_SAX1;
-        } else {
-            memcpy(ctxt->sax, debugSAX2Handler, sizeof(xmlSAXHandler));
-        }
+        memcpy(ctxt->sax, debugSAX2Handler, sizeof(xmlSAXHandler));
         userData.filename = filename;
         userData.generalEntities = xmlHashCreate(0);
         userData.parameterEntities = xmlHashCreate(0);
@@ -1807,13 +1802,7 @@ oldParseTest(const char *filename, const char *result,
     /*
      * base of the test, parse with the old API
      */
-#ifdef LIBXML_SAX1_ENABLED
-    xmlGetWarningsDefaultValue = 0;
-    doc = xmlParseFile(filename);
-    xmlGetWarningsDefaultValue = 1;
-#else
     doc = xmlReadFile(filename, NULL, XML_PARSE_NOWARNING);
-#endif
     if (doc == NULL)
         return(1);
     temp = resultFilename(filename, temp_directory, ".res");
@@ -1830,13 +1819,7 @@ oldParseTest(const char *filename, const char *result,
     /*
      * Parse the saved result to make sure the round trip is okay
      */
-#ifdef LIBXML_SAX1_ENABLED
-    xmlGetWarningsDefaultValue = 0;
-    doc = xmlParseFile(temp);
-    xmlGetWarningsDefaultValue = 1;
-#else
     doc = xmlReadFile(temp, NULL, XML_PARSE_NOWARNING);
-#endif
     if (doc == NULL)
         return(1);
     xmlSaveFile(temp, doc);
@@ -5045,11 +5028,6 @@ testDesc testDescriptions[] = {
     { "Walker regression tests",
       walkerParseTest, "./test/data/*", "test/result/", ".rdr", NULL,
       0 },
-#endif
-#ifdef LIBXML_SAX1_ENABLED
-    { "SAX1 callbacks regression tests" ,
-      saxParseTest, "./test/data/*", "test/result/", ".sax", NULL,
-      XML_PARSE_SAX1 },
 #endif
     { "SAX2 callbacks regression tests" ,
       saxParseTest, "./test/data/*", "test/result/", ".sax2", NULL,

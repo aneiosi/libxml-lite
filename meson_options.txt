@@ -40,8 +40,6 @@ option('regexps', type: 'feature', description: 'Regular expressions support')
 
 option('relaxng', type: 'feature', description: 'RELAX NG support')
 
-option('sax1', type: 'feature', description: 'Older SAX1 interface')
-
 option('schemas', type: 'feature', description: 'XML Schemas 1.0 support')
 
 option('schematron', type: 'feature', description: 'Schematron support')

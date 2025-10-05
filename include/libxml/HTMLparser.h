@@ -90,14 +90,6 @@ struct _htmlEntityDesc {
     const char *desc;   /* the description */
 };
 
-#ifdef LIBXML_SAX1_ENABLED
-/**
- * @deprecated Use #xmlSAX2InitHtmlDefaultSAXHandler
- */
-XML_DEPRECATED
-XMLPUBVAR const xmlSAXHandlerV1 htmlDefaultSAXHandler;
-#endif /* LIBXML_SAX1_ENABLED */
-
 /** @endcond */
 
 /*

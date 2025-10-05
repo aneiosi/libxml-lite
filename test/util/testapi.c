@@ -986,29 +986,6 @@ main(int argc ATTRIBUTE_UNUSED, char **argv ATTRIBUTE_UNUSED) {
 #endif /* LIBXML_OUTPUT_ENABLED */
 #endif /* LIBXML_RELAXNG_ENABLED */
 
-#ifdef LIBXML_SAX1_ENABLED
-    xmlParseBalancedChunkMemory(NULL, NULL, NULL, 0, NULL, NULL);
-    xmlParseBalancedChunkMemoryRecover(NULL, NULL, NULL, 0, NULL, NULL, 0);
-    xmlFreeDoc(xmlParseDoc(NULL));
-    xmlFreeDoc(xmlParseEntity(NULL));
-    xmlParseExternalEntity(NULL, NULL, NULL, 0, NULL, NULL, NULL);
-    xmlFreeDoc(xmlParseFile(NULL));
-    xmlFreeDoc(xmlParseMemory(NULL, 0));
-    xmlFreeDoc(xmlRecoverDoc(NULL));
-    xmlFreeDoc(xmlRecoverFile(NULL));
-    xmlFreeDoc(xmlRecoverMemory(NULL, 0));
-    xmlSAXDefaultVersion(0);
-    xmlFreeDoc(xmlSAXParseDoc(NULL, NULL, 0));
-    xmlFreeDoc(xmlSAXParseEntity(NULL, NULL));
-    xmlFreeDoc(xmlSAXParseFile(NULL, NULL, 0));
-    xmlFreeDoc(xmlSAXParseFileWithData(NULL, NULL, 0, NULL));
-    xmlFreeDoc(xmlSAXParseMemory(NULL, NULL, 0, 0));
-    xmlFreeDoc(xmlSAXParseMemoryWithData(NULL, NULL, 0, 0, NULL));
-    xmlSAXUserParseFile(NULL, NULL, NULL);
-    xmlSAXUserParseMemory(NULL, NULL, NULL, 0);
-    xmlSetupParserForBuffer(NULL, NULL, NULL);
-#endif /* LIBXML_SAX1_ENABLED */
-
 #ifdef LIBXML_SCHEMAS_ENABLED
     xmlSchemaCheckFacet(NULL, NULL, NULL, NULL);
     xmlSchemaCleanupTypes();

@@ -1244,13 +1244,6 @@ extern "C" {
 
 	XML_DEPRECATED
 	XMLPUBVAR const xmlSAXLocator xmlDefaultSAXLocator;
-#ifdef LIBXML_SAX1_ENABLED
-	/**
-	 * @deprecated Use #xmlSAXVersion or #xmlSAX2InitDefaultSAXHandler
-	 */
-	XML_DEPRECATED
-	XMLPUBVAR const xmlSAXHandlerV1 xmlDefaultSAXHandler;
-#endif
 
 	XML_DEPRECATED
 	XMLPUBFUN int* __xmlDoValidityCheckingDefaultValue(void);
@@ -1374,11 +1367,6 @@ extern "C" {
 /*
  * Basic parsing Interfaces
  */
-#ifdef LIBXML_SAX1_ENABLED
-	XMLPUBFUN xmlDoc* xmlParseDoc(const xmlChar* cur);
-	XMLPUBFUN xmlDoc* xmlParseFile(const char* filename);
-	XMLPUBFUN xmlDoc* xmlParseMemory(const char* buffer, int size);
-#endif /* LIBXML_SAX1_ENABLED */
 	XML_DEPRECATED
 	XMLPUBFUN int  xmlSubstituteEntitiesDefault(int val);
 	XMLPUBFUN int  xmlKeepBlanksDefault(int val);
@@ -1403,49 +1391,12 @@ extern "C" {
 	XML_DEPRECATED
 	XMLPUBFUN int xmlThrDefLoadExtDtdDefaultValue(int v);
 
-#ifdef LIBXML_SAX1_ENABLED
-	/*
-	 * Recovery mode
-	 */
-	XML_DEPRECATED
-	XMLPUBFUN xmlDoc* xmlRecoverDoc(const xmlChar* cur);
-	XML_DEPRECATED
-	XMLPUBFUN xmlDoc* xmlRecoverMemory(const char* buffer, int size);
-	XML_DEPRECATED
-	XMLPUBFUN xmlDoc* xmlRecoverFile(const char* filename);
-#endif /* LIBXML_SAX1_ENABLED */
-
 	/*
 	 * Less common routines and SAX interfaces
 	 */
 	XMLPUBFUN int xmlParseDocument(xmlParserCtxt* ctxt);
 	XML_DEPRECATED
 	XMLPUBFUN int xmlParseExtParsedEnt(xmlParserCtxt* ctxt);
-#ifdef LIBXML_SAX1_ENABLED
-	XML_DEPRECATED
-	XMLPUBFUN int xmlSAXUserParseFile(xmlSAXHandler* sax, void* user_data, const char* filename);
-	XML_DEPRECATED
-	XMLPUBFUN int
-	xmlSAXUserParseMemory(xmlSAXHandler* sax, void* user_data, const char* buffer, int size);
-	XML_DEPRECATED
-	XMLPUBFUN xmlDoc* xmlSAXParseDoc(xmlSAXHandler* sax, const xmlChar* cur, int recovery);
-	XML_DEPRECATED
-	XMLPUBFUN xmlDoc*
-	xmlSAXParseMemory(xmlSAXHandler* sax, const char* buffer, int size, int recovery);
-	XML_DEPRECATED
-	XMLPUBFUN xmlDoc* xmlSAXParseMemoryWithData(
-		xmlSAXHandler* sax, const char* buffer, int size, int recovery, void* data
-	);
-	XML_DEPRECATED
-	XMLPUBFUN xmlDoc* xmlSAXParseFile(xmlSAXHandler* sax, const char* filename, int recovery);
-	XML_DEPRECATED
-	XMLPUBFUN xmlDoc*
-	xmlSAXParseFileWithData(xmlSAXHandler* sax, const char* filename, int recovery, void* data);
-	XML_DEPRECATED
-	XMLPUBFUN xmlDoc* xmlSAXParseEntity(xmlSAXHandler* sax, const char* filename);
-	XML_DEPRECATED
-	XMLPUBFUN xmlDoc* xmlParseEntity(const char* filename);
-#endif /* LIBXML_SAX1_ENABLED */
 
 #ifdef LIBXML_VALID_ENABLED
 	XMLPUBFUN xmlDtd* xmlCtxtParseDtd(
@@ -1460,39 +1411,8 @@ extern "C" {
 	XMLPUBFUN xmlDtd*
 	xmlIOParseDTD(xmlSAXHandler* sax, xmlParserInputBuffer* input, xmlCharEncoding enc);
 #endif /* LIBXML_VALID_ENABLE */
-#ifdef LIBXML_SAX1_ENABLED
-	XMLPUBFUN int xmlParseBalancedChunkMemory(
-		xmlDoc*        doc,
-		xmlSAXHandler* sax,
-		void*          user_data,
-		int            depth,
-		const xmlChar* string,
-		xmlNode**      lst
-	);
-#endif /* LIBXML_SAX1_ENABLED */
 	XMLPUBFUN xmlParserErrors
 	xmlParseInNodeContext(xmlNode* node, const char* data, int datalen, int options, xmlNode** lst);
-#ifdef LIBXML_SAX1_ENABLED
-	XMLPUBFUN int xmlParseBalancedChunkMemoryRecover(
-		xmlDoc*        doc,
-		xmlSAXHandler* sax,
-		void*          user_data,
-		int            depth,
-		const xmlChar* string,
-		xmlNode**      lst,
-		int            recover
-	);
-	XML_DEPRECATED
-	XMLPUBFUN int xmlParseExternalEntity(
-		xmlDoc*        doc,
-		xmlSAXHandler* sax,
-		void*          user_data,
-		int            depth,
-		const xmlChar* URL,
-		const xmlChar* ID,
-		xmlNode**      lst
-	);
-#endif /* LIBXML_SAX1_ENABLED */
 	XMLPUBFUN int xmlParseCtxtExternalEntity(
 		xmlParserCtxt* ctx, const xmlChar* URL, const xmlChar* ID, xmlNode** lst
 	);
@@ -1506,11 +1426,6 @@ extern "C" {
 	XML_DEPRECATED
 	XMLPUBFUN void xmlClearParserCtxt(xmlParserCtxt* ctxt);
 	XMLPUBFUN void xmlFreeParserCtxt(xmlParserCtxt* ctxt);
-#ifdef LIBXML_SAX1_ENABLED
-	XML_DEPRECATED
-	XMLPUBFUN void
-	xmlSetupParserForBuffer(xmlParserCtxt* ctxt, const xmlChar* buffer, const char* filename);
-#endif /* LIBXML_SAX1_ENABLED */
 	XMLPUBFUN xmlParserCtxt* xmlCreateDocParserCtxt(const xmlChar* cur);
 
 #ifdef LIBXML_PUSH_ENABLED
@@ -1638,13 +1553,6 @@ extern "C" {
 		 * Not supported by the push parser.
 		 */
 		XML_PARSE_NOBLANKS       = 1 << 8,
-		/**
-		 * Always invoke the deprecated SAX1 startElement and endElement
-		 * handlers.
-		 *
-		 * @deprecated This option will be removed in a future version.
-		 */
-		XML_PARSE_SAX1           = 1 << 9,
 		/**
 		 * Enable XInclude processing. This option only affects the
 		 * xmlTextReader and XInclude interfaces.
@@ -1896,8 +1804,6 @@ extern "C" {
 		XML_WITH_PATTERN    = 6,
 		/** XML Writer */
 		XML_WITH_WRITER     = 7,
-		/** Legacy SAX1 API */
-		XML_WITH_SAX1       = 8,
 		/** DTD validation */
 		XML_WITH_VALID      = 11,
 		/** HTML parser */

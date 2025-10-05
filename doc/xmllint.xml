@@ -126,7 +126,6 @@
             <arg choice="plain"><option>--exc-c14n</option></arg>
             <arg choice="plain"><option>--pedantic</option></arg>
             <arg choice="plain"><option>--sax</option></arg>
-            <arg choice="plain"><option>--sax1</option></arg>
             <arg choice="plain"><option>--oldxml10</option></arg>
         </group>
         <group choice="req">
@@ -730,13 +729,6 @@
             <term><option>--repeat</option></term>
             <listitem>
                 <para>Repeat 100 times, for timing or profiling.</para>
-            </listitem>
-        </varlistentry>
-
-        <varlistentry>
-            <term><option>--sax1</option></term>
-            <listitem>
-                <para>Use deprecated SAX1 interface (only for debugging).</para>
             </listitem>
         </varlistentry>
 

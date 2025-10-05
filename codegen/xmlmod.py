@@ -43,15 +43,6 @@ symbolMap1 = {
 	"xmlSprintfElementContent": "OUTPUT",
 	"xmlCreatePushParserCtxt": "PUSH",
 	"xmlParseChunk": "PUSH",
-	"xmlParseBalancedChunkMemory": "SAX1",
-	"xmlParseBalancedChunkMemoryRecover": "SAX1",
-	"xmlParseDoc": "SAX1",
-	"xmlParseEntity": "SAX1",
-	"xmlParseExternalEntity": "SAX1",
-	"xmlParseFile": "SAX1",
-	"xmlParseMemory": "SAX1",
-	"xmlSAXDefaultVersion": "SAX1",
-	"xmlSetupParserForBuffer": "SAX1",
 	"xmlCtxtGetValidCtxt": "VALID",
 	"xmlFreeValidCtxt": "VALID",
 	"xmlNewValidCtxt": "VALID",
@@ -107,8 +98,6 @@ def findModules(filename, symbol):
 	if module1 is None:
 		if re.search("^xml(Ctxt)?Valid|Parse(DTD|Dtd)", symbol):
 			module1 = "VALID"
-		elif re.search("^xml(Recover|SAX(User)?Parse)", symbol):
-			module1 = "SAX1"
 
 	module2 = symbolMap2.get(symbol)
 

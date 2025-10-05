@@ -1029,43 +1029,6 @@ fatalErrorDebug(void *ctx, const char *msg, ...)
     va_end(args);
 }
 
-#ifdef LIBXML_SAX1_ENABLED
-static const xmlSAXHandler debugSAXHandler = {
-    internalSubsetDebug,
-    isStandaloneDebug,
-    hasInternalSubsetDebug,
-    hasExternalSubsetDebug,
-    resolveEntityDebug,
-    getEntityDebug,
-    entityDeclDebug,
-    notationDeclDebug,
-    attributeDeclDebug,
-    elementDeclDebug,
-    unparsedEntityDeclDebug,
-    setDocumentLocatorDebug,
-    startDocumentDebug,
-    endDocumentDebug,
-    startElementDebug,
-    endElementDebug,
-    referenceDebug,
-    charactersDebug,
-    ignorableWhitespaceDebug,
-    processingInstructionDebug,
-    commentDebug,
-    warningDebug,
-    errorDebug,
-    fatalErrorDebug,
-    getParameterEntityDebug,
-    cdataBlockDebug,
-    externalSubsetDebug,
-    1,
-    NULL,
-    NULL,
-    NULL,
-    NULL
-};
-#endif
-
 /*
  * SAX2 specific callbacks
  */
@@ -2263,7 +2226,6 @@ static void showVersion(FILE *errStream, const char *name) {
     if (xmlHasFeature(XML_WITH_READER)) fprintf(errStream, "Reader ");
     if (xmlHasFeature(XML_WITH_PATTERN)) fprintf(errStream, "Patterns ");
     if (xmlHasFeature(XML_WITH_WRITER)) fprintf(errStream, "Writer ");
-    if (xmlHasFeature(XML_WITH_SAX1)) fprintf(errStream, "SAXv1 ");
     if (xmlHasFeature(XML_WITH_VALID)) fprintf(errStream, "DTDValid ");
     if (xmlHasFeature(XML_WITH_HTML)) fprintf(errStream, "HTML ");
     if (xmlHasFeature(XML_WITH_C14N)) fprintf(errStream, "C14N ");
@@ -2383,9 +2345,6 @@ static void usage(FILE *f, const char *name) {
 #endif
 #ifdef LIBXML_SCHEMATRON_ENABLED
     fprintf(f, "\t--schematron schema : do validation against a schematron\n");
-#endif
-#ifdef LIBXML_SAX1_ENABLED
-    fprintf(f, "\t--sax1: use the old SAX1 interfaces for processing\n");
 #endif
     fprintf(f, "\t--sax: do not build a tree but work just at the SAX level\n");
     fprintf(f, "\t--oldxml10: use XML-1.0 parsing rules before the 5th edition\n");
@@ -2737,11 +2696,6 @@ xmllintParseOptions(xmllintState *lint, int argc, const char **argv) {
             lint->pattern = argv[i];
 #endif
 #endif /* LIBXML_READER_ENABLED */
-#ifdef LIBXML_SAX1_ENABLED
-        } else if ((!strcmp(argv[i], "-sax1")) ||
-                   (!strcmp(argv[i], "--sax1"))) {
-            lint->parseOptions |= XML_PARSE_SAX1;
-#endif /* LIBXML_SAX1_ENABLED */
         } else if ((!strcmp(argv[i], "-sax")) ||
                    (!strcmp(argv[i], "--sax"))) {
             lint->appOptions |= XML_LINT_SAX_ENABLED;
@@ -2926,8 +2880,6 @@ xmllintParseOptions(xmllintState *lint, int argc, const char **argv) {
             xmllintOptWarnNoSupport(errStream, "--html", "--pedantic");
         if (lint->parseOptions & XML_PARSE_DTDVALID)
             xmllintOptWarnNoSupport(errStream, "--html", "--valid");
-        if (lint->parseOptions & XML_PARSE_SAX1)
-            xmllintOptWarnNoSupport(errStream, "--html", "--sax1");
     } else {
         if (lint->htmlOptions & HTML_PARSE_NODEFDTD)
             fprintf(errStream, "Warning: Option %s requires %s\n",
@@ -3203,10 +3155,6 @@ xmllintMain(int argc, const char **argv, FILE *errStream,
 
                 if (lint->noout) {
                     handler = &emptySAXHandler;
-#ifdef LIBXML_SAX1_ENABLED
-                } else if (lint->parseOptions & XML_PARSE_SAX1) {
-                    handler = &debugSAXHandler;
-#endif
                 } else {
                     handler = &debugSAX2Handler;
                 }

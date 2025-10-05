@@ -2882,44 +2882,38 @@ xmlFreeParserCtxt(xmlParserCtxt *ctxt)
     while ((input = xmlCtxtPopInput(ctxt)) != NULL) { /* Non consuming */
         xmlFreeInputStream(input);
     }
-    if (ctxt->spaceTab != NULL) xmlFree(ctxt->spaceTab);
-    if (ctxt->nameTab != NULL) xmlFree((xmlChar * *)ctxt->nameTab);
-    if (ctxt->nodeTab != NULL) xmlFree(ctxt->nodeTab);
-    if (ctxt->nodeInfoTab != NULL) xmlFree(ctxt->nodeInfoTab);
-    if (ctxt->inputTab != NULL) xmlFree(ctxt->inputTab);
-    if (ctxt->version != NULL) xmlFree(ctxt->version);
-    if (ctxt->encoding != NULL) xmlFree(ctxt->encoding);
-    if (ctxt->extSubURI != NULL) xmlFree(ctxt->extSubURI);
-    if (ctxt->extSubSystem != NULL) xmlFree(ctxt->extSubSystem);
-#ifdef LIBXML_SAX1_ENABLED
-    if ((ctxt->sax != NULL) &&
-        (ctxt->sax != (xmlSAXHandlerPtr) &xmlDefaultSAXHandler))
-#else
-    if (ctxt->sax != NULL)
-#endif /* LIBXML_SAX1_ENABLED */
-        xmlFree(ctxt->sax);
-    if (ctxt->directory != NULL) xmlFree(ctxt->directory);
-    if (ctxt->vctxt.nodeTab != NULL) xmlFree(ctxt->vctxt.nodeTab);
-    if (ctxt->atts != NULL) xmlFree((xmlChar * *)ctxt->atts);
-    if (ctxt->dict != NULL) xmlDictFree(ctxt->dict);
-    if (ctxt->nsTab != NULL) xmlFree(ctxt->nsTab);
-    if (ctxt->nsdb != NULL) xmlParserNsFree(ctxt->nsdb);
-    if (ctxt->attrHash != NULL) xmlFree(ctxt->attrHash);
-    if (ctxt->pushTab != NULL) xmlFree(ctxt->pushTab);
-    if (ctxt->attallocs != NULL) xmlFree(ctxt->attallocs);
+    if (ctxt->spaceTab != NULL) {xmlFree(ctxt->spaceTab);}
+    if (ctxt->nameTab != NULL) {xmlFree((xmlChar * *)ctxt->nameTab);}
+    if (ctxt->nodeTab != NULL) {xmlFree(ctxt->nodeTab);}
+    if (ctxt->nodeInfoTab != NULL) {xmlFree(ctxt->nodeInfoTab);}
+    if (ctxt->inputTab != NULL) {xmlFree(ctxt->inputTab);}
+    if (ctxt->version != NULL) {xmlFree(ctxt->version);}
+    if (ctxt->encoding != NULL) {xmlFree(ctxt->encoding);}
+    if (ctxt->extSubURI != NULL) {xmlFree(ctxt->extSubURI);}
+    if (ctxt->extSubSystem != NULL) {xmlFree(ctxt->extSubSystem);}
+    if (ctxt->sax != NULL) {xmlFree(ctxt->sax);}
+    if (ctxt->directory != NULL) {xmlFree(ctxt->directory);}
+    if (ctxt->vctxt.nodeTab != NULL) {xmlFree(ctxt->vctxt.nodeTab);}
+    if (ctxt->atts != NULL) {xmlFree((xmlChar * *)ctxt->atts);}
+    if (ctxt->dict != NULL) {xmlDictFree(ctxt->dict);}
+    if (ctxt->nsTab != NULL) {xmlFree(ctxt->nsTab);}
+    if (ctxt->nsdb != NULL) {xmlParserNsFree(ctxt->nsdb);}
+    if (ctxt->attrHash != NULL) {xmlFree(ctxt->attrHash);}
+    if (ctxt->pushTab != NULL) {xmlFree(ctxt->pushTab);}
+    if (ctxt->attallocs != NULL) {xmlFree(ctxt->attallocs);}
     if (ctxt->attsDefault != NULL)
-        xmlHashFree(ctxt->attsDefault, xmlHashDefaultDeallocator);
+        {xmlHashFree(ctxt->attsDefault, xmlHashDefaultDeallocator);}
     if (ctxt->attsSpecial != NULL)
-        xmlHashFree(ctxt->attsSpecial, NULL);
+        {xmlHashFree(ctxt->attsSpecial, NULL);}
     if (ctxt->freeElems != NULL) {
         xmlNodePtr cur, next;
 
-	cur = ctxt->freeElems;
-	while (cur != NULL) {
-	    next = cur->next;
-	    xmlFree(cur);
-	    cur = next;
-	}
+			cur = ctxt->freeElems;
+			while (cur != NULL) {
+					next = cur->next;
+					xmlFree(cur);
+					cur = next;
+			}
     }
     if (ctxt->freeAttrs != NULL) {
         xmlAttrPtr cur, next;
@@ -2935,19 +2929,19 @@ xmlFreeParserCtxt(xmlParserCtxt *ctxt)
      * cleanup the error strings
      */
     if (ctxt->lastError.message != NULL)
-        xmlFree(ctxt->lastError.message);
+        {xmlFree(ctxt->lastError.message);}
     if (ctxt->lastError.file != NULL)
-        xmlFree(ctxt->lastError.file);
+        {xmlFree(ctxt->lastError.file);}
     if (ctxt->lastError.str1 != NULL)
-        xmlFree(ctxt->lastError.str1);
+        {xmlFree(ctxt->lastError.str1);}
     if (ctxt->lastError.str2 != NULL)
-        xmlFree(ctxt->lastError.str2);
+        {xmlFree(ctxt->lastError.str2);}
     if (ctxt->lastError.str3 != NULL)
-        xmlFree(ctxt->lastError.str3);
+        {xmlFree(ctxt->lastError.str3);}
 
 #ifdef LIBXML_CATALOG_ENABLED
     if (ctxt->catalogs != NULL)
-	xmlCatalogFreeLocal(ctxt->catalogs);
+	{xmlCatalogFreeLocal(ctxt->catalogs);}
 #endif
     xmlFree(ctxt);
 }

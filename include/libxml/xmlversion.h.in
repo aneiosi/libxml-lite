@@ -93,13 +93,6 @@
 #define LIBXML_WRITER_ENABLED
 #endif
 
-#if @WITH_SAX1@
-/**
- * Whether the older SAX1 interface is configured in
- */
-#define LIBXML_SAX1_ENABLED
-#endif
-
 #if @WITH_VALID@
 /**
  * Whether the DTD validation support is configured in

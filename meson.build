@@ -110,9 +110,6 @@ want_iso8859x = want_minimum ? feature.enabled() : feature.allowed()
 feature = get_option('modules')
 want_modules = want_minimum ? feature.enabled() : feature.allowed()
 
-feature = get_option('sax1')
-want_sax1 = want_minimum ? feature.enabled() : feature.allowed()
-
 feature = get_option('threads')
 want_threads = want_minimum ? feature.enabled() : feature.allowed()
 
@@ -579,7 +576,6 @@ summary(
 		'readline': want_readline,
 		'regexps': want_regexps,
 		'relaxng': want_relaxng,
-		'sax1': want_sax1,
 		'schemas': want_schemas,
 		'schematron': want_schematron,
 		'threads': want_threads,

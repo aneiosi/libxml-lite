@@ -67,7 +67,6 @@ The following options disable or enable code modules and relevant symbols:
     --with-reader           xmlReader parsing interface (on)
     --with-regexps          regular expressions support (on)
     --with-relaxng          RELAX NG support (on)
-    --with-sax1             older SAX1 interface (on)
     --with-schemas          XML Schemas 1.0 support (on)
     --with-schematron       Schematron support (off)
     --with-threads          multithreading support (on)
