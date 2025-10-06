@@ -9703,7 +9703,7 @@ xmlSchemaCreatePCtxtOnVCtxt(xmlSchemaValidCtxtPtr vctxt)
         if (vctxt->schema != NULL)
 	    vctxt->pctxt =
 		xmlSchemaNewParserCtxtUseDict("*", vctxt->schema->dict);
-	else
+        else
 	    vctxt->pctxt = xmlSchemaNewParserCtxt("*");
 	if (vctxt->pctxt == NULL) {
 	    VERROR_INT("xmlSchemaCreatePCtxtOnVCtxt",
@@ -10234,11 +10234,11 @@ doc_load:
 	/* Don' free this one, since it was provided by the caller. */
 	preserveDoc = 1;
 	/* TODO: Does the context or the doc hold the location? */
-	if (schemaDoc->URL != NULL)
-	    schemaLocation = xmlDictLookup(pctxt->dict,
-		schemaDoc->URL, -1);
+        if (schemaDoc->URL != NULL)
+	    {schemaLocation = xmlDictLookup(pctxt->dict,
+		schemaDoc->URL, -1);}
         else
-	    schemaLocation = BAD_CAST "in_memory_buffer";
+	    {schemaLocation = BAD_CAST "in_memory_buffer";}
     } else if ((schemaLocation != NULL) || (schemaBuffer != NULL)) {
 	xmlParserCtxtPtr parserCtxt;
 

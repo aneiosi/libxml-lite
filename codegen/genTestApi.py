@@ -227,7 +227,6 @@ test.write("""/*
 #include <libxml/parserInternals.h>
 #include <libxml/pattern.h>
 #include <libxml/relaxng.h>
-#include <libxml/schematron.h>
 #include <libxml/uri.h>
 #include <libxml/xinclude.h>
 #include <libxml/xlink.h>

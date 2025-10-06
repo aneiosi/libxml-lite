@@ -1584,12 +1584,6 @@ extern "C" {
 		 */
 		XML_PARSE_COMPACT        = 1 << 16,
 		/**
-		 * Use old Name productions from before XML 1.0 Fifth Edition.
-		 *
-		 * @deprecated This option will be removed in a future version.
-		 */
-		XML_PARSE_OLD10          = 1 << 17,
-		/**
 		 * Don't fix up XInclude xml:base URIs. This option only affects
 		 * the xmlTextReader and XInclude interfaces.
 		 */
@@ -1619,12 +1613,6 @@ extern "C" {
 		 * huge:   40
 		 */
 		XML_PARSE_HUGE           = 1 << 19,
-		/**
-		 * Enable an unspecified legacy mode for SAX parsers.
-		 *
-		 * @deprecated This option will be removed in a future version.
-		 */
-		XML_PARSE_OLDSAX         = 1 << 20,
 		/**
 		 * Ignore the encoding in the XML declaration. This option is
 		 * mostly unneeded these days. The only effect is to enforce
@@ -1834,8 +1822,6 @@ extern "C" {
 		XML_WITH_EXPR       = 24,
 		/** XML Schemas */
 		XML_WITH_SCHEMAS    = 25,
-		/** Schematron */
-		XML_WITH_SCHEMATRON = 26,
 		/** Loadable modules */
 		XML_WITH_MODULES    = 27,
 		/** Debugging API */

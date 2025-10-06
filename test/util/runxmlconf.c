@@ -358,10 +358,6 @@ xmlconfTestItem(xmlDocPtr doc, xmlNodePtr cur) {
 	goto error;
     }
     edition = xmlGetProp(cur, BAD_CAST "EDITION");
-    if ((edition != NULL) && (xmlStrchr(edition, '5') == NULL)) {
-        /* test limited to all versions before 5th */
-	options |= XML_PARSE_OLD10;
-    }
 
     /*
      * Reset errors and check memory usage before the test

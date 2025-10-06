@@ -20,7 +20,6 @@ xmlversion_h.set10('WITH_READER', want_reader)
 xmlversion_h.set10('WITH_REGEXPS', want_regexps)
 xmlversion_h.set10('WITH_RELAXNG', want_relaxng)
 xmlversion_h.set10('WITH_SCHEMAS', want_schemas)
-xmlversion_h.set10('WITH_SCHEMATRON', want_schematron)
 xmlversion_h.set10('WITH_THREADS', want_threads)
 xmlversion_h.set10('WITH_THREAD_ALLOC', want_thread_alloc)
 xmlversion_h.set10('WITH_VALID', want_valid)
@@ -64,7 +63,6 @@ libxml_headers = files(
 	'pattern.h',
 	'relaxng.h',
 	'schemasInternals.h',
-	'schematron.h',
 	'threads.h',
 	'tree.h',
 	'uri.h',

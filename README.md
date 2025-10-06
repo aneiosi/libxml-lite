@@ -68,7 +68,6 @@ The following options disable or enable code modules and relevant symbols:
     --with-regexps          regular expressions support (on)
     --with-relaxng          RELAX NG support (on)
     --with-schemas          XML Schemas 1.0 support (on)
-    --with-schematron       Schematron support (off)
     --with-threads          multithreading support (on)
     --with-thread-alloc     per-thread malloc hooks (off)
     --with-valid            DTD validation support (on)

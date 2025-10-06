@@ -764,18 +764,16 @@ typedef enum {
     XML_DOC_WELLFORMED		= 1<<0,
     /** document is Namespace valid */
     XML_DOC_NSVALID		= 1<<1,
-    /** parsed with old XML-1.0 parser */
-    XML_DOC_OLD10		= 1<<2,
     /** DTD validation was successful */
-    XML_DOC_DTDVALID		= 1<<3,
+    XML_DOC_DTDVALID		= 1<<2,
     /** XInclude substitution was done */
-    XML_DOC_XINCLUDE		= 1<<4,
+    XML_DOC_XINCLUDE		= 1<<3,
     /** Document was built using the API and not by parsing an instance */
-    XML_DOC_USERBUILT		= 1<<5,
+    XML_DOC_USERBUILT		= 1<<4,
     /** built for internal processing */
-    XML_DOC_INTERNAL		= 1<<6,
+    XML_DOC_INTERNAL		= 1<<5,
     /** parsed or built HTML document */
-    XML_DOC_HTML		= 1<<7
+    XML_DOC_HTML		= 1<<6
 } xmlDocProperties;
 
 /** XML or HTML document */
@@ -1573,4 +1571,3 @@ XMLPUBFUN size_t         xmlBufShrink	(xmlBuf *buf, size_t len);
 #endif /* __XML_TREE_H__ */
 
 #endif /* XML_TREE_INTERNALS */
-

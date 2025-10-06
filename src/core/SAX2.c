@@ -884,9 +884,6 @@ void xmlSAX2StartDocument(void* ctx) {
 		doc = ctxt->myDoc = xmlNewDoc(ctxt->version);
 		if (doc != NULL) {
 			doc->properties = 0;
-			if (ctxt->options & XML_PARSE_OLD10) {
-				doc->properties |= XML_DOC_OLD10;
-			}
 			doc->parseFlags = ctxt->options;
 			doc->standalone = ctxt->standalone;
 		} else {
@@ -965,10 +962,6 @@ void xmlSAX2EndDocument(void* ctx) {
 			if (ctxt->nsWellFormed) {
 				doc->properties |= XML_DOC_NSVALID;
 			}
-		}
-
-		if (ctxt->options & XML_PARSE_OLD10) {
-			doc->properties |= XML_DOC_OLD10;
 		}
 	}
 }

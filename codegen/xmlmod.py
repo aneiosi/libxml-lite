@@ -13,7 +13,6 @@ moduleMap = {
 	"pattern": "PATTERN",
 	"relaxng": "RELAXNG",
 	"schemasInternals": "SCHEMAS",
-	"schematron": "SCHEMATRON",
 	"xinclude": "XINCLUDE",
 	"xlink": "XPTR",
 	"xmlautomata": "REGEXP",

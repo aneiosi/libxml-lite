@@ -42,8 +42,6 @@ option('relaxng', type: 'feature', description: 'RELAX NG support')
 
 option('schemas', type: 'feature', description: 'XML Schemas 1.0 support')
 
-option('schematron', type: 'feature', description: 'Schematron support')
-
 option('threads', type: 'feature', description: 'Multithreading support')
 
 option(

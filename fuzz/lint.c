@@ -33,7 +33,6 @@
  *
  * --relaxng:
  * --schema:
- * --schematron: Requires schemas
  *
  * --shell: We could pipe fuzz data to stdin but this is probably
  *          not worth it.

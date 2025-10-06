@@ -130,7 +130,7 @@ feature = get_option('output')
 want_output = not want_minimum or get_option('c14n').enabled() or get_option('writer').enabled() ? feature.allowed() : feature.enabled()
 
 feature = get_option('pattern')
-want_pattern = not want_minimum or get_option('schemas').enabled() or get_option('schematron').enabled() ? feature.allowed() : feature.enabled()
+want_pattern = not want_minimum or get_option('schemas').enabled() ? feature.allowed() : feature.enabled()
 
 feature = get_option('regexps')
 want_regexps = not want_minimum or get_option('relaxng').enabled() or get_option('schemas').enabled() ? feature.allowed() : feature.enabled()
@@ -142,7 +142,7 @@ feature = get_option('readline')
 want_readline = get_option('history').enabled() ? feature.allowed() : feature.enabled()
 
 feature = get_option('xpath')
-want_xpath = not want_minimum or get_option('c14n').enabled() or get_option('schematron').enabled() or get_option('xptr').enabled() ? feature.allowed() : feature.enabled()
+want_xpath = not want_minimum or get_option('c14n').enabled() or get_option('xptr').enabled() ? feature.allowed() : feature.enabled()
 
 feature = get_option('c14n').require(want_output, error_message: 'c14n requires output').require(want_xpath, error_message: 'c14n requires xpath')
 want_c14n = want_minimum ? feature.enabled() : feature.allowed()
@@ -158,9 +158,6 @@ want_schemas = not want_minimum or get_option('relaxng').enabled() ? feature.all
 
 feature = get_option('relaxng').require(want_regexps, error_message: 'relaxng requires regexps').require(want_schemas, error_message: 'relaxng requires schemas')
 want_relaxng = want_minimum ? feature.enabled() : feature.allowed()
-
-feature = get_option('schematron').require(want_pattern, error_message: 'schematron requires pattern').require(want_xpath, error_message: 'schematron requires xpath')
-want_schematron = want_legacy ? feature.allowed() : feature.enabled()
 
 feature = get_option('writer').require(want_output, error_message: 'writer requires output').require(want_push, error_message: 'writer requires push')
 want_writer = want_minimum ? feature.enabled() : feature.allowed()
@@ -391,7 +388,6 @@ opt_src = [
 	[want_regexps, ['xmlregexp.c']],
 	[want_relaxng, ['relaxng.c']],
 	[want_schemas, ['xmlschemas.c', 'xmlschemastypes.c']],
-	[want_schematron, ['schematron.c']],
 	[want_writer, ['xmlwriter.c']],
 	[want_xinclude, ['xinclude.c']],
 	[want_xpath, ['xpath.c']],
@@ -577,7 +573,6 @@ summary(
 		'regexps': want_regexps,
 		'relaxng': want_relaxng,
 		'schemas': want_schemas,
-		'schematron': want_schematron,
 		'threads': want_threads,
 		'thread-alloc': want_thread_alloc,
 		'tls': want_tls,

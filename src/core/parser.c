@@ -643,12 +643,6 @@ int xmlHasFeature(xmlFeature feature) {
 #else
 			return (0);
 #endif
-		case XML_WITH_SCHEMATRON:
-#ifdef LIBXML_SCHEMATRON_ENABLED
-			return (1);
-#else
-			return (0);
-#endif
 		case XML_WITH_MODULES:
 #ifdef LIBXML_MODULES_ENABLED
 			return (1);
@@ -3030,13 +3024,10 @@ xmlChar* xmlSplitQName(xmlParserCtxt* ctxt, const xmlChar* name, xmlChar** prefi
  * characters for Name and NmToken in the Revision 5 of XML-1.0
  * They correspond to the modified production [4] and the new production [4a]
  * changes in that revision. Also note that the macros used for the
- * productions Letter, Digit, CombiningChar and Extender are not needed
- * anymore.
- * We still keep compatibility to pre-revision5 parsing semantic if the
- * new XML_PARSE_OLD10 option is given to the parser.
+ * productions Letter, Digit, CombiningChar and Extender are not needed anymore.
  */
 
-static int xmlIsNameStartCharNew(int c) {
+static int xmlIsNameStartChar(int c) {
 	/*
 	 * Use the new checks of production [4] [4a] amd [5] of the
 	 * Update 5 of XML-1.0
@@ -3054,7 +3045,7 @@ static int xmlIsNameStartCharNew(int c) {
 	return (0);
 }
 
-static int xmlIsNameCharNew(int c) {
+static int xmlIsNameChar(int c) {
 	/*
 	 * Use the new checks of production [4] [4a] amd [5] of the
 	 * Update 5 of XML-1.0
@@ -3075,39 +3066,6 @@ static int xmlIsNameCharNew(int c) {
 	return (0);
 }
 
-static int xmlIsNameStartCharOld(int c) {
-	if ((c != ' ') && (c != '>') && (c != '/') && /* accelerators */
-	    (IS_LETTER(c) || (c == '_') || (c == ':'))) {
-		return (1);
-	}
-	return (0);
-}
-
-static int xmlIsNameCharOld(int c) {
-	if ((c != ' ') && (c != '>') && (c != '/') && /* accelerators */
-	    ((IS_LETTER(c)) || (IS_DIGIT(c)) || (c == '.') || (c == '-') || (c == '_') || (c == ':')
-	     || (IS_COMBINING(c)) || (IS_EXTENDER(c)))) {
-		return (1);
-	}
-	return (0);
-}
-
-static int xmlIsNameStartChar(int c, int old10) {
-	if (!old10) {
-		return (xmlIsNameStartCharNew(c));
-	} else {
-		return (xmlIsNameStartCharOld(c));
-	}
-}
-
-static int xmlIsNameChar(int c, int old10) {
-	if (!old10) {
-		return (xmlIsNameCharNew(c));
-	} else {
-		return (xmlIsNameCharOld(c));
-	}
-}
-
 /*
  * Scan an XML Name, NCName or Nmtoken.
  *
@@ -3122,7 +3080,6 @@ static int xmlIsNameChar(int c, int old10) {
  */
 const xmlChar* xmlScanName(const xmlChar* ptr, size_t maxSize, int flags) {
 	int stop  = flags & XML_SCAN_NC ? ':' : 0;
-	int old10 = flags & XML_SCAN_OLD10 ? 1 : 0;
 
 	while (1) {
 		int c, len;
@@ -3141,7 +3098,7 @@ const xmlChar* xmlScanName(const xmlChar* ptr, size_t maxSize, int flags) {
 			}
 		}
 
-		if (flags & XML_SCAN_NMTOKEN ? !xmlIsNameChar(c, old10) : !xmlIsNameStartChar(c, old10)) {
+		if (flags & XML_SCAN_NMTOKEN ? !xmlIsNameChar(c) : !xmlIsNameStartChar(c)) {
 			break;
 		}
 
@@ -3161,19 +3118,18 @@ static const xmlChar* xmlParseNameComplex(xmlParserCtxtPtr ctxt) {
 	int            len = 0, l;
 	int            c;
 	int maxLength = (ctxt->options & XML_PARSE_HUGE) ? XML_MAX_TEXT_LENGTH : XML_MAX_NAME_LENGTH;
-	int old10     = (ctxt->options & XML_PARSE_OLD10) ? 1 : 0;
 
 	/*
 	 * Handler for more complex cases
 	 */
 	c             = xmlCurrentChar(ctxt, &l);
-	if (!xmlIsNameStartChar(c, old10)) {
+	if (!xmlIsNameStartChar(c)) {
 		return (NULL);
 	}
 	len += l;
 	NEXTL(l);
 	c = xmlCurrentChar(ctxt, &l);
-	while (xmlIsNameChar(c, old10)) {
+	while (xmlIsNameChar(c)) {
 		if (len <= INT_MAX - l) {
 			len += l;
 		}
@@ -3264,7 +3220,6 @@ static xmlHashedString xmlParseNCNameComplex(xmlParserCtxtPtr ctxt) {
 	int             len = 0, l;
 	int             c;
 	int    maxLength = (ctxt->options & XML_PARSE_HUGE) ? XML_MAX_TEXT_LENGTH : XML_MAX_NAME_LENGTH;
-	int    old10     = (ctxt->options & XML_PARSE_OLD10) ? 1 : 0;
 	size_t startPosition = 0;
 
 	ret.name             = NULL;
@@ -3276,12 +3231,12 @@ static xmlHashedString xmlParseNCNameComplex(xmlParserCtxtPtr ctxt) {
 	startPosition        = CUR_PTR - BASE_PTR;
 	c                    = xmlCurrentChar(ctxt, &l);
 	if ((c == ' ') || (c == '>') || (c == '/') || /* accelerators */
-	    (!xmlIsNameStartChar(c, old10) || (c == ':'))) {
+	    (!xmlIsNameStartChar(c) || (c == ':'))) {
 		return (ret);
 	}
 
 	while ((c != ' ') && (c != '>') && (c != '/') && /* test bigname.xml */
-	       (xmlIsNameChar(c, old10) && (c != ':'))) {
+	       (xmlIsNameChar(c) && (c != ':'))) {
 		if (len <= INT_MAX - l) {
 			len += l;
 		}
@@ -3406,10 +3361,6 @@ static xmlChar* xmlParseStringName(xmlParserCtxtPtr ctxt, const xmlChar** str) {
 	int            flags = 0;
 	int maxLength = (ctxt->options & XML_PARSE_HUGE) ? XML_MAX_TEXT_LENGTH : XML_MAX_NAME_LENGTH;
 
-	if (ctxt->options & XML_PARSE_OLD10) {
-		flags |= XML_SCAN_OLD10;
-	}
-
 	cur = xmlScanName(*str, maxLength, flags);
 	if (cur == NULL) {
 		xmlFatalErr(ctxt, XML_ERR_NAME_TOO_LONG, "NCName");
@@ -3446,11 +3397,10 @@ xmlChar* xmlParseNmtoken(xmlParserCtxt* ctxt) {
 	int      len = 0, l;
 	int      c;
 	int maxLength = (ctxt->options & XML_PARSE_HUGE) ? XML_MAX_TEXT_LENGTH : XML_MAX_NAME_LENGTH;
-	int old10     = (ctxt->options & XML_PARSE_OLD10) ? 1 : 0;
 
 	c             = xmlCurrentChar(ctxt, &l);
 
-	while (xmlIsNameChar(c, old10)) {
+	while (xmlIsNameChar(c)) {
 		COPY_BUF(buf, len, c);
 		NEXTL(l);
 		c = xmlCurrentChar(ctxt, &l);
@@ -3468,7 +3418,7 @@ xmlChar* xmlParseNmtoken(xmlParserCtxt* ctxt) {
 				return (NULL);
 			}
 			memcpy(buffer, buf, len);
-			while (xmlIsNameChar(c, old10)) {
+			while (xmlIsNameChar(c)) {
 				if (len + 10 > max) {
 					xmlChar* tmp;
 					int      newSize;
@@ -7601,25 +7551,12 @@ xmlLookupGeneralEntity(xmlParserCtxtPtr ctxt, const xmlChar* name, int inAttr) {
 	xmlEntityPtr ent = NULL;
 
 	/*
-	 * Predefined entities override any extra definition
-	 */
-	if ((ctxt->options & XML_PARSE_OLDSAX) == 0) {
-		ent = xmlGetPredefinedEntity(name);
-		if (ent != NULL) {
-			return (ent);
-		}
-	}
-
-	/*
 	 * Ask first SAX for entity resolution, otherwise try the
 	 * entities which may have stored in the parser context.
 	 */
 	if (ctxt->sax != NULL) {
 		if (ctxt->sax->getEntity != NULL) {
 			ent = ctxt->sax->getEntity(ctxt->userData, name);
-		}
-		if ((ctxt->wellFormed == 1) && (ent == NULL) && (ctxt->options & XML_PARSE_OLDSAX)) {
-			ent = xmlGetPredefinedEntity(name);
 		}
 		if ((ctxt->wellFormed == 1) && (ent == NULL) && (ctxt->userData == ctxt)) {
 			ent = xmlSAX2GetEntity(ctxt, name);
@@ -10194,20 +10131,22 @@ void xmlParseXMLDecl(xmlParserCtxt* ctxt) {
 		xmlFatalErr(ctxt, XML_ERR_VERSION_MISSING, NULL);
 	} else {
 		if (!xmlStrEqual(version, (const xmlChar*)XML_DEFAULT_VERSION)) {
-			/*
-			 * Changed here for XML-1.0 5th edition
-			 */
-			if (ctxt->options & XML_PARSE_OLD10) {
-				xmlFatalErrMsgStr(ctxt, XML_ERR_UNKNOWN_VERSION, "Unsupported version '%s'\n", version);
-			} else {
 				if ((version[0] == '1') && (version[1] == '.')) {
 					xmlWarningMsg(
-						ctxt, XML_WAR_UNKNOWN_VERSION, "Unsupported version '%s'\n", version, NULL
+						ctxt,
+						XML_WAR_UNKNOWN_VERSION,
+						"Unsupported version '%s'\n",
+						version,
+						NULL
 					);
 				} else {
-					xmlFatalErrMsgStr(ctxt, XML_ERR_UNKNOWN_VERSION, "Unsupported version '%s'\n", version);
+					xmlFatalErrMsgStr(
+						ctxt,
+						XML_ERR_UNKNOWN_VERSION,
+						"Unsupported version '%s'\n",
+						version
+					);
 				}
-			}
 		}
 		if (ctxt->version != NULL) {
 			xmlFree(ctxt->version);
@@ -12432,9 +12371,8 @@ static int xmlCtxtSetOptionsInternal(xmlParserCtxtPtr ctxt, int options, int kee
 	 */
 	allMask = XML_PARSE_RECOVER | XML_PARSE_NOENT | XML_PARSE_DTDLOAD | XML_PARSE_DTDATTR
 	        | XML_PARSE_DTDVALID | XML_PARSE_NOERROR | XML_PARSE_NOWARNING | XML_PARSE_PEDANTIC
-	        | XML_PARSE_NOBLANKS |
-	          XML_PARSE_NODICT | XML_PARSE_NSCLEAN | XML_PARSE_NOCDATA
-	        | XML_PARSE_COMPACT | XML_PARSE_OLD10 | XML_PARSE_HUGE | XML_PARSE_OLDSAX
+	        | XML_PARSE_NOBLANKS | XML_PARSE_NODICT | XML_PARSE_NSCLEAN | XML_PARSE_NOCDATA
+	        | XML_PARSE_COMPACT | XML_PARSE_HUGE
 	        | XML_PARSE_IGNORE_ENC | XML_PARSE_BIG_LINES | XML_PARSE_NO_XXE | XML_PARSE_UNZIP
 	        | XML_PARSE_NO_SYS_CATALOG | XML_PARSE_CATALOG_PI;
 
@@ -12515,9 +12453,7 @@ int xmlCtxtGetOptions(xmlParserCtxt* ctxt) {
  * - XML_PARSE_NSCLEAN
  * - XML_PARSE_NOCDATA
  * - XML_PARSE_COMPACT
- * - XML_PARSE_OLD10
  * - XML_PARSE_HUGE
- * - XML_PARSE_OLDSAX
  * - XML_PARSE_IGNORE_ENC
  * - XML_PARSE_BIG_LINES
  *
@@ -12541,8 +12477,8 @@ int xmlCtxtUseOptions(xmlParserCtxt* ctxt, int options) {
 	 * For historic reasons, some options can only be enabled.
 	 */
 	keepMask = XML_PARSE_NOERROR | XML_PARSE_NOWARNING | XML_PARSE_NSCLEAN
-	         | XML_PARSE_NOCDATA | XML_PARSE_COMPACT | XML_PARSE_OLD10 | XML_PARSE_HUGE
-	         | XML_PARSE_OLDSAX | XML_PARSE_IGNORE_ENC | XML_PARSE_BIG_LINES;
+	         | XML_PARSE_NOCDATA | XML_PARSE_COMPACT | XML_PARSE_HUGE
+	         | XML_PARSE_IGNORE_ENC | XML_PARSE_BIG_LINES;
 
 	return (xmlCtxtSetOptionsInternal(ctxt, options, keepMask));
 }

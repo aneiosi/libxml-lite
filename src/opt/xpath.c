@@ -587,8 +587,8 @@ turtle_comparison:
  * Wrapper for the Timsort algorithm from timsort.h
  */
 #ifdef WITH_TIM_SORT
-#define SORT_NAME libxml_domnode
-#define SORT_TYPE xmlNodePtr
+	#define SORT_NAME libxml_domnode
+	#define SORT_TYPE xmlNodePtr
 /**
  * Comparison function for the Timsort implementation
  *
@@ -599,21 +599,21 @@ turtle_comparison:
  */
 static
 int wrap_cmp( xmlNodePtr x, xmlNodePtr y );
-#ifdef XP_OPTIMIZED_NON_ELEM_COMPARISON
+	#ifdef XP_OPTIMIZED_NON_ELEM_COMPARISON
     static int wrap_cmp( xmlNodePtr x, xmlNodePtr y )
     {
         int res = xmlXPathCmpNodesExt(x, y);
         return res == -2 ? res : -res;
     }
-#else
+	#else
     static int wrap_cmp( xmlNodePtr x, xmlNodePtr y )
     {
         int res = xmlXPathCmpNodes(x, y);
         return res == -2 ? res : -res;
     }
-#endif
-#define SORT_CMP(x, y)  (wrap_cmp(x, y))
-#include "timsort.h"
+	#endif
+	#define SORT_CMP(x, y)  (wrap_cmp(x, y))
+	#include "timsort.h"
 #endif /* WITH_TIM_SORT */
 
 /************************************************************************
@@ -5555,14 +5555,13 @@ xmlXPathEqualValuesCommon(xmlXPathParserContextPtr ctxt,
                     /* Falls through. */
 		case XPATH_NUMBER:
 		    /* Hand check NaN and Infinity equalities */
-		    if (xmlXPathIsNaN(arg1->floatval) ||
-			    xmlXPathIsNaN(arg2->floatval)) {
+		    if (xmlXPathIsNaN(arg1->floatval) || xmlXPathIsNaN(arg2->floatval)) {
 		        ret = 0;
 		    } else if (xmlXPathIsInf(arg1->floatval) == 1) {
 		        if (xmlXPathIsInf(arg2->floatval) == 1)
-			    ret = 1;
-			else
-			    ret = 0;
+			    {ret = 1;}
+		        else
+			    {ret = 0;}
 		    } else if (xmlXPathIsInf(arg1->floatval) == -1) {
 			if (xmlXPathIsInf(arg2->floatval) == -1)
 			    ret = 1;
@@ -8888,8 +8887,8 @@ xmlXPathCompAdditiveExpr(xmlXPathParserContextPtr ctxt) {
 	int plus;
 	int op1 = ctxt->comp->last;
 
-        if (CUR == '+') plus = 1;
-	else plus = 0;
+        if (CUR == '+') {plus = 1;}
+        else {plus = 0;}
 	NEXT;
 	SKIP_BLANKS;
         xmlXPathCompMultiplicativeExpr(ctxt);
@@ -8925,12 +8924,12 @@ xmlXPathCompRelationalExpr(xmlXPathParserContextPtr ctxt) {
 	int inf, strict;
 	int op1 = ctxt->comp->last;
 
-        if (CUR == '<') inf = 1;
-	else inf = 0;
-	if (NXT(1) == '=') strict = 0;
-	else strict = 1;
+        if (CUR == '<') {inf = 1;}
+        else {inf = 0;}
+	if (NXT(1) == '=') {strict = 0;}
+	else {strict = 1;}
 	NEXT;
-	if (!strict) NEXT;
+	if (!strict) {NEXT;}
 	SKIP_BLANKS;
         xmlXPathCompAdditiveExpr(ctxt);
 	CHECK_ERROR;
@@ -8962,8 +8961,8 @@ xmlXPathCompEqualityExpr(xmlXPathParserContextPtr ctxt) {
 	int eq;
 	int op1 = ctxt->comp->last;
 
-        if (CUR == '=') eq = 1;
-	else eq = 0;
+        if (CUR == '=') {eq = 1;}
+        else {eq = 0;}
 	NEXT;
 	if (!eq) NEXT;
 	SKIP_BLANKS;
