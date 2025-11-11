@@ -4,6 +4,7 @@
 #include "libxml.h"
 
 #include <libxml/encoding.h>
+#include <libxml/parser.h>
 #include <libxml/tree.h>
 #include <libxml/xmlversion.h>
 

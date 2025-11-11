@@ -1982,10 +1982,6 @@ int xmlC14NDocDumpMemory(
  *			canonicalization, ignored otherwise)
  * @param with_comments  	include comments in the result (!=0) or not (==0)
  * @param filename  		the filename to store canonical XML image
- * @param compression  	the compression level (zlib required):
- *				-1 - libxml default,
- *				 0 - uncompressed,
- *				>0 - compression level
  * @returns the number of bytes written success or a negative value on fail
  */
 int xmlC14NDocSave(
@@ -1994,8 +1990,7 @@ int xmlC14NDocSave(
 	int         mode,
 	xmlChar**   inclusive_ns_prefixes,
 	int         with_comments,
-	const char* filename,
-	int         compression
+	const char* filename
 ) {
 	xmlOutputBufferPtr buf;
 	int                ret;
@@ -2008,7 +2003,7 @@ int xmlC14NDocSave(
 	/*
 	 * save the content to a temp buffer, use default UTF8 encoding.
 	 */
-	buf = xmlOutputBufferCreateFilename(filename, NULL, compression);
+	buf = xmlOutputBufferCreateFilename(filename, NULL);
 	if (buf == NULL) {
 		xmlC14NErr(NULL, NULL, XML_IO_UNKNOWN, "creating temporary filename");
 		return (-1);

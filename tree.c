@@ -91,8 +91,6 @@ const xmlChar xmlStringTextNoenc[] =
 /* #undef xmlStringComment */
 const xmlChar xmlStringComment[] = { 'c', 'o', 'm', 'm', 'e', 'n', 't', 0 };
 
-static int xmlCompressMode = 0;
-
 #define IS_STR_XML(str) ((str != NULL) && (str[0] == 'x') && \
   (str[1] == 'm') && (str[2] == 'l') && (str[3] == 0))
 
@@ -894,7 +892,6 @@ xmlNewDoc(const xmlChar *version) {
 	return(NULL);
     }
     cur->standalone = -1;
-    cur->compression = -1; /* not initialized */
     cur->doc = cur;
     cur->parseFlags = 0;
     cur->properties = XML_DOC_USERBUILT;
@@ -4332,7 +4329,6 @@ xmlCopyDoc(xmlDoc *doc, int recursive) {
             goto error;
     }
     ret->charset = doc->charset;
-    ret->compression = doc->compression;
     ret->standalone = doc->standalone;
     if (!recursive) return(ret);
 
@@ -6663,62 +6659,6 @@ xmlTextConcat(xmlNode *node, const xmlChar *content, int len) {
     return(xmlTextAddContent(node, content, len));
 }
 
-/**
- * Get the compression level of a document, ZLIB based.
- *
- * @param doc  the document
- * @returns 0 (uncompressed) to 9 (max compression)
- */
-int
-xmlGetDocCompressMode (const xmlDoc *doc) {
-    if (doc == NULL) return(-1);
-    return(doc->compression);
-}
-
-/**
- * Set the compression level of a document, ZLIB based.
- *
- * Correct values: 0 (uncompressed) to 9 (max compression)
- *
- * @param doc  the document
- * @param mode  the compression ratio
- */
-void
-xmlSetDocCompressMode (xmlDoc *doc, int mode) {
-    if (doc == NULL) return;
-    if (mode < 0) doc->compression = 0;
-    else if (mode > 9) doc->compression = 9;
-    else doc->compression = mode;
-}
-
-/**
- * Get the global compression level, ZLIB based.
- *
- * @deprecated Use #xmlGetDocCompressMode
- *
- * @returns 0 (uncompressed) to 9 (max compression)
- */
-int
-xmlGetCompressMode(void)
-{
-    return (xmlCompressMode);
-}
-
-/**
- * Set the global compression level, ZLIB based.
- *
- * @deprecated Use #xmlSetDocCompressMode
- *
- * Correct values: 0 (uncompressed) to 9 (max compression)
- *
- * @param mode  the compression ratio
- */
-void
-xmlSetCompressMode(int mode) {
-    if (mode < 0) xmlCompressMode = 0;
-    else if (mode > 9) xmlCompressMode = 9;
-    else xmlCompressMode = mode;
-}
 
 #define XML_TREE_NSMAP_PARENT -1
 #define XML_TREE_NSMAP_XML -2

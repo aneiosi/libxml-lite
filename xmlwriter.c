@@ -218,16 +218,15 @@ xmlNewTextWriter(xmlOutputBuffer *out)
  * Create a new xmlTextWriter structure with `uri` as output
  *
  * @param uri  the URI of the resource for the output
- * @param compression  compress the output?
  * @returns the new xmlTextWriter or NULL in case of error
  */
 xmlTextWriter *
-xmlNewTextWriterFilename(const char *uri, int compression)
+xmlNewTextWriterFilename(const char *uri)
 {
     xmlTextWriterPtr ret;
     xmlOutputBufferPtr out;
 
-    out = xmlOutputBufferCreateFilename(uri, NULL, compression);
+    out = xmlOutputBufferCreateFilename(uri, NULL);
     if (out == NULL) {
         xmlWriterErrMsg(NULL, XML_IO_EIO,
                         "xmlNewTextWriterFilename : cannot open uri\n");
@@ -249,19 +248,16 @@ xmlNewTextWriterFilename(const char *uri, int compression)
 
 /**
  * Create a new xmlTextWriter structure with `buf` as output
- * TODO: handle compression
  *
  * @param buf  xmlBuffer
- * @param compression  compress the output?
  * @returns the new xmlTextWriter or NULL in case of error
  */
 xmlTextWriter *
-xmlNewTextWriterMemory(xmlBuffer *buf, int compression ATTRIBUTE_UNUSED)
+xmlNewTextWriterMemory(xmlBuffer *buf)
 {
     xmlTextWriterPtr ret;
     xmlOutputBufferPtr out;
 
-/*::todo handle compression */
     out = xmlOutputBufferCreateBuffer(buf, NULL);
 
     if (out == NULL) {
@@ -285,15 +281,12 @@ xmlNewTextWriterMemory(xmlBuffer *buf, int compression ATTRIBUTE_UNUSED)
  * Create a new xmlTextWriter structure with `ctxt` as output
  * NOTE: the `ctxt` context will be freed with the resulting writer
  *       (if the call succeeds).
- * TODO: handle compression
  *
  * @param ctxt  xmlParserCtxt to hold the new XML document tree
- * @param compression  compress the output?
  * @returns the new xmlTextWriter or NULL in case of error
  */
 xmlTextWriter *
-xmlNewTextWriterPushParser(xmlParserCtxt *ctxt,
-                           int compression ATTRIBUTE_UNUSED)
+xmlNewTextWriterPushParser(xmlParserCtxt *ctxt)
 {
     xmlTextWriterPtr ret;
     xmlOutputBufferPtr out;
@@ -330,11 +323,10 @@ xmlNewTextWriterPushParser(xmlParserCtxt *ctxt,
  * Create a new xmlTextWriter structure with `doc` as output
  *
  * @param doc  address of a xmlDoc to hold the new XML document tree
- * @param compression  compress the output?
  * @returns the new xmlTextWriter or NULL in case of error
  */
 xmlTextWriter *
-xmlNewTextWriterDoc(xmlDoc ** doc, int compression)
+xmlNewTextWriterDoc(xmlDoc ** doc)
 {
     xmlTextWriterPtr ret;
     xmlSAXHandler saxHandler;
@@ -364,7 +356,7 @@ xmlNewTextWriterDoc(xmlDoc ** doc, int compression)
         return NULL;
     }
 
-    ret = xmlNewTextWriterPushParser(ctxt, compression);
+    ret = xmlNewTextWriterPushParser(ctxt);
     if (ret == NULL) {
         xmlFreeDoc(ctxt->myDoc);
         xmlFreeParserCtxt(ctxt);
@@ -372,8 +364,6 @@ xmlNewTextWriterDoc(xmlDoc ** doc, int compression)
                 "xmlNewTextWriterDoc : error at xmlNewTextWriterPushParser!\n");
         return NULL;
     }
-
-    xmlSetDocCompressMode(ctxt->myDoc, compression);
 
     if (doc != NULL) {
         *doc = ctxt->myDoc;
@@ -389,11 +379,10 @@ xmlNewTextWriterDoc(xmlDoc ** doc, int compression)
  *
  * @param doc  xmlDoc
  * @param node  xmlNode or NULL for doc->children
- * @param compression  compress the output?
  * @returns the new xmlTextWriter or NULL in case of error
  */
 xmlTextWriter *
-xmlNewTextWriterTree(xmlDoc *doc, xmlNode *node, int compression)
+xmlNewTextWriterTree(xmlDoc *doc, xmlNode *node)
 {
     xmlTextWriterPtr ret;
     xmlSAXHandler saxHandler;
@@ -421,7 +410,7 @@ xmlNewTextWriterTree(xmlDoc *doc, xmlNode *node, int compression)
      */
     ctxt->dictNames = 0;
 
-    ret = xmlNewTextWriterPushParser(ctxt, compression);
+    ret = xmlNewTextWriterPushParser(ctxt);
     if (ret == NULL) {
         xmlFreeParserCtxt(ctxt);
         xmlWriterErrMsg(NULL, XML_ERR_INTERNAL_ERROR,
@@ -432,8 +421,6 @@ xmlNewTextWriterTree(xmlDoc *doc, xmlNode *node, int compression)
     ctxt->myDoc = doc;
     ctxt->node = node;
     ret->no_doc_free = 1;
-
-    xmlSetDocCompressMode(doc, compression);
 
     return ret;
 }

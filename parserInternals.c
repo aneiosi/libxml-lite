@@ -2549,8 +2549,7 @@ xmlCtxtResolveFromCatalog(xmlParserCtxtPtr ctxt, const char* url, const char* pu
  * - the default loader which will return
  *   - the result from a matching global input callback set with
  *     #xmlRegisterInputCallbacks (deprecated)
- *   - a file opened from the filesystem, with automatic detection
- *     of compressed files if support is compiled in.
+ *   - a file opened from the filesystem
  *
  * @since 2.14.0
  *
@@ -2799,8 +2798,7 @@ xmlLoadResource(xmlParserCtxt* ctxt, const char* url, const char* publicId, xmlR
  * - the default loader which will return
  *   - the result from a matching global input callback set with
  *     #xmlRegisterInputCallbacks (deprecated)
- *   - a file opened from the filesystem, with automatic detection
- *     of compressed files if support is compiled in.
+ *   - a file opened from the filesystem
  *
  * @param URL  the URL or system ID for the entity to load
  * @param publicId  the public ID for the entity to load (optional)

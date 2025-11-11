@@ -29,6 +29,7 @@
 #include <libxml/xmlwriter.h>
 #include <libxml/xpathInternals.h>
 #include <libxml/xpointer.h>
+#include <libxml/threads.h>
 
 static void
 ignoreError(void *userData ATTRIBUTE_UNUSED,
@@ -245,8 +246,6 @@ main(int argc ATTRIBUTE_UNUSED, char **argv ATTRIBUTE_UNUSED) {
     xmlGetBufferAllocationScheme();
     xmlGetCharEncodingHandler(0);
     xmlGetCharEncodingName(0);
-    xmlGetCompressMode();
-    xmlGetDocCompressMode(NULL);
     xmlGetDocEntity(NULL, NULL);
     xmlGetDtdAttrDesc(NULL, NULL, NULL);
     xmlGetDtdElementDesc(NULL, NULL);
@@ -529,8 +528,6 @@ main(int argc ATTRIBUTE_UNUSED, char **argv ATTRIBUTE_UNUSED) {
     xmlFreeNs(xmlSearchNs(NULL, NULL, NULL));
     xmlFreeNs(xmlSearchNsByHref(NULL, NULL, NULL));
     xmlSetBufferAllocationScheme(0);
-    xmlSetCompressMode(0);
-    xmlSetDocCompressMode(NULL, 0);
     xmlSetExternalEntityLoader(0);
     xmlSetGenericErrorFunc(NULL, 0);
     xmlSetListDoc(NULL, NULL);
@@ -578,7 +575,6 @@ main(int argc ATTRIBUTE_UNUSED, char **argv ATTRIBUTE_UNUSED) {
     xmlThrDefKeepBlanksDefaultValue(0);
     xmlThrDefLineNumbersDefaultValue(0);
     xmlThrDefLoadExtDtdDefaultValue(0);
-    xmlThrDefOutputBufferCreateFilenameDefault(0);
     xmlThrDefParserInputBufferCreateFilenameDefault(0);
     xmlThrDefPedanticParserDefaultValue(0);
     xmlThrDefRegisterNodeDefault(0);
@@ -607,7 +603,7 @@ main(int argc ATTRIBUTE_UNUSED, char **argv ATTRIBUTE_UNUSED) {
 
 #ifdef LIBXML_C14N_ENABLED
     xmlC14NDocDumpMemory(NULL, NULL, 0, NULL, 0, NULL);
-    xmlC14NDocSave(NULL, NULL, 0, NULL, 0, NULL, 0);
+    xmlC14NDocSave(NULL, NULL, 0, NULL, 0, NULL);
     xmlC14NDocSaveTo(NULL, NULL, 0, NULL, 0, NULL);
     xmlC14NExecute(NULL, 0, NULL, 0, NULL, 0, NULL);
 #endif /* LIBXML_C14N_ENABLED */
@@ -735,7 +731,7 @@ main(int argc ATTRIBUTE_UNUSED, char **argv ATTRIBUTE_UNUSED) {
 #endif /* LIBXML_MODULES_ENABLED */
 
 #ifdef LIBXML_OUTPUT_ENABLED
-    xmlOutputBufferClose(__xmlOutputBufferCreateFilename(NULL, NULL, 0));
+    xmlOutputBufferClose(__xmlOutputBufferCreateFilename(NULL, NULL));
     xmlOutputBufferClose(xmlAllocOutputBuffer(NULL));
     xmlAttrSerializeTxtContent(NULL, NULL, NULL, NULL);
     xmlBufNodeDump(NULL, NULL, NULL, 0, 0);
@@ -761,7 +757,7 @@ main(int argc ATTRIBUTE_UNUSED, char **argv ATTRIBUTE_UNUSED) {
     xmlOutputBufferClose(xmlOutputBufferCreateBuffer(NULL, NULL));
     xmlOutputBufferClose(xmlOutputBufferCreateFd(0, NULL));
     xmlOutputBufferClose(xmlOutputBufferCreateFile(NULL, NULL));
-    xmlOutputBufferClose(xmlOutputBufferCreateFilename(NULL, NULL, 0));
+    xmlOutputBufferClose(xmlOutputBufferCreateFilename(NULL, NULL));
     xmlOutputBufferClose(xmlOutputBufferCreateIO(0, 0, NULL, NULL));
     xmlOutputBufferFlush(NULL);
     xmlOutputBufferGetContent(NULL);
@@ -1126,11 +1122,11 @@ main(int argc ATTRIBUTE_UNUSED, char **argv ATTRIBUTE_UNUSED) {
 #ifdef LIBXML_WRITER_ENABLED
     xmlFreeTextWriter(NULL);
     xmlFreeTextWriter(xmlNewTextWriter(NULL));
-    xmlFreeTextWriter(xmlNewTextWriterDoc(NULL, 0));
-    xmlFreeTextWriter(xmlNewTextWriterFilename(NULL, 0));
-    xmlFreeTextWriter(xmlNewTextWriterMemory(NULL, 0));
-    xmlFreeTextWriter(xmlNewTextWriterPushParser(NULL, 0));
-    xmlFreeTextWriter(xmlNewTextWriterTree(NULL, NULL, 0));
+    xmlFreeTextWriter(xmlNewTextWriterDoc(NULL));
+    xmlFreeTextWriter(xmlNewTextWriterFilename(NULL));
+    xmlFreeTextWriter(xmlNewTextWriterMemory(NULL));
+    xmlFreeTextWriter(xmlNewTextWriterPushParser(NULL));
+    xmlFreeTextWriter(xmlNewTextWriterTree(NULL, NULL));
     xmlTextWriterClose(NULL);
     xmlTextWriterEndAttribute(NULL);
     xmlTextWriterEndCDATA(NULL);

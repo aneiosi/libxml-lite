@@ -16,9 +16,7 @@
 #include <libxml/encoding.h>
 #include <libxml/xmlversion.h>
 #include <stdio.h>
-#define XML_TREE_INTERNALS
 #include <libxml/tree.h>
-#undef XML_TREE_INTERNALS
 
 #ifdef __cplusplus
 extern "C" {
@@ -109,12 +107,12 @@ extern "C" {
 	 *
 	 * @param URI  the URI to write to
 	 * @param encoder  the requested target encoding
-	 * @param compression  compression level
 	 * @returns the new xmlOutputBuffer in case of success or NULL if no
 	 *         method was found.
 	 */
 	typedef xmlOutputBuffer* (*xmlOutputBufferCreateFilenameFunc)(
-		const char* URI, xmlCharEncodingHandler* encoder, int compression
+		const char* URI,
+		xmlCharEncodingHandler* encoder
 	);
 
 	/**
@@ -135,8 +133,6 @@ extern "C" {
 		xmlBuf* buffer                      XML_DEPRECATED_MEMBER;
 		/* if encoder != NULL buffer for raw input */
 		xmlBuf* raw                         XML_DEPRECATED_MEMBER;
-		/* -1=unknown, 0=not compressed, 1=compressed */
-		int compressed                      XML_DEPRECATED_MEMBER;
 		int error                           XML_DEPRECATED_MEMBER;
 		/* amount consumed from raw */
 		unsigned long rawconsumed           XML_DEPRECATED_MEMBER;
@@ -230,7 +226,7 @@ extern "C" {
 	XMLPUBFUN xmlOutputBuffer* xmlAllocOutputBuffer(xmlCharEncodingHandler* encoder);
 
 	XMLPUBFUN xmlOutputBuffer*
-	xmlOutputBufferCreateFilename(const char* URI, xmlCharEncodingHandler* encoder, int compression);
+	xmlOutputBufferCreateFilename(const char* URI, xmlCharEncodingHandler* encoder);
 
 	XMLPUBFUN xmlOutputBuffer*
 	xmlOutputBufferCreateFile(FILE* file, xmlCharEncodingHandler* encoder);
@@ -267,9 +263,7 @@ extern "C" {
 		xmlOutputCloseCallback closeFunc
 	);
 
-	XMLPUBFUN xmlOutputBuffer* __xmlOutputBufferCreateFilename(
-		const char* URI, xmlCharEncodingHandler* encoder, int compression
-	);
+	XMLPUBFUN xmlOutputBuffer* __xmlOutputBufferCreateFilename(const char* URI, xmlCharEncodingHandler* encoder);
 #endif /* LIBXML_OUTPUT_ENABLED */
 
 	XML_DEPRECATED
@@ -289,11 +283,10 @@ extern "C" {
 
 	XMLPUBFUN xmlParserInputBufferCreateFilenameFunc
 	xmlParserInputBufferCreateFilenameDefault(xmlParserInputBufferCreateFilenameFunc func);
+
 	XMLPUBFUN xmlOutputBufferCreateFilenameFunc
 	xmlOutputBufferCreateFilenameDefault(xmlOutputBufferCreateFilenameFunc func);
-	XML_DEPRECATED
-	XMLPUBFUN xmlOutputBufferCreateFilenameFunc
-	xmlThrDefOutputBufferCreateFilenameDefault(xmlOutputBufferCreateFilenameFunc func);
+
 	XML_DEPRECATED
 	XMLPUBFUN xmlParserInputBufferCreateFilenameFunc
 	xmlThrDefParserInputBufferCreateFilenameDefault(xmlParserInputBufferCreateFilenameFunc func);

@@ -14,11 +14,7 @@
 #define __XML_PARSER_H__
 
 #include <libxml/xmlversion.h>
-/** @cond ignore */
-#define XML_TREE_INTERNALS
-/** @endcond */
 #include <libxml/tree.h>
-#undef XML_TREE_INTERNALS
 #include <libxml/dict.h>
 #include <libxml/encoding.h>
 #include <libxml/entities.h>
@@ -28,9 +24,6 @@
 #include <libxml/xmlIO.h>
 #include <libxml/xmlmemory.h>
 #include <libxml/xmlstring.h>
-/* for compatibility */
-#include <libxml/SAX2.h>
-#include <libxml/threads.h>
 
 #ifdef __cplusplus
 extern "C" {

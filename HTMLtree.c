@@ -1280,7 +1280,7 @@ htmlSaveFileFormat(const char *filename, xmlDoc *cur,
     /*
      * save the content to a temp buffer.
      */
-    buf = xmlOutputBufferCreateFilename(filename, handler, cur->compression);
+    buf = xmlOutputBufferCreateFilename(filename, handler);
     if (buf == NULL) {
         xmlCharEncCloseFunc(handler);
         return(0);

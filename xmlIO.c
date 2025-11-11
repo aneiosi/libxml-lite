@@ -1219,15 +1219,12 @@ xmlParserErrors xmlInputFromFd(xmlParserInputBuffer* buf, int fd) {
 /**
  * @param buf  input buffer to be filled
  * @param filename  filename or URI
- * @param compression  compression level or 0
  * @returns an xmlParserErrors code.
  */
 static xmlParserErrors
-xmlOutputDefaultOpen(xmlOutputBufferPtr buf, const char* filename, int compression) {
+xmlOutputDefaultOpen(xmlOutputBufferPtr buf, const char* filename) {
 	xmlFdIOCtxt* fdctxt;
 	int          fd;
-
-	(void)compression;
 
 	if (!strcmp(filename, "-")) {
 		fd = dup(STDOUT_FILENO);
@@ -1298,7 +1295,6 @@ xmlParserInputBuffer* xmlAllocParserInputBuffer(xmlCharEncoding enc) {
 	ret->readcallback  = NULL;
 	ret->closecallback = NULL;
 	ret->context       = NULL;
-	ret->compressed    = -1;
 	ret->rawconsumed   = 0;
 
 	return (ret);
@@ -1504,8 +1500,6 @@ xmlParserErrors xmlParserInputBufferCreateUrl(const char* URI, xmlCharEncoding e
 
 /**
  * Create a buffered parser input for the progressive parsing of a file
- * Automatic support for ZLIB/Compress compressed document is provided
- * by default if found at compile-time.
  * Do an encoding check if enc == XML_CHAR_ENCODING_NONE
  *
  * Internal implementation, never uses the callback installed with
@@ -1526,8 +1520,6 @@ xmlParserInputBuffer* __xmlParserInputBufferCreateFilename(const char* URI, xmlC
 
 /**
  * Create a buffered parser input for the progressive parsing of a file
- * Automatic support for ZLIB/Compress compressed document is provided
- * by default if found at compile-time.
  * Do an encoding check if enc == XML_CHAR_ENCODING_NONE
  *
  * Allows the actual function to be overridden with
@@ -1585,8 +1577,6 @@ xmlParserInputBuffer* xmlParserInputBufferCreateFilename(const char* URI, xmlCha
 /**
  * Create a buffered  output for the progressive saving of a file
  * If filename is `"-"` then we use stdout as the output.
- * Automatic support for ZLIB/Compress compressed document is provided
- * by default if found at compile-time.
  *
  * Consumes `encoder` but not in error case.
  *
@@ -1595,12 +1585,9 @@ xmlParserInputBuffer* xmlParserInputBufferCreateFilename(const char* URI, xmlCha
  *
  * @param URI  a C string containing the URI or filename
  * @param encoder  the encoding converter or NULL
- * @param compression  the compression ration (0 none, 9 max).
  * @returns the new output or NULL
  */
-xmlOutputBuffer* __xmlOutputBufferCreateFilename(
-	const char* URI, xmlCharEncodingHandler* encoder, int compression
-) {
+xmlOutputBuffer* __xmlOutputBufferCreateFilename(const char* URI, xmlCharEncodingHandler* encoder) {
 	xmlOutputBufferPtr ret = NULL;
 	xmlURIPtr          puri;
 	int                i         = 0;
@@ -1645,7 +1632,7 @@ xmlOutputBuffer* __xmlOutputBufferCreateFilename(
 		xmlParserErrors    code;
 
 		if (cb->matchcallback == xmlIODefaultMatch) {
-			code = xmlOutputDefaultOpen(ret, URI, compression);
+			code = xmlOutputDefaultOpen(ret, URI);
 			/* TODO: Handle other errors */
 			if (code == XML_ERR_OK) {
 				break;
@@ -1675,8 +1662,6 @@ error:
 /**
  * Create a buffered  output for the progressive saving of a file
  * If filename is `"-"` then we use stdout as the output.
- * Automatic support for ZLIB/Compress compressed document is provided
- * by default if found at compile-time.
  *
  * Consumes `encoder` but not in error case.
  *
@@ -1685,16 +1670,13 @@ error:
  *
  * @param URI  a C string containing the URI or filename
  * @param encoder  the encoding converter or NULL
- * @param compression  the compression ration (0 none, 9 max).
  * @returns the new output or NULL
  */
-xmlOutputBuffer* xmlOutputBufferCreateFilename(
-	const char* URI, xmlCharEncodingHandler* encoder, int compression ATTRIBUTE_UNUSED
-) {
+xmlOutputBuffer* xmlOutputBufferCreateFilename(const char* URI, xmlCharEncodingHandler* encoder) {
 	if (xmlOutputBufferCreateFilenameValue) {
-		return xmlOutputBufferCreateFilenameValue(URI, encoder, compression);
+		return xmlOutputBufferCreateFilenameValue(URI, encoder);
 	}
-	return __xmlOutputBufferCreateFilename(URI, encoder, compression);
+	return __xmlOutputBufferCreateFilename(URI, encoder);
 }
 #endif /* LIBXML_OUTPUT_ENABLED */
 
@@ -1917,7 +1899,6 @@ xmlParserInputBuffer* xmlNewInputBufferMemory(
 			return (NULL);
 		}
 		memset(ret, 0, sizeof(xmlParserInputBuffer));
-		ret->compressed = -1;
 
 		ret->buffer = xmlBufCreateMem((const xmlChar*)mem, size, flags & XML_INPUT_BUF_STATIC ? 1 : 0);
 		if (ret->buffer == NULL) {
@@ -2001,7 +1982,6 @@ xmlParserInputBuffer* xmlNewInputBufferString(const char* str, xmlParserInputFla
 		return (NULL);
 	}
 	memset(ret, 0, sizeof(xmlParserInputBuffer));
-	ret->compressed = -1;
 
 	ret->buffer
 		= xmlBufCreateMem((const xmlChar*)str, strlen(str), flags & XML_INPUT_BUF_STATIC ? 1 : 0);

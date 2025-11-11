@@ -1862,12 +1862,10 @@ xmlSaveCtxt *
 xmlSaveToFilename(const char *filename, const char *encoding, int options)
 {
     xmlSaveCtxtPtr ret;
-    int compression = 0; /* TODO handle compression option */
 
     ret = xmlNewSaveCtxt(encoding, options);
     if (ret == NULL) return(NULL);
-    ret->buf = xmlOutputBufferCreateFilename(filename, ret->handler,
-                                             compression);
+    ret->buf = xmlOutputBufferCreateFilename(filename, ret->handler);
     if (ret->buf == NULL) {
         xmlCharEncCloseFunc(ret->handler);
 	xmlFreeSaveCtxt(ret);
@@ -2626,7 +2624,7 @@ xmlSaveFormatFileEnc( const char * filename, xmlDoc *cur,
     /*
      * save the content to a temp buffer.
      */
-    buf = xmlOutputBufferCreateFilename(filename, NULL, cur->compression);
+    buf = xmlOutputBufferCreateFilename(filename, NULL);
     if (buf == NULL) return(-1);
 
     xmlDocDumpInternal(buf, cur, encoding, format);

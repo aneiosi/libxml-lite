@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief XML entities
- * 
+ *
  * This module provides an API to work with XML entities.
  *
  * @copyright See Copyright for the status of this software.
@@ -14,9 +14,7 @@
 #define __XML_ENTITIES_H__
 
 #include <libxml/xmlversion.h>
-#define XML_TREE_INTERNALS
 #include <libxml/tree.h>
-#undef XML_TREE_INTERNALS
 
 #ifdef __cplusplus
 extern "C" {

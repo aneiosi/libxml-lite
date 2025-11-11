@@ -3,6 +3,7 @@
 
 #include <libxml/parser.h>
 #include <libxml/tree.h>
+#include "libxml.h"
 
 XML_HIDDEN xmlBuf *
 xmlBufCreate(size_t size);

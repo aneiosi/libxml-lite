@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief DTD validator
- * 
+ *
  * API to handle XML Document Type Definitions and validate
  * documents.
  *
@@ -17,9 +17,7 @@
 
 #include <libxml/xmlversion.h>
 #include <libxml/xmlerror.h>
-#define XML_TREE_INTERNALS
 #include <libxml/tree.h>
-#undef XML_TREE_INTERNALS
 #include <libxml/list.h>
 #include <libxml/xmlautomata.h>
 #include <libxml/xmlregexp.h>

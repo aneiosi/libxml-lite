@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief SAX2 parser interface used to build the DOM tree
- * 
+ *
  * those are the default SAX2 interfaces used by
  *              the library when building DOM tree.
  *
@@ -16,7 +16,8 @@
 #define __XML_SAX2_H__
 
 #include <libxml/xmlversion.h>
-#include <libxml/parser.h>
+#include <libxml/xmlstring.h>
+#include <libxml/tree.h>
 
 #ifdef __cplusplus
 extern "C" {

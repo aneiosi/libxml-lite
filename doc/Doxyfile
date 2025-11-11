@@ -104,5 +104,4 @@ INCLUDE_PATH           = $(SOURCE_ROOT). \
                          $(SOURCE_ROOT)include \
                          $(BUILD_ROOT). \
                          $(BUILD_ROOT)include
-PREDEFINED             = XML_TREE_INTERNALS
 HAVE_DOT               = NO
