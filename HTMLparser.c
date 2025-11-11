@@ -5508,7 +5508,6 @@ htmlCtxtSetOptionsInternal(xmlParserCtxtPtr ctxt, int options, int keepMask)
               HTML_PARSE_NOWARNING |
               HTML_PARSE_PEDANTIC |
               HTML_PARSE_NOBLANKS |
-              HTML_PARSE_NONET |
               HTML_PARSE_NOIMPLIED |
               HTML_PARSE_COMPACT |
               HTML_PARSE_HUGE |
@@ -5787,7 +5786,7 @@ htmlReadFd(int fd, const char *url, const char *encoding, int options)
 
     htmlCtxtUseOptions(ctxt, options);
 
-    input = xmlCtxtNewInputFromFd(ctxt, url, fd, encoding, 0);
+    input = xmlCtxtNewInputFromFd(ctxt, url, fd, encoding);
 
     if (input != NULL)
         doc = htmlCtxtParseDocument(ctxt, input);
@@ -5958,7 +5957,7 @@ htmlCtxtReadFd(xmlParserCtxt *ctxt, int fd,
     htmlCtxtReset(ctxt);
     htmlCtxtUseOptions(ctxt, options);
 
-    input = xmlCtxtNewInputFromFd(ctxt, URL, fd, encoding, 0);
+    input = xmlCtxtNewInputFromFd(ctxt, URL, fd, encoding);
     if (input == NULL)
         return(NULL);
 

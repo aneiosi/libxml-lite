@@ -18,7 +18,6 @@
 #include <libxml/parserInternals.h>
 #include <libxml/pattern.h>
 #include <libxml/relaxng.h>
-#include <libxml/schematron.h>
 #include <libxml/uri.h>
 #include <libxml/xinclude.h>
 #include <libxml/xlink.h>
@@ -98,7 +97,6 @@ main(int argc ATTRIBUTE_UNUSED, char **argv ATTRIBUTE_UNUSED) {
     xmlFree(xmlCharStrdup(NULL));
     xmlFree(xmlCharStrndup(NULL, 0));
     xmlCheckFilename(NULL);
-    xmlFreeInputStream(xmlCheckHTTPInput(NULL, NULL));
     xmlCheckLanguageID(NULL);
     xmlCheckThreadLocalStorage();
     xmlCheckUTF8(NULL);
@@ -393,7 +391,7 @@ main(int argc ATTRIBUTE_UNUSED, char **argv ATTRIBUTE_UNUSED) {
     xmlNewEntity(NULL, NULL, 0, NULL, NULL, NULL);
     xmlFreeInputStream(xmlNewEntityInputStream(NULL, NULL));
     xmlFreeInputStream(xmlNewIOInputStream(NULL, NULL, 0));
-    xmlFreeInputStream(xmlNewInputFromFd(NULL, 0, 0));
+    xmlFreeInputStream(xmlNewInputFromFd(NULL, 0));
     xmlFreeInputStream(xmlNewInputFromFile(NULL, NULL));
     xmlFreeInputStream(xmlNewInputFromIO(NULL, 0, 0, NULL, 0));
     xmlFreeInputStream(xmlNewInputFromMemory(NULL, NULL, 0, 0));
@@ -418,7 +416,6 @@ main(int argc ATTRIBUTE_UNUSED, char **argv ATTRIBUTE_UNUSED) {
     xmlFreeNode(xmlNewTextLen(NULL, 0));
     xmlNextChar(NULL);
     xmlFreeNode(xmlNextElementSibling(NULL));
-    xmlFreeInputStream(xmlNoNetExternalEntityLoader(NULL, NULL, NULL));
     xmlNodeAddContent(NULL, NULL);
     xmlNodeAddContentLen(NULL, NULL, 0);
     xmlNodeBufGetContent(NULL, NULL);
@@ -1079,19 +1076,6 @@ main(int argc ATTRIBUTE_UNUSED, char **argv ATTRIBUTE_UNUSED) {
     xmlSchemaDump(NULL, NULL);
 #endif /* LIBXML_DEBUG_ENABLED */
 #endif /* LIBXML_SCHEMAS_ENABLED */
-
-#ifdef LIBXML_SCHEMATRON_ENABLED
-    xmlSchematronFree(NULL);
-    xmlSchematronFreeParserCtxt(NULL);
-    xmlSchematronFreeValidCtxt(NULL);
-    xmlSchematronNewDocParserCtxt(NULL);
-    xmlSchematronNewMemParserCtxt(NULL, 0);
-    xmlSchematronNewParserCtxt(NULL);
-    xmlSchematronNewValidCtxt(NULL, 0);
-    xmlSchematronParse(NULL);
-    xmlSchematronSetValidStructuredErrors(NULL, 0, NULL);
-    xmlSchematronValidateDoc(NULL, NULL);
-#endif /* LIBXML_SCHEMATRON_ENABLED */
 
 #ifdef LIBXML_SGML_CATALOG_ENABLED
     xmlCatalogConvert();

@@ -57,7 +57,6 @@ The following options disable or enable code modules and relevant symbols:
     --with-history          history support for xmllint shell (off)
     --with-readline[=DIR]   use readline in DIR for shell (off)
     --with-html             HTML parser (on)
-    --with-http             ABI compatibility for removed HTTP support (off)
     --with-iconv[=DIR]      iconv support (on)
     --with-icu              ICU support (off)
     --with-iso8859x         ISO-8859-X support if no iconv (on)
@@ -65,13 +64,11 @@ The following options disable or enable code modules and relevant symbols:
     --with-output           serialization support (on)
     --with-pattern          xmlPattern selection interface (on)
     --with-push             push parser interfaces (on)
-    --with-python           Python bindings (off)
     --with-reader           xmlReader parsing interface (on)
     --with-regexps          regular expressions support (on)
     --with-relaxng          RELAX NG support (on)
     --with-sax1             older SAX1 interface (on)
     --with-schemas          XML Schemas 1.0 support (on)
-    --with-schematron       Schematron support (off)
     --with-threads          multithreading support (on)
     --with-thread-alloc     per-thread malloc hooks (off)
     --with-valid            DTD validation support (on)
@@ -79,7 +76,6 @@ The following options disable or enable code modules and relevant symbols:
     --with-xinclude         XInclude 1.0 support (on)
     --with-xpath            XPath 1.0 support (on)
     --with-xptr             XPointer support (on)
-    --with-zlib[=DIR]       use libz in DIR (off)
 
 Other options:
 
@@ -122,7 +118,6 @@ Common CMake options include:
     --config Release                    # specify build type (multi-config)
     -D CMAKE_INSTALL_PREFIX=/usr/local  # specify the install path
     -D LIBXML2_WITH_ICONV=OFF           # disable iconv
-    -D LIBXML2_WITH_ZLIB=ON             # enable zlib
 
 You can also open the libxml source directory with its CMakeLists.txt
 directly in various IDEs such as CLion, QtCreator, or Visual Studio.
@@ -141,7 +136,6 @@ See the `meson_options.txt` file for options. For example:
     -Dprefix=$prefix
     -Dhistory=enabled
     -Dschemas=disabled
-    -Dzlib=enabled
 
 ## Dependencies
 
@@ -160,7 +154,7 @@ The xmllint executable uses libreadline and libhistory if enabled.
 Besides build system tools, only a C compiler should be required.
 Reconfiguration of the Autotools build requires the pkg.m4 macro from
 pkg-config. Building the documentation requires Doxygen, xsltproc and the
-DocBook 4 XSLT stylesheets. Building the Python bindings requires Doxygen.
+DocBook 4 XSLT stylesheets.
 
 ## Contributing
 
@@ -179,4 +173,3 @@ tests if possible.
 - Igor Zlatkovic for the Windows port
 - Aleksey Sanin
 - Nick Wellnhofer
-

@@ -82,7 +82,6 @@
             <arg choice="plain"><option>--noent</option></arg>
             <arg choice="plain"><option>--nofixup-base-uris</option></arg>
             <arg choice="plain"><option>--noout</option></arg>
-            <arg choice="plain"><option>--nonet</option></arg>
             <arg choice="plain"><option>--path "<replaceable class="option">PATH(S)</replaceable>"</option></arg>
             <arg choice="plain"><option>--load-trace</option></arg>
             <arg choice="plain"><option>--valid</option></arg>
@@ -94,7 +93,6 @@
             <arg choice="plain"><option>--repeat</option></arg>
             <arg choice="plain"><option>--insert</option></arg>
             <arg choice="plain"><option>--strict-namespace</option></arg>
-            <arg choice="plain"><option>--compress</option></arg>
             <arg choice="plain"><option>--html</option></arg>
             <arg choice="plain"><option>--xmlout</option></arg>
             <arg choice="plain"><option>--push</option></arg>
@@ -121,7 +119,6 @@
             <arg choice="plain"><option>--pattern <replaceable class="option">PATTERNVALUE</replaceable></option></arg>
             <arg choice="plain"><option>--relaxng <replaceable class="option">SCHEMA</replaceable></option></arg>
             <arg choice="plain"><option>--schema <replaceable class="option">SCHEMA</replaceable></option></arg>
-            <arg choice="plain"><option>--schematron <replaceable class="option">SCHEMA</replaceable></option></arg>
             <arg choice="plain"><option>--c14n</option></arg>
             <arg choice="plain"><option>--c14n11</option></arg>
             <arg choice="plain"><option>--exc-c14n</option></arg>
@@ -195,16 +192,6 @@
             <listitem>
                 <para>
                     Use a W3C <acronym>XML</acronym> Schema file
-                    named <replaceable>SCHEMA</replaceable> for validation.
-                </para>
-            </listitem>
-        </varlistentry>
-
-        <varlistentry>
-            <term><option>--schematron <replaceable>SCHEMA</replaceable></option></term>
-            <listitem>
-                <para>
-                    Use a Schematron file
                     named <replaceable>SCHEMA</replaceable> for validation.
                 </para>
             </listitem>
@@ -345,15 +332,6 @@
                 <para>
                     Don't fix xml:base URIs when processing XIncludes
                     (parser option XML_PARSE_NOBASEFIX).
-                </para>
-            </listitem>
-        </varlistentry>
-
-        <varlistentry>
-            <term><option>--nonet</option></term>
-            <listitem>
-                <para>
-                    Do not use the Internet to fetch <acronym>DTD</acronym>s or entities. Has no effect with libxml2 2.15 or later.
                 </para>
             </listitem>
         </varlistentry>
@@ -512,18 +490,6 @@
     </para>
 
     <variablelist>
-
-        <varlistentry>
-            <term><option>--compress</option></term>
-            <listitem>
-                <para>
-                    Turn on <citerefentry>
-                <refentrytitle>gzip</refentrytitle>
-                <manvolnum>1</manvolnum>
-            </citerefentry> compression of output.
-                </para>
-            </listitem>
-        </varlistentry>
 
         <varlistentry>
             <term><option>--c14n</option></term>

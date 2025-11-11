@@ -22,8 +22,6 @@ install:
 
 .test:
   image: registry.gitlab.gnome.org/gnome/libxml2
-  variables:
-    BASE_CONFIG: "--with-http --with-schematron --with-zlib --with-python"
   before_script:
     - rm -rf libxml2-build
     - mkdir libxml2-build
@@ -39,7 +37,6 @@ gcc:
 gcc:c89:
   extends: .test
   variables:
-    CONFIG: "--without-python"
     CFLAGS: "-O2 -std=c89 -D_XOPEN_SOURCE=600 -Wno-error=unused-function -Wno-error=overlength-strings"
 
 gcc:minimum:
@@ -60,13 +57,13 @@ gcc:legacy:
   only:
     - schedules
   variables:
-    BASE_CONFIG: "--with-legacy --with-python"
+    BASE_CONFIG: "--with-legacy"
     CFLAGS: "-O2"
 
 gcc:static:
   extends: .test
   variables:
-    CONFIG: "--disable-shared --without-python --without-modules"
+    CONFIG: "--disable-shared --without-modules"
     CFLAGS: "-O2"
 
 clang:asan:
@@ -74,7 +71,6 @@ clang:asan:
   tags:
     - asan
   variables:
-    CONFIG: "--without-python"
     CC: clang
     CFLAGS: "-O2 -g -fno-omit-frame-pointer -fsanitize=address,undefined,integer -fno-sanitize-recover=all"
     UBSAN_OPTIONS: "print_stacktrace=1"
@@ -85,7 +81,6 @@ clang:msan:
 #  only:
 #    - schedules
   variables:
-    CONFIG: "--without-python --without-zlib"
     CC: clang
     CFLAGS: "-O2 -g -fno-omit-frame-pointer -fsanitize=memory"
     MSAN_SYMBOLIZER_PATH: "$CI_PROJECT_DIR/.gitlab-ci/llvm-symbolizer"
@@ -94,9 +89,7 @@ clang:msan:
   tags:
     - win32-ps
   variables:
-    BASE_CONFIG: "--with-http --with-schematron --with-zlib --with-python"
-    # Python is disabled for now, see #658
-    CONFIG: "--with-docs --without-python"
+    CONFIG: "--with-docs"
     CHERE_INVOKING: "yes"
   before_script:
     - $Env:Path="C:\msys64\usr\bin;$Env:Path"

@@ -34,7 +34,6 @@
  *
  * --relaxng:
  * --schema:
- * --schematron: Requires schemas
  *
  * --shell: We could pipe fuzz data to stdin but this is probably
  *          not worth it.
@@ -44,7 +43,6 @@ static const char *const switches[] = {
     "--auto",
     "--c14n",
     "--c14n11",
-    "--compress",
     "--copy",
     "--debug",
     NULL,
@@ -66,7 +64,6 @@ static const char *const switches[] = {
     "--noenc",
     "--noent",
     "--nofixup-base-uris",
-    "--nonet",
     "--noout",
     "--nowarning",
     NULL,
@@ -253,4 +250,3 @@ LLVMFuzzerCustomMutator(char *data, size_t size, size_t maxSize,
     return xmlFuzzMutateChunks(chunks, data, size, maxSize, seed,
                                LLVMFuzzerMutate);
 }
-

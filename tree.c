@@ -24,10 +24,6 @@
 #include <ctype.h>
 #include <stdlib.h>
 
-#ifdef LIBXML_ZLIB_ENABLED
-#include <zlib.h>
-#endif
-
 #include <libxml/tree.h>
 #include <libxml/xmlmemory.h>
 #include <libxml/parser.h>
@@ -8898,4 +8894,3 @@ xmlDeregisterNodeDefault(xmlDeregisterNodeFunc func)
     xmlDeregisterNodeDefaultValue = func;
     return(old);
 }
-

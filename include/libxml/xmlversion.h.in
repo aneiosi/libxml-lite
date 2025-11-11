@@ -100,13 +100,6 @@
 #define LIBXML_SAX1_ENABLED
 #endif
 
-#if @WITH_HTTP@
-/**
- * HTTP support was removed in 2.15
- */
-#define LIBXML_HTTP_STUBS_ENABLED
-#endif
-
 #if @WITH_VALID@
 /**
  * Whether the DTD validation support is configured in
@@ -223,13 +216,6 @@
 #define LIBXML_SCHEMAS_ENABLED
 #endif
 
-#if @WITH_SCHEMATRON@
-/**
- * Whether the Schematron validation interfaces are compiled in
- */
-#define LIBXML_SCHEMATRON_ENABLED
-#endif
-
 #if @WITH_MODULES@
 /**
  * Whether the module interfaces are compiled in
@@ -238,18 +224,9 @@
 /**
  * the string suffix used by dynamic modules (usually shared libraries)
  */
-#define LIBXML_MODULE_EXTENSION "@MODULE_EXTENSION@" 
-#endif
-
-#if @WITH_ZLIB@
-/**
- * Whether the Zlib support is compiled in
- */
-#define LIBXML_ZLIB_ENABLED
+#define LIBXML_MODULE_EXTENSION "@MODULE_EXTENSION@"
 #endif
 
 #include <libxml/xmlexports.h>
 
 #endif
-
-

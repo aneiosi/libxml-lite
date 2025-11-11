@@ -538,8 +538,6 @@ xmlHasFeature(xmlFeature feature)
 #else
             return(0);
 #endif
-        case XML_WITH_HTTP:
-            return(0);
         case XML_WITH_VALID:
 #ifdef LIBXML_VALID_ENABLED
             return(1);
@@ -624,12 +622,6 @@ xmlHasFeature(xmlFeature feature)
 #else
             return(0);
 #endif
-        case XML_WITH_SCHEMATRON:
-#ifdef LIBXML_SCHEMATRON_ENABLED
-            return(1);
-#else
-            return(0);
-#endif
         case XML_WITH_MODULES:
 #ifdef LIBXML_MODULES_ENABLED
             return(1);
@@ -643,14 +635,6 @@ xmlHasFeature(xmlFeature feature)
             return(0);
 #endif
         case XML_WITH_DEBUG_MEM:
-            return(0);
-        case XML_WITH_ZLIB:
-#ifdef LIBXML_ZLIB_ENABLED
-            return(1);
-#else
-            return(0);
-#endif
-        case XML_WITH_LZMA:
             return(0);
         case XML_WITH_ICU:
 #ifdef LIBXML_ICU_ENABLED
@@ -10039,7 +10023,7 @@ xmlParseEncName(xmlParserCtxt *ctxt) {
  *
  * @deprecated Internal function, don't use.
  *
- *     [80] EncodingDecl ::= S 'encoding' Eq ('"' EncName '"' | 
+ *     [80] EncodingDecl ::= S 'encoding' Eq ('"' EncName '"' |
  *                           "'" EncName "'")
  *
  * this setups the conversion filters.
@@ -12505,7 +12489,7 @@ xmlSAXParseFileWithData(xmlSAXHandler *sax, const char *filename,
     }
 
     if ((filename != NULL) && (filename[0] == '-') && (filename[1] == 0))
-        input = xmlCtxtNewInputFromFd(ctxt, filename, STDIN_FILENO, NULL, 0);
+        input = xmlCtxtNewInputFromFd(ctxt, filename, STDIN_FILENO, NULL);
     else
         input = xmlCtxtNewInputFromUrl(ctxt, filename, NULL, NULL, 0);
 
@@ -13153,7 +13137,6 @@ xmlCtxtSetOptionsInternal(xmlParserCtxtPtr ctxt, int options, int keepMask)
 #ifdef LIBXML_SAX1_ENABLED
               XML_PARSE_SAX1 |
 #endif
-              XML_PARSE_NONET |
               XML_PARSE_NODICT |
               XML_PARSE_NSCLEAN |
               XML_PARSE_NOCDATA |
@@ -13164,7 +13147,6 @@ xmlCtxtSetOptionsInternal(xmlParserCtxtPtr ctxt, int options, int keepMask)
               XML_PARSE_IGNORE_ENC |
               XML_PARSE_BIG_LINES |
               XML_PARSE_NO_XXE |
-              XML_PARSE_UNZIP |
               XML_PARSE_NO_SYS_CATALOG |
               XML_PARSE_CATALOG_PI;
 
@@ -13244,7 +13226,6 @@ xmlCtxtGetOptions(xmlParserCtxt *ctxt)
  *
  * - XML_PARSE_NOERROR
  * - XML_PARSE_NOWARNING
- * - XML_PARSE_NONET
  * - XML_PARSE_NSCLEAN
  * - XML_PARSE_NOCDATA
  * - XML_PARSE_COMPACT
@@ -13276,7 +13257,6 @@ xmlCtxtUseOptions(xmlParserCtxt *ctxt, int options)
      */
     keepMask = XML_PARSE_NOERROR |
                XML_PARSE_NOWARNING |
-               XML_PARSE_NONET |
                XML_PARSE_NSCLEAN |
                XML_PARSE_NOCDATA |
                XML_PARSE_COMPACT |
@@ -13420,8 +13400,7 @@ xmlReadFile(const char *filename, const char *encoding, int options)
      * should be removed at some point.
      */
     if ((filename != NULL) && (filename[0] == '-') && (filename[1] == 0))
-        input = xmlCtxtNewInputFromFd(ctxt, filename, STDIN_FILENO,
-                                      encoding, 0);
+        input = xmlCtxtNewInputFromFd(ctxt, filename, STDIN_FILENO, encoding);
     else
         input = xmlCtxtNewInputFromUrl(ctxt, filename, NULL, encoding, 0);
 
@@ -13499,7 +13478,7 @@ xmlReadFd(int fd, const char *URL, const char *encoding, int options)
 
     xmlCtxtUseOptions(ctxt, options);
 
-    input = xmlCtxtNewInputFromFd(ctxt, URL, fd, encoding, 0);
+    input = xmlCtxtNewInputFromFd(ctxt, URL, fd, encoding);
 
     if (input != NULL)
         doc = xmlCtxtParseDocument(ctxt, input);
@@ -13670,7 +13649,7 @@ xmlCtxtReadFd(xmlParserCtxt *ctxt, int fd,
     xmlCtxtReset(ctxt);
     xmlCtxtUseOptions(ctxt, options);
 
-    input = xmlCtxtNewInputFromFd(ctxt, URL, fd, encoding, 0);
+    input = xmlCtxtNewInputFromFd(ctxt, URL, fd, encoding);
     if (input == NULL)
         return(NULL);
 
@@ -13714,4 +13693,3 @@ xmlCtxtReadIO(xmlParserCtxt *ctxt, xmlInputReadCallback ioread,
 
     return(xmlCtxtParseDocument(ctxt, input));
 }
-

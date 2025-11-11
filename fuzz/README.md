@@ -26,7 +26,7 @@ Other options that can improve stack traces:
 
 Build libxml2 with instrumentation:
 
-    ./configure --without-python
+    ./configure
     make
 
 Run fuzzers:

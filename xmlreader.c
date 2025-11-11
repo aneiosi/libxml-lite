@@ -2095,12 +2095,7 @@ xmlNewTextReaderFilename(const char *URI) {
         }
     } else {
         xmlParserErrors code;
-
-        /*
-         * TODO: Remove XML_INPUT_UNZIP
-         */
-        code = xmlParserInputBufferCreateUrl(URI, XML_CHAR_ENCODING_NONE,
-                                             XML_INPUT_UNZIP, &input);
+        code = xmlParserInputBufferCreateUrl(URI, XML_CHAR_ENCODING_NONE, &input);
         if (code != XML_ERR_OK) {
             xmlTextReaderErr(code, "failed to open %s", URI);
             return(NULL);
@@ -5088,10 +5083,8 @@ xmlReaderForFd(int fd, const char *URL, const char *encoding, int options)
         xmlTextReaderErrMemory(NULL);
         return(NULL);
     }
-    /*
-     * TODO: Remove XML_INPUT_UNZIP
-     */
-    code = xmlInputFromFd(input, fd, XML_INPUT_UNZIP);
+
+		code = xmlInputFromFd(input, fd);
     if (code != XML_ERR_OK) {
         xmlTextReaderErr(code, "failed to open fd");
         return(NULL);
@@ -5257,17 +5250,8 @@ xmlReaderNewFile(xmlTextReader *reader, const char *filename,
             return(-1);
         }
     } else {
-        /*
-         * TODO: Remove XML_INPUT_UNZIP
-         */
-        xmlParserInputFlags flags = XML_INPUT_UNZIP;
         xmlParserErrors code;
-
-        if ((options & XML_PARSE_NONET) == 0)
-            flags |= XML_INPUT_NETWORK;
-
-        code = xmlParserInputBufferCreateUrl(filename, XML_CHAR_ENCODING_NONE,
-                                             flags, &input);
+        code = xmlParserInputBufferCreateUrl(filename, XML_CHAR_ENCODING_NONE, &input);
         if (code != XML_ERR_OK) {
             xmlTextReaderErr(code, "failed to open %s", filename);
             return(-1);
@@ -5345,10 +5329,8 @@ xmlReaderNewFd(xmlTextReader *reader, int fd,
         xmlTextReaderErrMemory(NULL);
         return(-1);
     }
-    /*
-     * TODO: Remove XML_INPUT_UNZIP
-     */
-    code = xmlInputFromFd(input, fd, XML_INPUT_UNZIP);
+
+		code = xmlInputFromFd(input, fd);
     if (code != XML_ERR_OK) {
         xmlTextReaderErr(code, "failed to open fd");
         return(-1);

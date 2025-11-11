@@ -83,10 +83,8 @@ add_project_arguments(global_args, language: 'c')
 
 # disabled by default
 want_docs = get_option('docs').enabled()
-want_http = get_option('http').enabled()
 want_icu = get_option('icu').enabled()
 want_legacy = get_option('legacy').enabled()
-want_python = get_option('python').enabled()
 want_thread_alloc = get_option('thread-alloc').enabled()
 want_tls = get_option('tls').enabled()
 
@@ -124,18 +122,13 @@ want_valid = want_minimum ? feature.enabled() : feature.allowed()
 feature = get_option('xinclude')
 want_xinclude = want_minimum ? feature.enabled() : feature.allowed()
 
-# default depends on legacy option
-
-feature = get_option('zlib')
-want_zlib = want_legacy ? feature.allowed() : feature.enabled()
-
 # dependencies
 
 feature = get_option('output')
 want_output = not want_minimum or get_option('c14n').enabled() or get_option('writer').enabled() ? feature.allowed() : feature.enabled()
 
 feature = get_option('pattern')
-want_pattern = not want_minimum or get_option('schemas').enabled() or get_option('schematron').enabled() ? feature.allowed() : feature.enabled()
+want_pattern = not want_minimum or get_option('schemas').enabled() ? feature.allowed() : feature.enabled()
 
 feature = get_option('regexps')
 want_regexps = not want_minimum or get_option('relaxng').enabled() or get_option('schemas').enabled() ? feature.allowed() : feature.enabled()
@@ -147,7 +140,7 @@ feature = get_option('readline')
 want_readline = get_option('history').enabled() ? feature.allowed() : feature.enabled()
 
 feature = get_option('xpath')
-want_xpath = not want_minimum or get_option('c14n').enabled() or get_option('schematron').enabled() or get_option('xptr').enabled() ? feature.allowed() : feature.enabled()
+want_xpath = not want_minimum or get_option('c14n').enabled() or get_option('xptr').enabled() ? feature.allowed() : feature.enabled()
 
 feature = get_option('c14n').require(want_output, error_message: 'c14n requires output').require(want_xpath, error_message: 'c14n requires xpath')
 want_c14n = want_minimum ? feature.enabled() : feature.allowed()
@@ -163,9 +156,6 @@ want_schemas = not want_minimum or get_option('relaxng').enabled() ? feature.all
 
 feature = get_option('relaxng').require(want_regexps, error_message: 'relaxng requires regexps').require(want_schemas, error_message: 'relaxng requires schemas')
 want_relaxng = want_minimum ? feature.enabled() : feature.allowed()
-
-feature = get_option('schematron').require(want_pattern, error_message: 'schematron requires pattern').require(want_xpath, error_message: 'schematron requires xpath')
-want_schematron = want_legacy ? feature.allowed() : feature.enabled()
 
 feature = get_option('writer').require(want_output, error_message: 'writer requires output').require(want_push, error_message: 'writer requires push')
 want_writer = want_minimum ? feature.enabled() : feature.allowed()
@@ -215,7 +205,6 @@ endforeach
 # [X] include/libxml/xmlversion.h.in
 # [X] libxml-2.0.pc.in
 # [X] libxml2-config.cmake.in
-# [X] python/setup.py.in
 # [X] xml2-config.in
 
 ## config.h
@@ -331,11 +320,6 @@ if sys_windows == true
 	xml_deps += bcrypt_dep
 endif
 
-### zlib
-if want_zlib
-	xml_deps += dependency('zlib')
-endif
-
 # icu
 if want_icu
 	icu_dep = dependency('icu-uc')
@@ -386,7 +370,6 @@ xml_opt_src = [
 	[want_catalog, ['catalog.c']],
 	[want_debug, ['debugXML.c']],
 	[want_html, ['HTMLparser.c', 'HTMLtree.c']],
-	[want_http, ['nanohttp.c']],
 	[want_modules, ['xmlmodule.c']],
 	[want_output, ['xmlsave.c']],
 	[want_pattern, ['pattern.c']],
@@ -394,7 +377,6 @@ xml_opt_src = [
 	[want_regexps, ['xmlregexp.c']],
 	[want_relaxng, ['relaxng.c']],
 	[want_schemas, ['xmlschemas.c', 'xmlschemastypes.c']],
-	[want_schematron, ['schematron.c']],
 	[want_writer, ['xmlwriter.c']],
 	[want_xinclude, ['xinclude.c']],
 	[want_xpath, ['xpath.c']],
@@ -414,6 +396,16 @@ foreach file : xml_opt_src
 		endif
 	endif
 endforeach
+
+if sys_windows
+	xml_src += 'win32/libxml2.rc'
+	rc_version = configuration_data()
+	rc_version.set('LIBXML_MAJOR_VERSION', v_maj)
+	rc_version.set('LIBXML_MINOR_VERSION', v_min)
+	rc_version.set('LIBXML_MICRO_VERSION', v_mic)
+	rc_version.set('LIBXML_DOTTED_VERSION', meson.project_version())
+	configure_file(output: 'rcVersion.h', configuration: rc_version)
+endif
 
 xml_src_files = files(xml_src)
 v_min_compat = 14
@@ -528,12 +520,8 @@ endif
 
 subdir('example')
 
-if want_docs or want_python
+if want_docs
 	subdir('doc')
-endif
-
-if want_python == true
-	subdir('python')
 endif
 
 ## pc files
@@ -547,30 +535,6 @@ pkgmod.generate(
 	name: 'libXML',
 	subdirs: [meson.project_name()],
 	variables: 'modules=' + want_modules.to_string('1', '0'),
-)
-
-## libxml2-config.cmake file
-
-config_cmake = configuration_data()
-config_cmake.set('LIBXML_MAJOR_VERSION', v_maj)
-config_cmake.set('LIBXML_MINOR_VERSION', v_min)
-config_cmake.set('LIBXML_MICRO_VERSION', v_mic)
-config_cmake.set('INSTALL_BINDIR', dir_bin)
-config_cmake.set('INSTALL_INCLUDEDIR', dir_include)
-config_cmake.set('INSTALL_LIBDIR', dir_lib)
-config_cmake.set('VERSION', meson.project_version())
-config_cmake.set10('BUILD_SHARED_LIBS', get_option('default_library') != 'static')
-config_cmake.set10('WITH_ICONV', want_iconv)
-config_cmake.set10('WITH_ICU', want_icu)
-config_cmake.set10('WITH_MODULES', want_modules)
-config_cmake.set10('WITH_THREADS', want_threads)
-config_cmake.set10('WITH_ZLIB', want_zlib)
-config_cmake.set('XML_CFLAGS', xml_cflags)
-configure_file(
-	input: 'libxml2-config.cmake.in',
-	output: 'libxml2-config.cmake',
-	configuration: config_cmake,
-	install_dir: dir_lib / 'cmake' / meson.project_name(),
 )
 
 ## xml2-config script
@@ -593,7 +557,6 @@ summary(
 		'docs': want_docs,
 		'history': want_history,
 		'html': want_html,
-		'http': want_http,
 		'iconv': want_iconv,
 		'icu': want_icu,
 		'iso8859x': want_iso8859x,
@@ -602,14 +565,12 @@ summary(
 		'output': want_output,
 		'pattern': want_pattern,
 		'push': want_push,
-		'python': want_python,
 		'reader': want_reader,
 		'readline': want_readline,
 		'regexps': want_regexps,
 		'relaxng': want_relaxng,
 		'sax1': want_sax1,
 		'schemas': want_schemas,
-		'schematron': want_schematron,
 		'threads': want_threads,
 		'thread-alloc': want_thread_alloc,
 		'tls': want_tls,
@@ -618,7 +579,6 @@ summary(
 		'xinclude': want_xinclude,
 		'xpath': want_xpath,
 		'xptr': want_xptr,
-		'zlib': want_zlib,
 	},
 	section: 'Configuration Options Summary:',
 )

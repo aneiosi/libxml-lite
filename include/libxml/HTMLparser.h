@@ -1,15 +1,14 @@
 /**
  * @file
- * 
+ *
  * @brief HTML parser, doesn't support HTML5
- * 
+ *
  * This module orginally implemented an HTML parser based on the
  * (underspecified) HTML 4.0 spec. As of 2.14, the tokenizer
  * conforms to HTML5. Tree construction still follows a custom,
  * unspecified algorithm with many differences to HTML5.
  *
- * The parser defaults to ISO-8859-1, the default encoding of
- * HTTP/1.0.
+ * The parser defaults to ISO-8859-1, the default encoding of HTTP/1.0.
  *
  * @copyright See Copyright for the status of this software.
  *
@@ -248,10 +247,6 @@ typedef enum {
      * DISCOURAGED.
      */
     HTML_PARSE_NOBLANKS = 1<<8,
-    /**
-     * No effect.
-     */
-    HTML_PARSE_NONET = 1<<11,
     /**
      * Do not add implied html, head or body elements.
      */

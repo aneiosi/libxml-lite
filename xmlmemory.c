@@ -389,8 +389,6 @@ xmlCleanupMemoryInternal(void) {
      * Don't clean up mutex on Windows. Global state destructors can call
      * malloc functions after xmlCleanupParser was called. If memory
      * debugging is enabled, xmlMemMutex can be used after cleanup.
-     *
-     * See python/tests/thread2.py
      */
 #if !defined(LIBXML_THREAD_ENABLED) || !defined(_WIN32)
     xmlCleanupMutex(&xmlMemMutex);
@@ -513,4 +511,3 @@ xmlGcMemGet(xmlFreeFunc *freeFunc, xmlMallocFunc *mallocFunc,
     if (strdupFunc != NULL) *strdupFunc = xmlMemStrdup;
     return(0);
 }
-
